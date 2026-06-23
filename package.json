@@ -1,0 +1,19 @@
+{
+  "name": "website-edulaw",
+  "version": "1.0.0",
+  "description": "ศูนย์รวมกฎหมายการศึกษาไทย — Education Law Hub",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "build:laws": "node scripts/build-laws-bundle.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}

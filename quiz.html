@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แบบทดสอบความรู้กฎหมายการศึกษา | กฎหมายการศึกษา</title>
+<meta name="description" content="ทดสอบความรู้ความเข้าใจกฎหมายการศึกษาไทย แยกตามหมวดหมู่ พร้อมคำอธิบายเหตุผลของคำตอบทุกข้อ เหมาะสำหรับครู บุคลากรทางการศึกษา และผู้เตรียมสอบ">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2248%22 fill=%22%230E2A47%22/><text x=%2250%22 y=%2264%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22%23B8902E%22>%C2%A7</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">ข้ามไปยังเนื้อหาหลัก</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <span class="seal" data-seal></span>
+      <span class="brand-text"><strong>กฎหมายการศึกษา</strong><span>EDUCATION LAW HUB</span></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">หน้าแรก</a>
+      <a href="library.html">คลังกฎหมาย</a>
+      <a href="quiz.html">แบบทดสอบ</a>
+      <a href="forum.html">กระดานสนทนา</a>
+      <a href="about.html">เกี่ยวกับเว็บไซต์</a>
+    </nav>
+    <div class="header-tools">
+      <form class="search-mini" onsubmit="return false;">
+        <input type="search" placeholder="ค้นหากฎหมาย..." aria-label="ค้นหากฎหมาย">
+        <button type="button" aria-label="ค้นหา"></button>
+      </form>
+      <button class="nav-toggle" aria-label="เปิดเมนู" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">หน้าแรก</a> / แบบทดสอบความรู้</div>
+      <h1>แบบทดสอบความรู้กฎหมายการศึกษา</h1>
+      <p>เลือกหมวดที่ต้องการทดสอบ แต่ละหมวดมี 8 ข้อ พร้อมคำอธิบายเหตุผลของคำตอบทันทีหลังเลือกตอบทุกข้อ เหมาะสำหรับทบทวนก่อนสอบหรือประเมินความเข้าใจของตนเอง</p>
+    </div>
+  </div>
+
+  <section style="padding-top:46px;">
+    <div class="container">
+
+      <div class="quiz-stage active" id="stageSelect">
+        <div class="section-head">
+          <div><div class="eyebrow">เลือกหมวดทดสอบ</div><h2 class="mt-0">หมวดแบบทดสอบ</h2></div>
+        </div>
+        <div class="quiz-cat-grid" id="quizCatGrid"></div>
+      </div>
+
+      <div class="quiz-stage" id="stageQuiz">
+        <div class="quiz-paper">
+          <div class="quiz-progress-row">
+            <span class="pnum" id="qProgressText"></span>
+            <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+            <span class="quiz-score-pill" id="scorePill">คะแนน 0</span>
+          </div>
+          <p class="q-text" id="qText"></p>
+          <div class="q-options" id="qOptions"></div>
+          <div class="q-explain" id="qExplain"></div>
+          <div class="quiz-nav-row">
+            <button class="btn btn-primary" id="nextBtn" disabled>ข้อต่อไป</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz-stage" id="stageResult">
+        <div class="quiz-paper quiz-result">
+          <div class="seal" data-seal></div>
+          <span class="grade-badge" id="gradeBadge"></span>
+          <p class="score-big" id="scoreBig"></p>
+          <p class="score-label" id="scoreLabel"></p>
+          <div class="result-actions">
+            <button class="btn btn-primary" id="retryBtn">ทำแบบทดสอบหมวดนี้อีกครั้ง</button>
+            <button class="btn btn-outline" id="backCatBtn">เลือกหมวดอื่น</button>
+            <a class="btn btn-outline" href="library.html">ทบทวนในคลังกฎหมาย</a>
+          </div>
+          <div class="review-list" id="reviewList"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="seal" data-seal style="--seal-size:40px;"></span>
+        <div>
+          <strong>กฎหมายการศึกษา</strong>
+          <p style="margin:6px 0 0;font-size:13px;line-height:1.6;">คลังความรู้กฎหมายการศึกษาไทยที่ครบถ้วน จัดระบบ และเข้าถึงง่าย เพื่อครู บุคลากรทางการศึกษา นักศึกษา และผู้สนใจทุกคน</p>
+        </div>
+      </div>
+      <div><h5>เมนูหลัก</h5><ul>
+        <li><a href="library.html">คลังกฎหมาย</a></li>
+        <li><a href="quiz.html">แบบทดสอบความรู้</a></li>
+        <li><a href="forum.html">กระดานสนทนา</a></li>
+        <li><a href="about.html">เกี่ยวกับเว็บไซต์</a></li>
+      </ul></div>
+      <div><h5>หมวดกฎหมายเด่น</h5><ul>
+        <li><a href="library.html?cat=national">การจัดการศึกษาแห่งชาติ</a></li>
+        <li><a href="library.html?cat=personnel">ครูและบุคลากรทางการศึกษา</a></li>
+        <li><a href="library.html?cat=child">คุ้มครองเด็กและกองทุนการศึกษา</a></li>
+        <li><a href="library.html?cat=draft">ร่างกฎหมาย/ความเคลื่อนไหว</a></li>
+      </ul></div>
+      <div><h5>แหล่งอ้างอิงทางการ</h5><ul>
+        <li><a href="https://www.krisdika.go.th" target="_blank" rel="noopener">สำนักงานคณะกรรมการกฤษฎีกา</a></li>
+        <li><a href="https://ratchakitcha.soc.go.th" target="_blank" rel="noopener">ราชกิจจานุเบกษา</a></li>
+        <li><a href="https://www.moe.go.th" target="_blank" rel="noopener">กระทรวงศึกษาธิการ</a></li>
+        <li><a href="https://www.parliament.go.th" target="_blank" rel="noopener">รัฐสภาไทย</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year></span> กฎหมายการศึกษา — จัดทำโดย Boorapatis Ploysuwan</span>
+      <span>แบบทดสอบนี้จัดทำเพื่อการเรียนรู้เท่านั้น ไม่ใช่แบบทดสอบทางราชการ</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/quiz-data.js"></script>
+<script src="js/main.js"></script>
+<script>
+function shuffle(arr){ return [...arr].sort(()=>Math.random()-0.5); }
+
+let quiz = { questions:[], idx:0, score:0, answered:[], setTitle:'' };
+
+function buildCatGrid(){
+  const sets = [...QUIZ_SETS, {
+    key:'mixed', title:'แบบทดสอบรวมทุกหมวด', level:'สุ่ม 20 ข้อ',
+    desc:'สุ่มคำถามจากทุกหมวดมารวมกัน เหมาะสำหรับประเมินความเข้าใจโดยรวม',
+    questions: Array(20),
+  }];
+  document.querySelector('#quizCatGrid').innerHTML = sets.map(s=>`
+    <button class="quiz-cat-card" data-key="${s.key}">
+      <span class="level">${s.level}</span>
+      <h3>${s.title}</h3>
+      <p>${s.desc}</p>
+      <span class="qmeta">${s.questions.length} ข้อ</span>
+    </button>`).join('');
+  document.querySelectorAll('.quiz-cat-card').forEach(b=> b.addEventListener('click', ()=> startQuiz(b.dataset.key)));
+}
+
+function startQuiz(key){
+  let qs, title;
+  if(key==='mixed'){
+    qs = shuffle(getAllQuestions()).slice(0,20);
+    title = 'แบบทดสอบรวมทุกหมวด';
+  } else {
+    const set = getQuizSet(key);
+    qs = set.questions.map(q=>({...q, setTitle:set.title}));
+    title = set.title;
+  }
+  quiz = { questions:qs, idx:0, score:0, answered:[], setTitle:title };
+  showStage('stageQuiz');
+  renderQuestion();
+}
+
+function showStage(id){
+  document.querySelectorAll('.quiz-stage').forEach(s=> s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top: document.querySelector('.page-hero').offsetHeight, behavior:'smooth'});
+}
+
+function renderQuestion(){
+  const q = quiz.questions[quiz.idx];
+  document.querySelector('#qProgressText').textContent = `ข้อ ${quiz.idx+1} / ${quiz.questions.length} · ${quiz.setTitle}`;
+  document.querySelector('#progressFill').style.width = (quiz.idx/quiz.questions.length*100)+'%';
+  document.querySelector('#scorePill').textContent = `คะแนน ${quiz.score}/${quiz.questions.length}`;
+  document.querySelector('#qText').textContent = q.q;
+  const letters = ['ก','ข','ค','ง'];
+  document.querySelector('#qOptions').innerHTML = q.options.map((opt,i)=>`
+    <button class="q-option" data-i="${i}"><span class="opt-letter">${letters[i]}</span><span>${opt}</span></button>`).join('');
+  document.querySelector('#qExplain').classList.remove('show');
+  document.querySelector('#qExplain').textContent='';
+  document.querySelector('#nextBtn').disabled = true;
+  document.querySelector('#nextBtn').textContent = (quiz.idx === quiz.questions.length-1) ? 'ดูผลคะแนน' : 'ข้อต่อไป';
+
+  document.querySelectorAll('.q-option').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(btn.disabled) return;
+      const chosen = parseInt(btn.dataset.i);
+      const correct = q.correct;
+      document.querySelectorAll('.q-option').forEach(b=>{ b.disabled = true; });
+      if(chosen===correct){
+        btn.classList.add('correct'); quiz.score++;
+      } else {
+        btn.classList.add('incorrect');
+        document.querySelector(`.q-option[data-i="${correct}"]`).classList.add('correct');
+      }
+      quiz.answered[quiz.idx] = chosen;
+      const exp = document.querySelector('#qExplain');
+      exp.innerHTML = `<strong>${chosen===correct ? 'ถูกต้อง! ':'ยังไม่ถูกต้อง — '}</strong>${q.explain}`;
+      exp.classList.add('show');
+      document.querySelector('#scorePill').textContent = `คะแนน ${quiz.score}/${quiz.questions.length}`;
+      document.querySelector('#nextBtn').disabled = false;
+    });
+  });
+}
+
+function nextQuestion(){
+  if(quiz.idx < quiz.questions.length-1){
+    quiz.idx++;
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult(){
+  showStage('stageResult');
+  const total = quiz.questions.length;
+  const pct = Math.round(quiz.score/total*100);
+  let grade = 'ควรทบทวนเพิ่มเติม';
+  if(pct>=90) grade='ดีเยี่ยม — รอบรู้กฎหมายการศึกษา!';
+  else if(pct>=75) grade='ดีมาก';
+  else if(pct>=60) grade='ดี';
+  else if(pct>=40) grade='พอใช้';
+  document.querySelector('#gradeBadge').textContent = grade;
+  document.querySelector('#scoreBig').textContent = `${quiz.score} / ${total}`;
+  document.querySelector('#scoreLabel').textContent = `คุณตอบถูก ${pct}% ในหมวด “${quiz.setTitle}”`;
+
+  document.querySelector('#reviewList').innerHTML = quiz.questions.map((q,i)=>{
+    const right = quiz.answered[i]===q.correct;
+    return `<div class="review-item ${right?'right':'wrong'}">
+      <strong>ข้อ ${i+1}:</strong> ${q.q}<br>
+      <span style="color:var(--ink-soft);">เฉลย: ${q.options[q.correct]}</span>
+      ${!right ? `<br><span style="color:var(--danger);">คำตอบของคุณ: ${q.options[quiz.answered[i]] ?? '— ไม่ได้ตอบ —'}</span>` : ''}
+    </div>`;
+  }).join('');
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  document.querySelector('.search-mini button').innerHTML = icon('search',15);
+  buildCatGrid();
+  document.querySelector('#nextBtn').addEventListener('click', nextQuestion);
+  document.querySelector('#retryBtn').addEventListener('click', ()=>{
+    const key = QUIZ_SETS.find(s=>s.title===quiz.setTitle)?.key || 'mixed';
+    startQuiz(key);
+  });
+  document.querySelector('#backCatBtn').addEventListener('click', ()=> showStage('stageSelect'));
+});
+</script>
+</body>
+</html>

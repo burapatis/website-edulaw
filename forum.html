@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>กระดานสนทนา | กฎหมายการศึกษา</title>
+<meta name="description" content="พื้นที่แลกเปลี่ยนความคิดเห็น ถามตอบข้อกฎหมาย และติดตามความเคลื่อนไหวด้านกฎหมายการศึกษา สำหรับครู บุคลากรทางการศึกษา นักศึกษา และผู้สนใจทั่วไป">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2248%22 fill=%22%230E2A47%22/><text x=%2250%22 y=%2264%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22%23B8902E%22>%C2%A7</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">ข้ามไปยังเนื้อหาหลัก</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <span class="seal" data-seal></span>
+      <span class="brand-text"><strong>กฎหมายการศึกษา</strong><span>EDUCATION LAW HUB</span></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">หน้าแรก</a>
+      <a href="library.html">คลังกฎหมาย</a>
+      <a href="quiz.html">แบบทดสอบ</a>
+      <a href="forum.html">กระดานสนทนา</a>
+      <a href="about.html">เกี่ยวกับเว็บไซต์</a>
+    </nav>
+    <div class="header-tools">
+      <form class="search-mini" onsubmit="return false;">
+        <input type="search" placeholder="ค้นหากฎหมาย..." aria-label="ค้นหากฎหมาย">
+        <button type="button" aria-label="ค้นหา"></button>
+      </form>
+      <button class="nav-toggle" aria-label="เปิดเมนู" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">หน้าแรก</a> / กระดานสนทนา</div>
+      <h1>กระดานสนทนา</h1>
+      <p>พื้นที่แลกเปลี่ยนความคิดเห็น ถาม-ตอบข้อกฎหมาย และติดตามความเคลื่อนไหวด้านกฎหมายการศึกษา ร่วมกันระหว่างครู บุคลากรทางการศึกษา นักศึกษา และผู้สนใจทั่วไป</p>
+    </div>
+  </div>
+
+  <section style="padding-top:46px;">
+    <div class="container">
+      <div class="disclaimer-note">
+        <span id="disclaimerIcon"></span>
+        <span>พื้นที่นี้จัดทำขึ้นเพื่อแลกเปลี่ยนความรู้และประสบการณ์เท่านั้น เนื้อหาที่โพสต์ไม่ถือเป็นคำวินิจฉัยหรือคำปรึกษาทางกฎหมายอย่างเป็นทางการ โปรดตรวจสอบกับหน่วยงานที่เกี่ยวข้องก่อนนำไปใช้อ้างอิงจริง และโปรดสนทนาด้วยความสุภาพ — เมื่อรันเซิร์ฟเวอร์ กระทู้จะถูกแชร์ร่วมกันผ่าน backend</span>
+      </div>
+
+      <div class="forum-layout">
+        <aside class="forum-side" id="forumSide"></aside>
+
+        <div>
+          <div id="forumListView">
+            <button class="btn btn-primary btn-sm" id="openNewThread" style="margin-bottom:16px;">+ ตั้งกระทู้ใหม่</button>
+            <div class="new-thread-box" id="newThreadBox" style="display:none;">
+              <input type="text" id="newName" placeholder="ชื่อที่ใช้แสดง เช่น ครู... / ผอ... / นักศึกษา...">
+              <select id="newTopic"></select>
+              <input type="text" id="newTitle" placeholder="หัวข้อกระทู้">
+              <textarea id="newBody" placeholder="รายละเอียด / คำถาม / ประเด็นที่ต้องการแลกเปลี่ยน"></textarea>
+              <button class="btn btn-primary btn-sm" id="submitThread">ตั้งกระทู้</button>
+            </div>
+            <div class="thread-list" id="threadList"></div>
+          </div>
+
+          <div id="forumDetailView" style="display:none;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="seal" data-seal style="--seal-size:40px;"></span>
+        <div>
+          <strong>กฎหมายการศึกษา</strong>
+          <p style="margin:6px 0 0;font-size:13px;line-height:1.6;">คลังความรู้กฎหมายการศึกษาไทยที่ครบถ้วน จัดระบบ และเข้าถึงง่าย เพื่อครู บุคลากรทางการศึกษา นักศึกษา และผู้สนใจทุกคน</p>
+        </div>
+      </div>
+      <div><h5>เมนูหลัก</h5><ul>
+        <li><a href="library.html">คลังกฎหมาย</a></li>
+        <li><a href="quiz.html">แบบทดสอบความรู้</a></li>
+        <li><a href="forum.html">กระดานสนทนา</a></li>
+        <li><a href="about.html">เกี่ยวกับเว็บไซต์</a></li>
+      </ul></div>
+      <div><h5>หมวดกฎหมายเด่น</h5><ul>
+        <li><a href="library.html?cat=national">การจัดการศึกษาแห่งชาติ</a></li>
+        <li><a href="library.html?cat=personnel">ครูและบุคลากรทางการศึกษา</a></li>
+        <li><a href="library.html?cat=child">คุ้มครองเด็กและกองทุนการศึกษา</a></li>
+        <li><a href="library.html?cat=draft">ร่างกฎหมาย/ความเคลื่อนไหว</a></li>
+      </ul></div>
+      <div><h5>แหล่งอ้างอิงทางการ</h5><ul>
+        <li><a href="https://www.krisdika.go.th" target="_blank" rel="noopener">สำนักงานคณะกรรมการกฤษฎีกา</a></li>
+        <li><a href="https://ratchakitcha.soc.go.th" target="_blank" rel="noopener">ราชกิจจานุเบกษา</a></li>
+        <li><a href="https://www.moe.go.th" target="_blank" rel="noopener">กระทรวงศึกษาธิการ</a></li>
+        <li><a href="https://www.parliament.go.th" target="_blank" rel="noopener">รัฐสภาไทย</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year></span> กฎหมายการศึกษา — จัดทำโดย Boorapatis Ploysuwan</span>
+      <span>กระดานสนทนานี้ไม่ใช่บริการให้คำปรึกษาทางกฎหมาย</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/api-client.js"></script>
+<script src="js/main.js"></script>
+<script src="js/forum.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', ()=>{
+  document.querySelector('.search-mini button').innerHTML = icon('search',15);
+  document.querySelector('#disclaimerIcon').innerHTML = icon('info',18);
+  document.querySelector('#newTopic').innerHTML = FORUM_TOPICS.map(t=>`<option value="${t.key}">${t.label}</option>`).join('');
+  document.querySelector('#newName').value = getDisplayName();
+  initForumPage();
+});
+</script>
+</body>
+</html>

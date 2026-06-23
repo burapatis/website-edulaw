@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>จัดการเนื้อหา | กฎหมายการศึกษา</title>
+<meta name="description" content="หน้าจัดการคลังกฎหมายการศึกษา — เพิ่ม แก้ไข ลบ และ export ข้อมูล JSON">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2248%22 fill=%22%230E2A47%22/><text x=%2250%22 y=%2264%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22%23B8902E%22>%C2%A7</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">ข้ามไปยังเนื้อหาหลัก</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <span class="seal" data-seal></span>
+      <span class="brand-text"><strong>กฎหมายการศึกษา</strong><span>EDUCATION LAW HUB</span></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">หน้าแรก</a>
+      <a href="library.html">คลังกฎหมาย</a>
+      <a href="quiz.html">แบบทดสอบ</a>
+      <a href="forum.html">กระดานสนทนา</a>
+      <a href="about.html">เกี่ยวกับเว็บไซต์</a>
+    </nav>
+    <div class="header-tools">
+      <button class="nav-toggle" aria-label="เปิดเมนู" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">หน้าแรก</a> / จัดการเนื้อหา</div>
+      <h1>จัดการคลังกฎหมาย</h1>
+      <p>เพิ่ม แก้ไข ลบกฎหมาย และ export เป็น JSON เพื่ออัปเดต <code>data/laws.json</code> บนเซิร์ฟเวอร์</p>
+    </div>
+  </div>
+
+  <section style="padding-top:46px;">
+    <div class="container">
+
+      <div id="adminLogin" class="admin-login-card">
+        <h2>เข้าสู่ระบบจัดการ</h2>
+        <p>หน้านี้สำหรับผู้ดูแลเนื้อหาเท่านั้น การแก้ไขจะบันทึกในเบราว์เซอร์ของคุณจนกว่าจะ Export ไฟล์ JSON</p>
+        <form id="loginForm">
+          <label for="adminPin">รหัสผ่าน</label>
+          <input type="password" id="adminPin" placeholder="รหัสผ่านผู้ดูแล" autocomplete="current-password" required>
+          <button type="submit" class="btn btn-primary">เข้าสู่ระบบ</button>
+        </form>
+        <p class="admin-hint">รหัสเริ่มต้น: <code>edulaw2567</code> (เปลี่ยนได้ใน <code>js/admin.js</code>)</p>
+      </div>
+
+      <div id="adminApp" style="display:none;">
+        <div class="admin-toolbar">
+          <div>
+            <span class="admin-badge" id="storageNote"></span>
+            <span class="result-count">ทั้งหมด <b id="adminLawCount">0</b> ฉบับ</span>
+          </div>
+          <div class="admin-toolbar-actions">
+            <button type="button" class="btn btn-primary btn-sm" id="btnAddLaw">+ เพิ่มกฎหมาย</button>
+            <button type="button" class="btn btn-outline btn-sm" id="btnExport">Export JSON</button>
+            <button type="button" class="btn btn-outline btn-sm" id="btnImport">Import JSON</button>
+            <input type="file" id="importFile" accept=".json,application/json" hidden>
+            <button type="button" class="btn btn-outline btn-sm" id="btnReset">รีเซ็ตข้อมูล</button>
+            <button type="button" class="btn btn-outline btn-sm" id="logoutBtn">ออกจากระบบ</button>
+          </div>
+        </div>
+
+        <div class="disclaimer-note" style="margin-bottom:18px;">
+          <span id="adminInfoIcon"></span>
+          <span>เมื่อรัน <code>npm start</code> การแก้ไขจะบันทึกลงเซิร์ฟเวอร์ที่ <code>data/laws.json</code> ทันที กระดานสนทนาแชร์ข้อมูลร่วมกันผ่าน <code>data/forum.json</code></span>
+        </div>
+
+        <input type="search" class="admin-search" id="adminSearch" placeholder="ค้นหาในตาราง...">
+
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>ชื่อกฎหมาย</th>
+                <th>หมวด</th>
+                <th>ประเภท</th>
+                <th>สถานะ</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="lawTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="admin-form-card" id="lawForm" style="display:none;">
+          <h3 id="formTitle">เพิ่มกฎหมายใหม่</h3>
+          <form id="lawFormEl">
+            <div class="admin-form-grid">
+              <div class="field-row">
+                <label for="fId">รหัส (id)</label>
+                <div class="field-inline">
+                  <input type="text" id="fId" placeholder="เช่น nea-2542" required>
+                  <button type="button" class="btn btn-outline btn-sm" id="btnGenId">สร้างจากชื่อ</button>
+                </div>
+              </div>
+              <div>
+                <label for="fCategory">หมวดหมู่</label>
+                <select id="fCategory"></select>
+              </div>
+              <div class="field-full">
+                <label for="fTitle">ชื่อกฎหมาย</label>
+                <input type="text" id="fTitle" required>
+              </div>
+              <div>
+                <label for="fYear">ปี / ช่วงเวลา</label>
+                <input type="text" id="fYear" placeholder="พ.ศ. 2542">
+              </div>
+              <div>
+                <label for="fType">ประเภท</label>
+                <input type="text" id="fType" placeholder="พระราชบัญญัติ">
+              </div>
+              <div>
+                <label for="fAgency">หน่วยงาน</label>
+                <input type="text" id="fAgency">
+              </div>
+              <div>
+                <label for="fStatus">สถานะ</label>
+                <select id="fStatus">
+                  <option value="บังคับใช้">บังคับใช้</option>
+                  <option value="อยู่ระหว่างพิจารณา">อยู่ระหว่างพิจารณา</option>
+                  <option value="ยกเลิก">ยกเลิก</option>
+                </select>
+              </div>
+              <div class="field-full">
+                <label for="fSummary">สรุปสาระสำคัญ (1 ย่อหน้า)</label>
+                <textarea id="fSummary" rows="3" required></textarea>
+              </div>
+              <div class="field-full">
+                <label for="fPoints">สาระสำคัญ (หนึ่งบรรทัดต่อหนึ่งข้อ)</label>
+                <textarea id="fPoints" rows="5" placeholder="ข้อที่ 1...&#10;ข้อที่ 2..."></textarea>
+              </div>
+              <div class="field-full">
+                <label for="fCitation">อ้างอิงราชกิจจานุเบกษา</label>
+                <input type="text" id="fCitation" placeholder="ราชกิจจานุเบกษา เล่ม ... วันที่ ...">
+              </div>
+              <div class="field-full">
+                <label for="fLinks">ลิงก์อ้างอิง (รูปแบบ: ชื่อ|URL หนึ่งบรรทัดต่อหนึ่งลิงก์)</label>
+                <textarea id="fLinks" rows="3" placeholder="ราชกิจจานุเบกษา|https://ratchakitcha.soc.go.th"></textarea>
+              </div>
+              <div>
+                <label for="fTags">แท็ก (คั่นด้วย comma)</label>
+                <input type="text" id="fTags" placeholder="ครู, วิทยฐานะ">
+              </div>
+              <div>
+                <label for="fRelated">กฎหมายที่เกี่ยวข้อง (id คั่นด้วย comma)</label>
+                <input type="text" id="fRelated" placeholder="nea-2542, teacher-civil-2547">
+              </div>
+            </div>
+            <div class="admin-form-actions">
+              <button type="submit" class="btn btn-primary">บันทึก</button>
+              <button type="button" class="btn btn-outline" id="btnCancelForm">ยกเลิก</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom" style="border:none;padding-top:0;">
+      <span>© <span data-year></span> กฎหมายการศึกษา — หน้าจัดการเนื้อหา</span>
+      <span><a href="library.html">กลับไปคลังกฎหมาย</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/laws-bundle.js"></script>
+<script src="js/api-client.js"></script>
+<script src="js/laws-store.js"></script>
+<script src="js/main.js"></script>
+<script src="js/admin.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', ()=>{
+  document.querySelector('#adminInfoIcon').innerHTML = icon('info',18);
+});
+</script>
+</body>
+</html>

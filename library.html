@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>คลังกฎหมายการศึกษา | กฎหมายการศึกษา</title>
+<meta name="description" content="ค้นหาและศึกษากฎหมายการศึกษาไทยทุกฉบับ จัดหมวดหมู่ครบถ้วน พร้อมสรุปสาระสำคัญและลิงก์อ้างอิงแหล่งที่มาทางการ">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2248%22 fill=%22%230E2A47%22/><text x=%2250%22 y=%2264%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22%23B8902E%22>%C2%A7</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">ข้ามไปยังเนื้อหาหลัก</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <span class="seal" data-seal></span>
+      <span class="brand-text"><strong>กฎหมายการศึกษา</strong><span>EDUCATION LAW HUB</span></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">หน้าแรก</a>
+      <a href="library.html">คลังกฎหมาย</a>
+      <a href="quiz.html">แบบทดสอบ</a>
+      <a href="forum.html">กระดานสนทนา</a>
+      <a href="about.html">เกี่ยวกับเว็บไซต์</a>
+    </nav>
+    <div class="header-tools">
+      <form class="search-mini" onsubmit="return false;">
+        <input type="search" placeholder="ค้นหากฎหมาย..." aria-label="ค้นหากฎหมาย">
+        <button type="button" aria-label="ค้นหา"></button>
+      </form>
+      <button class="nav-toggle" aria-label="เปิดเมนู" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">หน้าแรก</a> / คลังกฎหมาย</div>
+      <h1>คลังกฎหมายการศึกษา</h1>
+      <p>รวบรวมกฎหมายการศึกษาไทยตั้งแต่รัฐธรรมนูญ พระราชบัญญัติ กฎกระทรวง ไปจนถึงร่างกฎหมายที่อยู่ระหว่างพิจารณา — ค้นหา กรองตามหมวดหมู่ และอ่านสาระสำคัญแบบสรุปได้ในที่เดียว</p>
+    </div>
+  </div>
+
+  <section style="padding-top:46px;">
+    <div class="container">
+      <div class="law-toolbar">
+        <input type="search" id="searchInput" placeholder="พิมพ์ชื่อกฎหมาย หน่วยงาน หรือคำสำคัญ เช่น วิทยฐานะ, เรียนฟรี, คุรุสภา...">
+        <div class="chip-row" id="chipRow"></div>
+      </div>
+      <div class="law-meta-row">
+        <span class="result-count" id="resultCount"></span>
+        <select id="sortSelect">
+          <option value="default">เรียงตามลำดับหมวดหมู่</option>
+          <option value="az">เรียงตามชื่อ (ก–ฮ)</option>
+          <option value="year">เรียงตามปี (ใหม่ไปเก่า)</option>
+        </select>
+      </div>
+      <div class="law-grid" id="lawGrid"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="seal" data-seal style="--seal-size:40px;"></span>
+        <div>
+          <strong>กฎหมายการศึกษา</strong>
+          <p style="margin:6px 0 0;font-size:13px;line-height:1.6;">คลังความรู้กฎหมายการศึกษาไทยที่ครบถ้วน จัดระบบ และเข้าถึงง่าย เพื่อครู บุคลากรทางการศึกษา นักศึกษา และผู้สนใจทุกคน</p>
+        </div>
+      </div>
+      <div><h5>เมนูหลัก</h5><ul>
+        <li><a href="library.html">คลังกฎหมาย</a></li>
+        <li><a href="quiz.html">แบบทดสอบความรู้</a></li>
+        <li><a href="forum.html">กระดานสนทนา</a></li>
+        <li><a href="about.html">เกี่ยวกับเว็บไซต์</a></li>
+      </ul></div>
+      <div><h5>หมวดกฎหมายเด่น</h5><ul>
+        <li><a href="library.html?cat=national">การจัดการศึกษาแห่งชาติ</a></li>
+        <li><a href="library.html?cat=personnel">ครูและบุคลากรทางการศึกษา</a></li>
+        <li><a href="library.html?cat=child">คุ้มครองเด็กและกองทุนการศึกษา</a></li>
+        <li><a href="library.html?cat=draft">ร่างกฎหมาย/ความเคลื่อนไหว</a></li>
+      </ul></div>
+      <div><h5>แหล่งอ้างอิงทางการ</h5><ul>
+        <li><a href="https://www.krisdika.go.th" target="_blank" rel="noopener">สำนักงานคณะกรรมการกฤษฎีกา</a></li>
+        <li><a href="https://ratchakitcha.soc.go.th" target="_blank" rel="noopener">ราชกิจจานุเบกษา</a></li>
+        <li><a href="https://www.moe.go.th" target="_blank" rel="noopener">กระทรวงศึกษาธิการ</a></li>
+        <li><a href="https://www.parliament.go.th" target="_blank" rel="noopener">รัฐสภาไทย</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year></span> กฎหมายการศึกษา — จัดทำโดย Boorapatis Ploysuwan</span>
+      <span>เนื้อหาเป็นการสรุปเพื่อการเรียนรู้ ไม่ใช่คำปรึกษาทางกฎหมาย</span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-card">
+    <div class="modal-head">
+      <button class="modal-close" id="modalClose">${''}</button>
+      <span class="law-tag" id="modalTag"></span>
+      <h2 id="modalTitle"></h2>
+      <div class="modal-sub" id="modalSub"></div>
+    </div>
+    <div class="modal-body">
+      <h4>สาระสำคัญ</h4>
+      <ul class="points" id="modalPoints"></ul>
+      <div class="modal-foot">
+        <div class="source-links" id="modalLinks"></div>
+        <a class="btn btn-outline btn-sm" id="modalForumBtn" href="forum.html">ตั้งกระทู้ถามเกี่ยวกับฉบับนี้</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/laws-bundle.js"></script>
+<script src="js/api-client.js"></script>
+<script src="js/laws-store.js"></script>
+<script src="js/main.js"></script>
+<script>
+let state = { cat:'all', q:'', sort:'default' };
+
+function buildChips(){
+  const row = document.querySelector('#chipRow');
+  const chips = [{key:'all', label:'ทั้งหมด'}, ...LAW_CATEGORIES.map(c=>({key:c.key, label:c.label}))];
+  row.innerHTML = chips.map(c=>`<button class="chip ${state.cat===c.key?'active':''}" data-cat="${c.key}">${c.label}</button>`).join('');
+  row.querySelectorAll('.chip').forEach(b=>{
+    b.addEventListener('click', ()=>{ state.cat = b.dataset.cat; syncUrl(); render(); });
+  });
+}
+
+function matchesQuery(law, q){
+  if(!q) return true;
+  const hay = [law.title, law.summary, law.agency, law.type, law.year, ...(law.points||[])].join(' ').toLowerCase();
+  return hay.includes(q.toLowerCase());
+}
+
+function render(){
+  buildChips();
+  let list = LAWS.filter(l => (state.cat==='all' || l.category===state.cat) && matchesQuery(l, state.q));
+
+  if(state.sort==='az') list = [...list].sort((a,b)=> a.title.localeCompare(b.title,'th'));
+  if(state.sort==='year') list = [...list].sort((a,b)=> (b.year.match(/\d{4}/g)||['0']).pop() - (a.year.match(/\d{4}/g)||['0']).pop());
+
+  document.querySelector('#resultCount').innerHTML = `พบ <b>${list.length}</b> ฉบับ จากทั้งหมด ${LAWS.length} ฉบับ`;
+
+  const grid = document.querySelector('#lawGrid');
+  if(list.length===0){
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">${icon('search',26)}<p style="margin-top:10px;">ไม่พบกฎหมายที่ตรงกับคำค้นหานี้ ลองใช้คำสำคัญอื่น หรือเลือกดู “ทั้งหมด”</p></div>`;
+    return;
+  }
+  grid.innerHTML = list.map(l => `
+    <div class="law-card" data-id="${l.id}">
+      <div class="law-card-top">
+        <span class="law-tag ${l.status!=='บังคับใช้' ? 'is-draft':''}">${l.type}</span>
+        <span class="law-year">${l.year.split('·')[0].trim()}</span>
+      </div>
+      <h3>${l.title}</h3>
+      <p class="law-summary">${l.summary}</p>
+      <div class="law-card-foot">
+        <span class="agency">${icon('building',14)} ${l.agency}</span>
+        <span class="read-more">อ่านสาระสำคัญ →</span>
+      </div>
+    </div>`).join('');
+  grid.querySelectorAll('.law-card').forEach(c => c.addEventListener('click', ()=> openModal(c.dataset.id)));
+}
+
+function openModal(id){
+  const l = getLawById(id);
+  if(!l) return;
+  document.querySelector('#modalTag').textContent = l.type;
+  document.querySelector('#modalTitle').textContent = l.title;
+  document.querySelector('#modalSub').textContent = `${l.year} · ${l.agency} · สถานะ: ${l.status}` + (l.citation ? ` · ${l.citation}` : '');
+  document.querySelector('#modalPoints').innerHTML = l.points.map(p=>`<li>${p}</li>`).join('');
+  const linksWrap = document.querySelector('#modalLinks');
+  let linksHtml = (l.links||[]).map(s=>`<a href="${s.url}" target="_blank" rel="noopener">${s.label} ↗</a>`).join('');
+  if((l.tags||[]).length){
+    linksHtml += (linksHtml ? ' ' : '') + (l.tags||[]).map(t=>`<span class="chip" style="pointer-events:none;font-size:11px;">${t}</span>`).join('');
+  }
+  linksWrap.innerHTML = linksHtml
+    || `<span style="font-size:12.5px;color:var(--ink-soft);">โปรดตรวจสอบฉบับเต็มจากราชกิจจานุเบกษาหรือเว็บไซต์หน่วยงานที่รับผิดชอบ</span>`;
+  if((l.relatedLaws||[]).length){
+    const rel = l.relatedLaws.map(rid=>{
+      const relLaw = getLawById(rid);
+      return relLaw ? `<a href="?law=${rid}" style="font-size:12.5px;color:var(--navy-2);">${relLaw.title}</a>` : '';
+    }).filter(Boolean).join(' · ');
+    if(rel) linksWrap.insertAdjacentHTML('beforeend', `<div style="width:100%;margin-top:10px;font-size:12.5px;color:var(--ink-soft);">เกี่ยวข้อง: ${rel}</div>`);
+  }
+  document.querySelector('#modalForumBtn').href = 'forum.html?topic=qa&lawTitle=' + encodeURIComponent(l.title);
+  document.querySelector('#modalOverlay').classList.add('open');
+  try{ history.replaceState(null,'', '?'+new URLSearchParams({...Object.fromEntries(new URLSearchParams(location.search)), law:id}).toString()); }catch(e){ /* URL sync is non-critical */ }
+}
+function closeModal(){
+  document.querySelector('#modalOverlay').classList.remove('open');
+  const p = new URLSearchParams(location.search);
+  p.delete('law');
+  try{ history.replaceState(null,'', location.pathname + (p.toString()?('?'+p.toString()):'')); }catch(e){ /* URL sync is non-critical */ }
+}
+
+function syncUrl(){
+  const p = new URLSearchParams();
+  if(state.cat!=='all') p.set('cat', state.cat);
+  if(state.q) p.set('q', state.q);
+  try{ history.replaceState(null,'', location.pathname + (p.toString()?('?'+p.toString()):'')); }catch(e){ /* URL sync is non-critical, never block render */ }
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  LawsStore.whenLawsReady().then(()=>{
+  document.querySelector('.search-mini button').innerHTML = icon('search',15);
+  document.querySelector('#modalClose').innerHTML = icon('close',18);
+
+  const params = new URLSearchParams(location.search);
+  state.cat = params.get('cat') || 'all';
+  state.q = params.get('q') || '';
+  document.querySelector('#searchInput').value = state.q;
+
+  render();
+  if(params.get('law')) openModal(params.get('law'));
+
+  document.querySelector('#searchInput').addEventListener('input', e=>{
+    state.q = e.target.value; syncUrl(); render();
+  });
+  document.querySelector('#sortSelect').addEventListener('change', e=>{ state.sort = e.target.value; render(); });
+  document.querySelector('#modalClose').addEventListener('click', closeModal);
+  document.querySelector('#modalOverlay').addEventListener('click', e=>{ if(e.target.id==='modalOverlay') closeModal(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+  }).catch(()=> showToast('โหลดข้อมูลกฎหมายไม่สำเร็จ', 'info'));
+});
+</script>
+</body>
+</html>
