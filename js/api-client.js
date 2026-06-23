@@ -6,8 +6,21 @@ const TOKEN_KEY = 'edulaw_admin_token';
 
 let _apiAvailable = null;
 
+function isStaticHost() {
+  const h = location.hostname;
+  return (
+    h.endsWith('.github.io') ||
+    h.endsWith('.gitlab.io') ||
+    h.endsWith('.pages.dev')
+  );
+}
+
 async function checkApi() {
   if (_apiAvailable !== null) return _apiAvailable;
+  if (isStaticHost()) {
+    _apiAvailable = false;
+    return false;
+  }
   try {
     const res = await fetch('/api/health', { cache: 'no-store' });
     _apiAvailable = res.ok;
