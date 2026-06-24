@@ -1,0 +1,6 @@
+{{- with site.Params.release_status }}
+<p class="footer-release-status">
+  สถานะเว็บไซต์: {{ . }}{{ with site.Params.version }} · v{{ . }}{{ end }}
+  · <a href="{{ partial "iu.html" "about/public-beta/" }}">รายละเอียดสถานะ</a>
+</p>
+{{- end }}

@@ -2,6 +2,17 @@
 
 ดัชนีเอกสารสำหรับผู้ดูแลและผู้ร่วมพัฒนา **Education Law Hub**
 
+## การปล่อยเวอร์ชันและ QA
+
+| เอกสาร | คำอธิบาย |
+|--------|----------|
+| [PUBLIC_RELEASE.md](PUBLIC_RELEASE.md) | การเปิดใช้งาน Public Beta และถ้อยคำสาธารณะ |
+| [QA_CHECKLIST.md](QA_CHECKLIST.md) | ทดสอบด้วยเบราว์เซอร์ (desktop/mobile) |
+| [ROADMAP.md](ROADMAP.md) | แผนพัฒนาเวอร์ชันถัดไป |
+| [../RELEASE_CHECKLIST.md](../RELEASE_CHECKLIST.md) | Checklist ก่อน deploy |
+| [../CHANGELOG.md](../CHANGELOG.md) | ประวัติการเปลี่ยนแปลง |
+| [../LEGAL_REVIEW_CHECKLIST.md](../LEGAL_REVIEW_CHECKLIST.md) | ตรวจกฎหมายก่อน deploy |
+
 ## การขยายเนื้อหาและ metadata
 
 | เอกสาร | คำอธิบาย |
@@ -41,4 +52,6 @@ npm run dev
 npm run check:content
 npm run check:content:full
 npm run build:search
+npm run release:check
+npm run report:stats
 ```

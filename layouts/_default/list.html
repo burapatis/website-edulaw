@@ -17,7 +17,9 @@
       <a class="law-card" href="{{ .RelPermalink }}">
         <span class="law-card-tag">{{ .Params.status | default "เอกสาร" }}</span>
         <h3>{{ .Title }}</h3>
-        <p>{{ .Summary }}</p>
+        {{- with .Description }}
+        <p>{{ . }}</p>
+        {{- end }}
       </a>
       {{- end }}
     </div>

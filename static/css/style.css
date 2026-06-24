@@ -34,6 +34,7 @@
 
   --radius-s: 6px;
   --radius-m: 12px;
+  --radius-md: 12px;
   --radius-l: 22px;
 }
 
@@ -1201,6 +1202,10 @@ section{padding:74px 0;}
 .footer-disclaimer{
   margin:0;font-size:13px;line-height:1.65;color:rgba(250,246,236,.82);max-width:720px;
 }
+.footer-release-status{
+  margin:10px 0 0;font-size:12.5px;line-height:1.55;color:rgba(250,246,236,.7);
+}
+.footer-release-status a{color:rgba(250,246,236,.88);}
 .footer-bottom{
   flex-direction:column;align-items:flex-start;gap:8px;
 }
@@ -1343,6 +1348,61 @@ body.nav-open{overflow:hidden;}
 .guide-sidebar-links{margin:0;padding:0;list-style:none;line-height:1.65;font-size:14.5px;}
 .guide-sidebar-links li{padding:6px 0;border-bottom:1px solid var(--paper-line);}
 .guide-sidebar-links li:last-child{border-bottom:none;}
+
+/* Public beta / release status page */
+.release-status-section{padding:40px 0 64px;}
+.release-hero-badge{
+  margin:12px 0 0;font-size:15px;
+  padding:8px 14px;display:inline-block;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+  border-radius:var(--radius-md);color:rgba(250,246,236,.95);
+}
+.release-status-grid{
+  display:flex;flex-direction:column;gap:20px;
+}
+.release-status-grid.content-body{max-width:none;}
+.release-status-grid > p:empty{display:none;}
+.release-status-grid .release-card h2,
+.release-status-grid .release-card h3{margin-top:0;}
+.release-card{
+  padding:22px 24px;background:var(--paper-alt);
+  border:1px solid var(--paper-line);border-radius:var(--radius-md);
+}
+.release-card h2{
+  font-size:20px;margin:0 0 14px;color:var(--navy);
+  padding-bottom:10px;border-bottom:1px solid var(--paper-line);
+}
+.release-card p{margin:0 0 12px;font-size:15px;line-height:1.7;}
+.release-card p:last-child{margin-bottom:0;}
+.release-card__list{
+  margin:0;padding-left:1.25rem;line-height:1.75;font-size:15px;
+}
+.release-card__list li{margin-bottom:8px;}
+.release-card__list li:last-child{margin-bottom:0;}
+.release-card__list--features li{margin-bottom:10px;}
+.release-card__steps{
+  margin:0;padding-left:1.35rem;line-height:1.75;font-size:15px;
+}
+.release-card__steps li{margin-bottom:10px;}
+.release-card__steps li:last-child{margin-bottom:0;}
+.release-card__note{
+  margin-top:14px!important;font-size:14px;color:var(--ink-soft);
+  padding-top:12px;border-top:1px solid var(--paper-line);
+}
+.release-card__links-title{
+  margin:16px 0 8px!important;font-size:14px;font-weight:600;color:var(--ink-soft);
+}
+.release-card__list--inline-links{list-style:none;padding-left:0;display:flex;flex-wrap:wrap;gap:8px 16px;}
+.release-card__list--inline-links li{margin:0;}
+.release-card--status{
+  background:var(--navy-tint);border-color:rgba(26,54,93,.15);
+}
+.release-card--warning{
+  background:#fff8e6;border-color:rgba(184,134,11,.28);
+}
+.release-card--emphasis{
+  border-left:4px solid var(--gold);background:var(--paper-alt);
+}
 
 .cat-card--tool-guides{border-color:rgba(26,54,93,.15);}
 

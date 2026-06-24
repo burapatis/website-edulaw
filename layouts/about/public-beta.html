@@ -1,0 +1,28 @@
+{{ define "main" }}
+<div class="page-hero" data-pagefind-body>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="{{ partial "iu.html" "" }}">หน้าแรก</a> /
+      <a href="{{ partial "iu.html" "about/" }}">เกี่ยวกับ</a> /
+      {{ .Title }}
+    </div>
+    <h1>{{ .Title }}</h1>
+    <p>{{ .Description }}</p>
+    {{- with site.Params.release_status }}
+    <p class="release-hero-badge">
+      สถานะเว็บไซต์: <strong>{{ . }}</strong>{{ with site.Params.version }} · v{{ . }}{{ end }}
+    </p>
+    {{- end }}
+  </div>
+</div>
+
+<section class="release-status-section">
+  <div class="container">
+    <div class="release-status-grid content-body" data-pagefind-body>
+      {{ partial "release-card-site-status.html" . }}
+      {{ .Content }}
+    </div>
+    {{ partial "feedback-callout.html" . }}
+  </div>
+</section>
+{{ end }}

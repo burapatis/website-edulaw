@@ -20,6 +20,8 @@ enableRobotsTXT = true
   ogImage = 'assets/feature-graphic.png'
   feedbackGithubIssuesNew = 'https://github.com/burapatis/website-edulaw/issues/new/choose'
   feedbackGoogleForm = ''
+  version = '1.0.0-beta'
+  release_status = 'Public Beta'
 
 [sitemap]
   changefreq = 'weekly'

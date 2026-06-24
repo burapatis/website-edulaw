@@ -12,6 +12,9 @@
     <p class="dash-meta-line">
       อัปเดตคลังข้อมูลล่าสุด: {{ with $s.catalogUpdatedAt }}{{ . }}{{ else }}—{{ end }}
       · สร้างหน้าเว็บ: {{ $s.buildDate }}
+      {{- with site.Params.release_status }}
+      · สถานะเว็บไซต์: {{ . }}{{ with site.Params.version }} (v{{ . }}){{ end }}
+      {{- end }}
     </p>
   </div>
 </div>
@@ -159,7 +162,8 @@
       <a class="btn btn-outline" href="{{ partial "iu.html" "search/" }}">ค้นหา</a>
       <a class="btn btn-outline" href="{{ partial "iu.html" "learning-paths/" }}">เส้นทางการเรียนรู้</a>
       <a class="btn btn-outline" href="{{ partial "iu.html" "quiz/" }}">แบบทดสอบ</a>
-      <a class="btn btn-outline" href="{{ partial "iu.html" "guides/" }}">คู่มือและบทความอธิบาย</a>
+      <a class="btn btn-outline" href="{{ partial "iu.html" "guides/" }}">คู่มือ</a>
+      <a class="btn btn-outline" href="{{ partial "iu.html" "about/public-beta/" }}">สถานะ Public Beta</a>
       <a class="btn btn-outline" href="{{ partial "iu.html" "feedback/" }}">แจ้งข้อผิดพลาด/เสนอแนะ</a>
     </div>
   </div>
