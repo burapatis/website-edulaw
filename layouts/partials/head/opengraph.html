@@ -1,0 +1,13 @@
+{{- $seo := partial "seo/resolve.html" . -}}
+<meta property="og:title" content="{{ $seo.title }}">
+<meta property="og:description" content="{{ $seo.description }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:type" content="{{ $seo.ogType }}">
+<meta property="og:locale" content="th_TH">
+<meta property="og:image" content="{{ $seo.ogImage }}">
+<meta property="og:image:alt" content="{{ site.Title }} — คลังความรู้กฎหมายการศึกษาไทย">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $seo.title }}">
+<meta name="twitter:description" content="{{ $seo.description }}">
+<meta name="twitter:image" content="{{ $seo.ogImage }}">

@@ -5,6 +5,8 @@
 
 title: "{{ replace .Name "-" " " | title }}"
 short_title: ""
+description: ""
+og_image: ""
 law_type: ""
 year: ""
 category: ""

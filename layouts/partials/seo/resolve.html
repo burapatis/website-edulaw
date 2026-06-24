@@ -1,0 +1,52 @@
+{{- /* คำนวณ title, description, ogImage, ogType, robots สำหรับทุกหน้า */ -}}
+{{- $defaultDesc := "เว็บไซต์รวบรวมกฎหมายการศึกษาไทย สรุปอ่านง่าย แบบทดสอบ เส้นทางการเรียนรู้ และลิงก์แหล่งข้อมูลทางการ เพื่อการศึกษาและค้นคว้าเบื้องต้น" -}}
+
+{{- $desc := "" -}}
+{{- if .Description -}}
+  {{- $desc = .Description -}}
+{{- else if .Params.description -}}
+  {{- $desc = .Params.description -}}
+{{- else if and (eq .Section "laws") .IsPage -}}
+  {{- $agency := .Params.agency | default "หน่วยงานที่เกี่ยวข้อง" -}}
+  {{- $status := .Params.status | default "ข้อมูลสรุป" -}}
+  {{- $desc = printf "สรุปและข้อมูลเบื้องต้นเกี่ยวกับ %s พร้อมหมวดหมู่ หน่วยงานที่เกี่ยวข้อง (%s) สถานะข้อมูล (%s) และลิงก์แหล่งข้อมูลทางการ" .Title $agency $status -}}
+{{- else if and (eq .Section "learning-paths") (not .IsSection) -}}
+  {{- $desc = printf "เส้นทางการเรียนรู้กฎหมายการศึกษาสำหรับ%s พร้อมหัวข้อที่ควรเริ่มศึกษา กฎหมายที่เกี่ยวข้อง แบบทดสอบ และลิงก์ค้นหาข้อมูลเพิ่มเติม" .Title -}}
+{{- else if eq .Section "quiz" -}}
+  {{- $desc = "แบบทดสอบความรู้กฎหมายการศึกษาเบื้องต้น พร้อมเฉลย เหตุผล และลิงก์อ่านต่อ ไม่ใช่การให้คำปรึกษากฎหมายเฉพาะกรณี" -}}
+{{- else if .Summary -}}
+  {{- $desc = .Summary | plainify | strings.TrimSpace | truncate 160 -}}
+{{- else -}}
+  {{- $desc = site.Params.description | default $defaultDesc -}}
+{{- end -}}
+
+{{- $pageTitle := "" -}}
+{{- if .IsHome -}}
+  {{- $pageTitle = printf "%s | %s" site.Title (site.Params.tagline | default "Education Law Hub") -}}
+{{- else -}}
+  {{- $pageTitle = printf "%s | %s" .Title site.Title -}}
+{{- end -}}
+
+{{- $ogPath := .Params.og_image | default site.Params.ogImage | default "assets/feature-graphic.png" -}}
+{{- $ogImage := $ogPath -}}
+{{- if not (hasPrefix $ogPath "http") -}}
+  {{- $ogImage = partial "iu.html" (strings.TrimPrefix "/" $ogPath) -}}
+{{- end -}}
+
+{{- $ogType := "website" -}}
+{{- if or (and (eq .Section "laws") .IsPage) (and (eq .Section "learning-paths") (not .IsSection)) (and (eq .Section "about") .IsPage) (eq .Section "summaries") -}}
+  {{- $ogType = "article" -}}
+{{- end -}}
+
+{{- $robots := "index, follow" -}}
+{{- if or .Params.noindex .Draft -}}
+  {{- $robots = "noindex, nofollow" -}}
+{{- end -}}
+
+{{- return dict
+  "title" $pageTitle
+  "description" $desc
+  "ogImage" $ogImage
+  "ogType" $ogType
+  "robots" $robots
+-}}

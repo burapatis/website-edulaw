@@ -1,0 +1,75 @@
+{{- $seo := partial "seo/resolve.html" . -}}
+{{- $author := site.Params.author -}}
+{{- $siteURL := strings.TrimSuffix "/" site.BaseURL -}}
+{{- $siteURLSlash := printf "%s/" $siteURL -}}
+
+{{- if .IsHome }}
+{{- $websiteID := printf "%s#website" $siteURLSlash -}}
+{{- $orgID := printf "%s#organization" $siteURLSlash -}}
+{{- $graph := slice
+  (dict
+    "@type" "WebSite"
+    "@id" $websiteID
+    "url" $siteURLSlash
+    "name" site.Title
+    "description" $seo.description
+    "inLanguage" "th-TH"
+    "publisher" (dict "@id" $orgID)
+    "potentialAction" (dict
+      "@type" "SearchAction"
+      "target" (printf "%ssearch/?q={search_term_string}" $siteURLSlash)
+      "query-input" "required name=search_term_string"
+    )
+  )
+  (dict
+    "@type" "Organization"
+    "@id" $orgID
+    "name" site.Title
+    "url" $siteURLSlash
+    "description" (site.Params.description | default $seo.description)
+    "founder" (dict "@type" "Person" "name" $author)
+  )
+-}}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" $graph | jsonify | safeJS }}</script>
+{{- else }}
+{{- $breadcrumbs := slice (dict "name" "หน้าแรก" "url" $siteURLSlash) -}}
+{{- if eq .Section "laws" -}}
+  {{- $breadcrumbs = $breadcrumbs | append (dict "name" "คลังกฎหมาย" "url" (printf "%slaws/" $siteURLSlash)) -}}
+{{- else if eq .Section "learning-paths" -}}
+  {{- $breadcrumbs = $breadcrumbs | append (dict "name" "เส้นทางการเรียนรู้" "url" (printf "%slearning-paths/" $siteURLSlash)) -}}
+{{- else if eq .Section "quiz" -}}
+  {{- $breadcrumbs = $breadcrumbs | append (dict "name" "แบบทดสอบ" "url" (printf "%squiz/" $siteURLSlash)) -}}
+{{- else if eq .Section "about" -}}
+  {{- $breadcrumbs = $breadcrumbs | append (dict "name" "เกี่ยวกับเว็บไซต์" "url" (printf "%sabout/" $siteURLSlash)) -}}
+{{- else if eq .Section "search" -}}
+  {{- $breadcrumbs = $breadcrumbs | append (dict "name" "ค้นหา" "url" (printf "%ssearch/" $siteURLSlash)) -}}
+{{- else if eq .Section "summaries" -}}
+  {{- $breadcrumbs = $breadcrumbs | append (dict "name" "สรุปกฎหมาย" "url" (printf "%ssummaries/" $siteURLSlash)) -}}
+{{- else if eq .Section "faq" -}}
+  {{- $breadcrumbs = $breadcrumbs | append (dict "name" "คำถามที่พบบ่อย" "url" (printf "%sfaq/" $siteURLSlash)) -}}
+{{- end -}}
+{{- if not .IsSection -}}
+  {{- $breadcrumbs = $breadcrumbs | append (dict "name" .Title "url" .Permalink) -}}
+{{- end -}}
+
+{{- $crumbs := slice -}}
+{{- range $i, $c := $breadcrumbs -}}
+  {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" (add $i 1) "name" $c.name "item" $c.url) -}}
+{{- end -}}
+
+{{- $graph := slice (dict "@type" "BreadcrumbList" "itemListElement" $crumbs) -}}
+{{- if and (eq .Section "laws") .IsPage -}}
+  {{- $graph = $graph | append (dict
+    "@type" "TechArticle"
+    "headline" .Title
+    "description" $seo.description
+    "url" .Permalink
+    "inLanguage" "th-TH"
+    "isAccessibleForFree" true
+    "author" (dict "@type" "Person" "name" $author)
+    "publisher" (dict "@type" "Organization" "name" site.Title "url" $siteURLSlash)
+    "about" (dict "@type" "Thing" "name" .Title "description" "การสรุปเพื่อการเรียนรู้ — ไม่ใช่ตัวบทกฎหมายฉบับทางการ")
+  ) -}}
+{{- end -}}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" $graph | jsonify | safeJS }}</script>
+{{- end }}

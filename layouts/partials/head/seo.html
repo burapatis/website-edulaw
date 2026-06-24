@@ -1,0 +1,6 @@
+{{- $seo := partial "seo/resolve.html" . -}}
+<title>{{ $seo.title }}</title>
+<meta name="description" content="{{ $seo.description }}">
+<meta name="robots" content="{{ $seo.robots }}">
+<meta name="author" content="{{ site.Params.author }}">
+<link rel="canonical" href="{{ .Permalink }}">

@@ -62,8 +62,11 @@
   {{- $catKeys := $law.categories | default (slice $law.category) -}}
   {{- $tags := $law.tags | default slice -}}
 
+  {{- $lawDesc := printf "สรุปและข้อมูลเบื้องต้นเกี่ยวกับ %s พร้อมหมวดหมู่ หน่วยงานที่เกี่ยวข้อง (%s) สถานะข้อมูล (%s) และลิงก์แหล่งข้อมูลทางการ" $law.title ($law.agency | default "หน่วยงานที่เกี่ยวข้อง") ($law.status | default "ข้อมูลสรุป") -}}
+
   {{- $params := dict
     "title" $law.title
+    "description" $lawDesc
     "short_title" $shortTitle
     "law_type" $lawType
     "year" $law.year
@@ -95,6 +98,7 @@
     "kind" "page"
     "path" $law.id
     "title" $law.title
+    "description" $lawDesc
     "params" $params
     "tags" $tags
     "categories" $catKeys

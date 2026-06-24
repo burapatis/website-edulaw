@@ -4,6 +4,7 @@ disableKinds = []
 locale = 'th-th'
 defaultContentLanguage = 'th'
 title = 'กฎหมายการศึกษา'
+enableRobotsTXT = true
 
 [taxonomies]
   tag = 'tags'
@@ -13,10 +14,14 @@ title = 'กฎหมายการศึกษา'
   audience = 'audiences'
 
 [params]
-  description = 'คลังรวบรวม จัดระบบ และเผยแพร่กฎหมายการศึกษาไทยที่น่าสนใจให้มากที่สุดเท่าที่จะทำได้ไว้ในที่เดียว พร้อมสรุปความรู้ แบบทดสอบ และลิงก์แหล่งอ้างอิงทางการ'
+  description = 'เว็บไซต์รวบรวมกฎหมายการศึกษาไทย สรุปอ่านง่าย แบบทดสอบ เส้นทางการเรียนรู้ และลิงก์แหล่งข้อมูลทางการ เพื่อการศึกษาและค้นคว้าเบื้องต้น'
   author = 'Boorapatis Ploysuwan'
   tagline = 'EDUCATION LAW HUB'
-  ogImage = '/assets/feature-graphic.png'
+  ogImage = 'assets/feature-graphic.png'
+
+[sitemap]
+  changefreq = 'weekly'
+  priority = 0.5
 
 [languages.th]
   label = 'ไทย'

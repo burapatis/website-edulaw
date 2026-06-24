@@ -8,6 +8,7 @@
     "serve:search": "pagefind --site public --serve",
     "build:search": "hugo --gc --minify && pagefind --site public",
     "check:content": "node scripts/check-content-quality.js",
+    "check:build": "hugo --gc --minify",
     "dev": "hugo server -D"
   },
   "devDependencies": {
