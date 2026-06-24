@@ -26,6 +26,10 @@ const DEFAULT_AUDIENCES = [
   'ผู้สนใจทั่วไป',
 ];
 const STRUCTURAL_REVIEW_DATE = extractGotmplReviewDate() || '2026-06-24';
+const STALE_CHECK_DAYS = 180;
+
+const args = process.argv.slice(2);
+const FULL_MODE = args.includes('--full') || args.includes('-full');
 
 const VAGUE_STATUS = new Set([
   '',
@@ -210,18 +214,36 @@ function deriveOfficialSource(law) {
   return OFFICIAL_PLACEHOLDER;
 }
 
+function daysBetween(isoDate, refDate = new Date()) {
+  const d = new Date(isoDate);
+  if (Number.isNaN(d.getTime())) return null;
+  const ms = refDate.getTime() - d.getTime();
+  return Math.floor(ms / (1000 * 60 * 60 * 24));
+}
+
+function isStaleLastChecked(isoDate) {
+  const days = daysBetween(isoDate);
+  if (days === null) return false;
+  return days > STALE_CHECK_DAYS;
+}
+
 function effectiveLawRecord(law) {
+  const categories = law.categories && law.categories.length ? law.categories : law.category ? [law.category] : [];
   return {
     title: (law.title || '').trim(),
     short_title: deriveShortTitle(law),
+    description: (law.description || '').trim(),
     law_type: (law.law_type || law.type || '').trim(),
     year: (law.year || '').trim(),
     category: (law.category || '').trim(),
+    categories,
     agency: (law.agency || '').trim(),
+    agencies: law.agencies || (law.agency ? [law.agency] : []),
     status: (law.status || '').trim(),
     source_url: deriveSourceUrl(law),
     official_source: deriveOfficialSource(law),
     last_checked: (law.last_checked || STRUCTURAL_REVIEW_DATE).trim(),
+    last_checked_source: law.last_checked || '',
     audiences: law.audiences && law.audiences.length ? law.audiences : [...DEFAULT_AUDIENCES],
     tags: law.tags || [],
     draft: law.draft === true,
@@ -251,7 +273,7 @@ function scanPlaceholders(source, id, texts) {
 }
 
 function validateRecord(source, id, record, opts = {}) {
-  const { rawBody = '', checkShortTitleWarning = true } = opts;
+  const { rawBody = '', checkShortTitleWarning = true, fullMode = false } = opts;
 
   if (!record.title) {
     addIssue('critical', source, id, 'ขาด title');
@@ -269,6 +291,24 @@ function validateRecord(source, id, record, opts = {}) {
 
   if (!record.last_checked) {
     addIssue('critical', source, id, 'ขาด last_checked');
+  } else if (record.last_checked_source && isStaleLastChecked(record.last_checked)) {
+    addIssue(
+      'warning',
+      source,
+      id,
+      `last_checked เก่ากว่า ${STALE_CHECK_DAYS} วัน (${record.last_checked}) — ควรทบทวนแหล่งข้อมูล`
+    );
+  } else if (fullMode && isStaleLastChecked(record.last_checked)) {
+    addIssue(
+      'warning',
+      source,
+      id,
+      `last_checked เก่ากว่า ${STALE_CHECK_DAYS} วัน (${record.last_checked}) — โหมด --full`
+    );
+  }
+
+  if (fullMode && !record.description) {
+    addIssue('warning', source, id, 'ขาด description ในแหล่งข้อมูล (gotmpl สร้างอัตโนมัติบนหน้าเว็บ)');
   }
 
   if (record.draft === true) {
@@ -303,12 +343,22 @@ function validateRecord(source, id, record, opts = {}) {
     );
   }
 
+  if (fullMode) {
+    if (record.category && isEmpty(record.categories)) {
+      addIssue('warning', source, id, 'มี category แต่ไม่มี categories[] — แนะนำใส่ categories ให้สอดคล้อง');
+    }
+    if (record.agency && isEmpty(record.agencies)) {
+      addIssue('warning', source, id, 'มี agency แต่ไม่มี agencies[] — taxonomy อาจ derive จาก agency เดี่ยว');
+    }
+  }
+
   scanPlaceholders(source, id, [
     rawBody,
     record.title,
     record.short_title,
     record.status,
     record.official_source,
+    record.description,
   ]);
 }
 
@@ -338,20 +388,24 @@ function checkMarkdownLawFiles() {
     const record = {
       title: parsed.data.title,
       short_title: parsed.data.short_title,
+      description: parsed.data.description,
       law_type: parsed.data.law_type || parsed.data.type,
       year: parsed.data.year,
       category: parsed.data.category,
+      categories: parsed.data.categories,
       agency: parsed.data.agency,
+      agencies: parsed.data.agencies,
       status: parsed.data.status,
       source_url: parsed.data.source_url,
       official_source: parsed.data.official_source,
       last_checked: parsed.data.last_checked,
+      last_checked_source: parsed.data.last_checked,
       audiences: parsed.data.audiences,
       tags: parsed.data.tags,
       draft: parsed.data.draft === true,
     };
 
-    validateRecord(rel, file, record, { rawBody: parsed.body });
+    validateRecord(rel, file, record, { rawBody: parsed.body, fullMode: FULL_MODE });
   }
 }
 
@@ -381,6 +435,7 @@ function checkLawsJson() {
     validateRecord('data/laws.json', id, record, {
       rawBody: texts.join('\n'),
       checkShortTitleWarning: Boolean(law.short_title === '' || law.short_title === undefined),
+      fullMode: FULL_MODE,
     });
 
     if (!law.last_checked) {
@@ -410,6 +465,9 @@ function main() {
   console.log('Education Law Hub — Content Quality Check');
   console.log(`Root: ${ROOT}`);
   console.log(`Structural review date (from _content.gotmpl): ${STRUCTURAL_REVIEW_DATE}`);
+  if (FULL_MODE) {
+    console.log(`โหมด: --full (รายงานเพิ่มเติม รวม last_checked > ${STALE_CHECK_DAYS} วัน และ taxonomy fields)`);
+  }
 
   checkMarkdownLawFiles();
   checkLawsJson();

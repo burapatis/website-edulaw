@@ -29,6 +29,10 @@ npm run dev
 
 ดูการตรวจคุณภาพเนื้อหาและลิงก์: [docs/QUALITY_CHECKS.md](docs/QUALITY_CHECKS.md)
 
+ดูการขยายคลังกฎหมายและ metadata: [docs/CONTENT_EXPANSION_WORKFLOW.md](docs/CONTENT_EXPANSION_WORKFLOW.md) · [docs/README.md](docs/README.md)
+
+แนวทางร่วมพัฒนา: [CONTRIBUTING.md](CONTRIBUTING.md)
+
 ## Build
 
 ```bash

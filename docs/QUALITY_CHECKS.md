@@ -53,6 +53,23 @@
 | ฟิลด์แนะนำว่าง | `law_type`, `year`, `category`, `agency` |
 | ไม่มี `last_checked` ใน JSON | ใช้ค่า default จาก gotmpl |
 | ข้อความ placeholder ในเนื้อหา | |
+| `description` ว่างใน JSON | เฉพาะโหมด `--full` — gotmpl สร้างอัตโนมัติบนหน้าเว็บ |
+| `last_checked` เก่ากว่า 180 วัน | เฉพาะเมื่อมี `last_checked` ใน JSON หรือใช้ `--full` |
+| `categories` / `agencies` ไม่สอดคล้อง | เฉพาะโหมด `--full` |
+
+### โหมด `--full`
+
+```bash
+npm run check:content:full
+```
+
+เพิ่ม warnings สำหรับ:
+
+- `last_checked` เก่ากว่า 180 วัน (รวมค่า default จาก gotmpl)
+- `category` มีแต่ `categories[]` ว่าง
+- `agency` มีแต่ `agencies[]` ว่าง
+
+**ไม่ทำให้ล้มเหลว** — ใช้ก่อนรอบทบทวนเนื้อหา
 
 ---
 
@@ -61,6 +78,7 @@
 ```bash
 npm install
 npm run check:content
+npm run check:content:full   # รายงานเพิ่มเติม
 ```
 
 Build ทั้ง Hugo + Pagefind:

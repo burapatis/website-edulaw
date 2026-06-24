@@ -1,0 +1,142 @@
+# ขั้นตอนขยายเนื้อหากฎหมาย (Content Expansion Workflow)
+
+คู่มือนี้อธิบายวิธีเพิ่มกฎหมายหรือเอกสารทางการศึกษาในคลัง **อย่างปลอดภัย สม่ำเสมอ และตรวจสอบแหล่งได้** — เพื่อรองรับการขยายจาก ~40 ฉบับไปสู่ 100+ รายการ
+
+## วัตถุประสงค์
+
+- รักษาความน่าเชื่อถือทางกฎหมายและการศึกษา
+- ให้ metadata สอดคล้องกับ law metadata card, taxonomy, SEO, Pagefind
+- แยกงาน **วางแผน** (backlog) ออกจากงาน **เผยแพร่** (laws.json / หน้าเว็บ)
+- ลดความเสี่ยงจากการเดา URL, สถานะกฎหมาย หรือสรุปที่เปลี่ยนความหมาย
+
+## แหล่งข้อมูลหลักในโปรเจกต์
+
+| แหล่ง | ใช้เมื่อ |
+|-------|----------|
+| `data/laws.json` | **วิธีหลัก** — คลังกฎหมายปัจจุบัน (~38 ฉบับ) |
+| `content/laws/_content.gotmpl` | สร้างหน้า Hugo จาก JSON |
+| `content/laws/*.md` | ฉบับที่สร้างด้วยมือ (`hugo new laws/<id>.md`) |
+| `data/law_backlog.yaml` | **วางแผนเท่านั้น** — ยังไม่สร้างหน้า |
+| `archetypes/laws.md` | แม่แบบ front matter + โครงเนื้อหา |
+| `docs/LAW_PAGE_TEMPLATE.md` | แม่แบบ copy-paste |
+
+## ขั้นตอนเพิ่มกฎหมายใหม่ (แนะนำ)
+
+### 1. วางแผนใน backlog (ถ้ายังไม่ชัด)
+
+1. เพิ่มรายการใน `data/law_backlog.yaml`
+2. ตั้ง `review_status: pending_review`
+3. ตั้ง `source_url: ""` และ `source_status: "ต้องตรวจสอบจากแหล่งทางการ"`
+4. ตรวจว่า **ไม่ซ้ำ** กับ `id` ที่มีใน `data/laws.json` แล้ว
+
+### 2. ตรวจสอบแหล่งทางการ
+
+ลำดับความน่าเชื่อถือ (ดู [นโยบายแหล่งข้อมูล](/about/source-policy/)):
+
+1. [ราชกิจจานุเบกษา](https://ratchakitcha.soc.go.th)
+2. [สำนักงานคณะกรรมการกฤษฎีกา](https://www.krisdika.go.th)
+3. เว็บไซต์หน่วยงานที่รับผิดชอบ (เช่น กระทรวงศึกษาธิการ, รัฐสภา)
+4. เอกสารอ้างอิงรอง — ใช้ระบุชัดว่าเป็นการสรุป
+
+**ห้าม** ใส่ `source_url` ที่ยังไม่เปิดอ่านหรือยังไม่ยืนยัน
+
+บันทึกผลใน [SOURCE_REVIEW_LOG.md](../SOURCE_REVIEW_LOG.md)
+
+### 3. เพิ่มข้อมูลใน `data/laws.json`
+
+เพิ่ม object ในอาร์เรย์ `laws` โดยมีอย่างน้อย:
+
+```json
+{
+  "id": "unique-slug",
+  "category": "national",
+  "categories": ["national"],
+  "title": "ชื่อเต็มตามแหล่งทางการ",
+  "short_title": "ชื่อย่อ (ถ้ามี)",
+  "year": "พ.ศ. XXXX",
+  "type": "พระราชบัญญัติ",
+  "law_type": "พระราชบัญญัติ",
+  "agency": "หน่วยงานหลัก",
+  "status": "บังคับใช้",
+  "summary": "สรุปสั้น 1–3 ประโยค",
+  "points": ["ข้อสรุป 1", "ข้อสรุป 2"],
+  "source_url": "https://...",
+  "official_source": "ราชกิจจานุเบกษา",
+  "last_checked": "YYYY-MM-DD",
+  "audiences": ["ครูและบุคลากรทางการศึกษา"],
+  "tags": ["คำสำคัญ"]
+}
+```
+
+ดูรายละเอียดแต่ละฟิลด์ใน [LAW_METADATA_GUIDE.md](LAW_METADATA_GUIDE.md)
+
+### 4. เขียนสรุปอย่างปลอดภัย
+
+- ใช้ภาษา **สรุปเพื่อการเรียนรู้**
+- แยกชัดระหว่าง **สรุป** กับ **ตัวบทฉบับทางการ**
+- หลีกเลี่ยง: “ฉบับล่าสุดแน่นอน”, “ครบถ้วน”, “ใช้แทนคำปรึกษากฎหมาย”
+- ใช้: “ควรตรวจสอบแหล่งทางการ”, “สรุปเบื้องต้น”, “ไม่ครอบคลุมทุกกรณี”
+
+### 5. ทดสอบในเครื่อง
+
+```bash
+npm run dev
+# เปิด /laws/<id>/ และ /laws/
+
+npm run check:content
+npm run build:search
+```
+
+ตรวจ:
+
+- law metadata card แสดงครบ
+- taxonomy (/categories/, /agencies/, /audiences/, /tags/)
+- ตัวกรองในหน้า /laws/
+- Pagefind ค้นหาชื่อ/คำสำคัญได้
+
+### 6. ตรวจด้วยมือก่อน merge
+
+- [LEGAL_REVIEW_CHECKLIST.md](../LEGAL_REVIEW_CHECKLIST.md)
+- [SOURCE_REVIEW_LOG.md](../SOURCE_REVIEW_LOG.md)
+- `npm run check:content` ต้องไม่มี **critical**
+
+### 7. Commit และ push
+
+```bash
+git add data/laws.json SOURCE_REVIEW_LOG.md
+git commit -m "เพิ่มสรุป [ชื่อกฎหมาย] พร้อมแหล่งทางการที่ตรวจสอบแล้ว"
+git push
+```
+
+ใช้ Pull Request ถ้าทำงานเป็นทีม — ให้ผู้ตรวจเนื้อหาอ่านสรุปและ `source_url`
+
+## การเลือก law_type, category, agency, audiences, tags
+
+| ฟิลด์ | แนวทาง |
+|-------|--------|
+| `law_type` / `type` | ตามชนิดเอกสารจริง: พระราชบัญญัติ, พระราชกฤษฎีกา, กฎกระทรวง, ระเบียบ, ประกาศ |
+| `category` | key หลักจาก `data/laws.json` → `categories` (เช่น `national`, `personnel`) |
+| `categories` | ใส่หลายหมวดได้ถ้าจำเป็น — มิฉะนั้นใช้ `[category]` |
+| `agency` | หน่วยงานเจ้าของเรื่องหลัก |
+| `audiences` | กลุ่มผู้ใช้ที่ควรอ่าน — ดู slug ใน `/audiences/` |
+| `tags` | คำค้นที่ใช้บ่อย (3–8 คำ) — ช่วย Pagefind และตัวกรอง |
+
+## วิธีตั้ง `source_url` และ `last_checked`
+
+- `source_url`: URL ที่เปิดอ่านฉบับทางการได้จริง (มักเป็น PDF/HTML ราชกิจจาหรือกฤษฎีกา)
+- `official_source`: ชื่อแหล่ง เช่น “ราชกิจจานุเบกษา” — **ไม่ใช่** placeholder
+- `last_checked`: วันที่ตรวจสอบล่าสุด (`YYYY-MM-DD`) — อัปเดตเมื่อทบทวนเนื้อหา
+
+## สิ่งที่ต้องตรวจด้วยมือเสมอ
+
+- ความถูกต้องของสรุปเทียบตัวบทจริง
+- สถานะกฎหมาย (บังคับใช้ / แก้ไข / เลิกใช้ / ร่าง)
+- URL ยังใช้งานได้
+- ไม่สร้างข้อเท็จจริงทางกฎหมายใหม่ใน quiz หรือ learning paths โดยไม่ตรวจ
+
+## เอกสารที่เกี่ยวข้อง
+
+- [LAW_METADATA_GUIDE.md](LAW_METADATA_GUIDE.md)
+- [LAW_PAGE_TEMPLATE.md](LAW_PAGE_TEMPLATE.md)
+- [QUALITY_CHECKS.md](QUALITY_CHECKS.md)
+- [CONTRIBUTING.md](../CONTRIBUTING.md)

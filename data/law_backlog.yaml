@@ -1,0 +1,168 @@
+# คิวงานกฎหมาย/เอกสารที่อาจเพิ่มในอนาคต — ยังไม่สร้างหน้าเว็บจากรายการนี้
+# ใช้สำหรับวางแผนและติดตามการตรวจสอบแหล่งทางการเท่านั้น
+# อย่าเพิ่ม source_url จนกว่าจะยืนยันจากแหล่งทางการจริง
+#
+# review_status: pending_review | in_review | verified | deferred | rejected
+# source_status: สถานะการหาแหล่งทางการ (ข้อความอธิบาย)
+# priority: high | medium | low
+
+version: 1
+updated_at: "2026-06-24"
+notes: "รายการนี้เป็นหัวข้อเบื้องต้นเพื่อการวางแผน ไม่ใช่ข้อเท็จจริงทางกฎหมายที่ยืนยันแล้ว"
+
+items:
+  - id: backlog-nea-framework
+    title: "กฎหมายแม่บทด้านการศึกษา (ภาพรวม)"
+    short_title: "กฎหมายแม่บทการศึกษา"
+    law_type: "พระราชบัญญัติ"
+    priority: high
+    target_audiences:
+      - ครูและบุคลากรทางการศึกษา
+      - นักศึกษา
+      - ผู้สนใจทั่วไป
+    possible_agencies:
+      - สำนักงานเลขาธิการสภาการศึกษา
+      - รัฐสภา
+    source_status: "ต้องตรวจสอบจากแหล่งทางการ"
+    source_url: ""
+    review_status: pending_review
+    notes: "อาจซ้ำกับ nea-2542 ในคลัง — ตรวจสอบก่อนเพิ่ม"
+
+  - id: backlog-compulsory-edu
+    title: "กฎหมายการศึกษาภาคบังคับ"
+    short_title: "การศึกษาภาคบังคับ"
+    law_type: "พระราชบัญญัติ"
+    priority: high
+    target_audiences:
+      - ครูและบุคลากรทางการศึกษา
+      - ผู้ปกครอง
+      - ผู้สนใจทั่วไป
+    possible_agencies:
+      - กระทรวงศึกษาธิการ
+    source_status: "ต้องตรวจสอบจากแหล่งทางการ"
+    source_url: ""
+    review_status: pending_review
+    notes: "อาจซ้ำกับ compulsory-2545 ในคลัง — ตรวจสอบก่อนเพิ่ม"
+
+  - id: backlog-teacher-profession
+    title: "กฎหมายวิชาชีพครู (ภาพรวม)"
+    short_title: "วิชาชีพครู"
+    law_type: "พระราชบัญญัติ"
+    priority: high
+    target_audiences:
+      - ครูและบุคลากรทางการศึกษา
+      - นักศึกษา
+    possible_agencies:
+      - คุรุสภา
+      - สำนักงาน ก.ค.ศ.
+    source_status: "ต้องตรวจสอบจากแหล่งทางการ"
+    source_url: ""
+    review_status: pending_review
+    notes: "แยกจาก teacher-council-2546 / teacher-civil-2547 หรือรวมเป็นหน้าอ้างอิง — ต้องตัดสินใจก่อนเพิ่ม"
+
+  - id: backlog-teacher-civil-service
+    title: "กฎหมายข้าราชการครูและบุคลากรทางการศึกษา"
+    short_title: "ข้าราชการครู"
+    law_type: "พระราชบัญญัติ"
+    priority: medium
+    target_audiences:
+      - ครูและบุคลากรทางการศึกษา
+    possible_agencies:
+      - สำนักงาน ก.ค.ศ.
+    source_status: "ต้องตรวจสอบจากแหล่งทางการ"
+    source_url: ""
+    review_status: pending_review
+    notes: "อาจมีในคลังแล้ว (teacher-civil-2547)"
+
+  - id: backlog-private-school
+    title: "กฎหมายโรงเรียนเอกชน"
+    short_title: "โรงเรียนเอกชน"
+    law_type: "พระราชบัญญัติ"
+    priority: medium
+    target_audiences:
+      - ผู้บริหารสถานศึกษา
+      - ผู้สนใจทั่วไป
+    possible_agencies:
+      - สำนักงานคณะกรรมการส่งเสริมการศึกษาเอกชน
+    source_status: "ต้องตรวจสอบจากแหล่งทางการ"
+    source_url: ""
+    review_status: pending_review
+    notes: "อาจมีในคลังแล้ว (private-school-2550)"
+
+  - id: backlog-special-education
+    title: "กฎหมายการศึกษาพิเศษ"
+    short_title: "การศึกษาพิเศษ"
+    law_type: "พระราชบัญญัติ"
+    priority: medium
+    target_audiences:
+      - ครูและบุคลากรทางการศึกษา
+      - ผู้ปกครอง
+    possible_agencies:
+      - กระทรวงศึกษาธิการ
+    source_status: "ต้องตรวจสอบจากแหล่งทางการ"
+    source_url: ""
+    review_status: pending_review
+    notes: "ตรวจสอบความซ้ำกับ disability-edu-2551 ในคลัง"
+
+  - id: backlog-lifelong-learning
+    title: "กฎหมายส่งเสริมการเรียนรู้"
+    short_title: "การเรียนรู้ตลอดชีวิต"
+    law_type: "พระราชบัญญัติ"
+    priority: medium
+    target_audiences:
+      - ผู้สนใจทั่วไป
+      - นักวิจัย
+    possible_agencies:
+      - สำนักงาน ก.ค.ศ.
+      - กระทรวงศึกษาธิการ
+    source_status: "ต้องตรวจสอบจากแหล่งทางการ"
+    source_url: ""
+    review_status: pending_review
+    notes: "อาจมีในคลังแล้ว (learning-promote-2566)"
+
+  - id: backlog-educational-equity
+    title: "กฎหมายความเสมอภาคทางการศึกษา"
+    short_title: "ความเสมอภาคทางการศึกษา"
+    law_type: "พระราชบัญญัติ"
+    priority: medium
+    target_audiences:
+      - ผู้สนใจทั่วไป
+      - นักวิจัย
+    possible_agencies:
+      - กองทุนเพื่อความเสมอภาพทางการศึกษา
+    source_status: "ต้องตรวจสอบจากแหล่งทางการ"
+    source_url: ""
+    review_status: pending_review
+    notes: "อาจเกี่ยวข้องกับ eef-2561 และกฎหมายอื่น — ต้องจัดขอบเขตก่อนเพิ่ม"
+
+  - id: backlog-kcs-regulations
+    title: "ระเบียบ/หลักเกณฑ์ ก.ค.ศ. ที่เกี่ยวข้องกับการศึกษา"
+    short_title: "ระเบียบ ก.ค.ศ."
+    law_type: "ระเบียบ"
+    priority: low
+    target_audiences:
+      - ครูและบุคลากรทางการศึกษา
+      - เจ้าหน้าที่ราชการ
+    possible_agencies:
+      - สำนักงาน ก.ค.ศ.
+    source_status: "ต้องตรวจสอบจากแหล่งทางการ"
+    source_url: ""
+    review_status: pending_review
+    notes: "หัวข้อกว้าง — แยกเป็นรายฉบับเมื่อระบุตัวบทและแหล่งได้"
+
+  - id: backlog-moe-announcements
+    title: "ประกาศ/แนวปฏิบัติของหน่วยงานทางการศึกษา"
+    short_title: "ประกาศ/แนวปฏิบัติ ศธ."
+    law_type: "ประกาศ"
+    priority: low
+    target_audiences:
+      - ครูและบุคลากรทางการศึกษา
+      - ผู้บริหารสถานศึกษา
+    possible_agencies:
+      - กระทรวงศึกษาธิการ
+      - สพฐ.
+      - สอศ.
+    source_status: "ต้องตรวจสอบจากแหล่งทางการ"
+    source_url: ""
+    review_status: pending_review
+    notes: "ต้องระบุฉบับ/เลขที่ประกาศก่อนเพิ่ม — ไม่สร้างหน้ารวมแบบคลุมเครือ"
