@@ -1,0 +1,8 @@
+{{- $p := . -}}
+{{- $icon := $p.Params.icon | default "book" -}}
+<a class="lp-card cat-card cat-card--{{ $p.Params.card_theme | default "national" }}" href="{{ $p.RelPermalink }}">
+  <span class="cat-icon" data-icon="{{ $icon }}"></span>
+  <h3>{{ $p.Title }}</h3>
+  <p>{{ $p.Params.card_summary | default $p.Description }}</p>
+  <span class="cat-count">ดูเส้นทาง →</span>
+</a>

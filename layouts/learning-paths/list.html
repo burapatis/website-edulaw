@@ -1,0 +1,81 @@
+{{ define "main" }}
+<div class="page-hero" data-pagefind-body>
+  <div class="container">
+    <div class="breadcrumb"><a href="{{ partial "iu.html" "" }}">หน้าแรก</a> / เส้นทางการเรียนรู้</div>
+    <h1>{{ .Title }}</h1>
+    <p>{{ .Description }}</p>
+    <div class="lp-intro">{{ .Content }}</div>
+  </div>
+</div>
+
+<section class="lp-section">
+  <div class="container">
+    {{ partial "legal-disclaimer.html" . }}
+
+    <div class="section-head" style="margin-top:28px;">
+      <div>
+        <div class="eyebrow">เลือกตามบทบาท</div>
+        <h2 class="mt-0">เส้นทางสำหรับกลุ่มผู้ใช้</h2>
+        <p class="lp-lead">เลือกเส้นทางที่ใกล้เคียงกับบทบาทหรือความสนใจของคุณมากที่สุด</p>
+      </div>
+    </div>
+
+    <div class="lp-grid cat-grid">
+      {{- range .Pages.ByWeight }}
+      {{ partial "learning-path-card.html" . }}
+      {{- end }}
+    </div>
+
+    <div class="section-head" style="margin-top:42px;">
+      <div>
+        <div class="eyebrow">เครื่องมือเสริม</div>
+        <h2 class="mt-0">เรียนรู้ต่อจากเส้นทาง</h2>
+      </div>
+    </div>
+
+    <div class="lp-tools cat-grid" style="grid-template-columns:repeat(3,1fr);">
+      <a class="cat-card cat-card--tool-summary" href="{{ partial "iu.html" "laws/" }}">
+        <span class="cat-icon" data-icon="book"></span>
+        <h3>คลังกฎหมาย</h3>
+        <p>ค้นหาและอ่านสรุปกฎหมายการศึกษาที่คัดสรรไว้ พร้อมลิงก์แหล่งทางการ</p>
+        <span class="cat-count">ไปที่คลัง →</span>
+      </a>
+      <a class="cat-card cat-card--tool-quiz" href="{{ partial "iu.html" "quiz/" }}">
+        <span class="cat-icon" data-icon="check"></span>
+        <h3>แบบทดสอบ</h3>
+        <p>ทดสอบความเข้าใจเบื้องต้นหลังศึกษาแต่ละหัวข้อ พร้อมคำอธิบายทุกข้อ</p>
+        <span class="cat-count">เริ่มทำแบบทดสอบ →</span>
+      </a>
+      <a class="cat-card cat-card--tool-faq" href="{{ partial "iu.html" "search/" }}">
+        <span class="cat-icon" data-icon="doc"></span>
+        <h3>ค้นหาในเว็บไซต์</h3>
+        <p>ค้นหาชื่อกฎหมาย ประเด็น หรือคำสำคัญในคลังเนื้อหา</p>
+        <span class="cat-count">ไปที่หน้าค้นหา →</span>
+      </a>
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{ define "scripts" }}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const icons = {
+    users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm10 2a3 3 0 1 0 0-6M21 21v-2a3 3 0 0 0-2-2.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+    building:'<path d="M4 21V9l8-5 8 5v12M9 21v-6h6v6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+    cap:'<path d="M12 3 2 8l10 5 10-5-10-5Zm0 7v6M6 11v4c0 2 2.7 3 6 3s6-1 6-3v-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+    heart:'<path d="M12 21s-7-4.4-9.5-8.5C.8 9.5 2 6 5.5 6c2 0 3.5 1.2 4.5 2.8C11 7.2 12.5 6 14.5 6 18 6 19.2 9.5 21.5 12.5 19 16.6 12 21 12 21Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+    scale:'<path d="M12 3v18M5 7h14M5 7 2 14a3 3 0 0 0 6 0L5 7Zm14 0-3 7a3 3 0 0 0 6 0l-3-7ZM8 21h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+    stamp:'<rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 12h8M8 16h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+    book:'<path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5v-13ZM20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5v-13Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+    check:'<path d="M9 12 11 14 15 10M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+    doc:'<path d="M7 3h7l5 5v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M14 3v6h6M9 13h6M9 17h4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
+    info:'<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 10v6M12 7h.01" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>'
+  };
+  document.querySelectorAll('[data-icon]').forEach((el) => {
+    const key = el.getAttribute('data-icon');
+    if (icons[key]) el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${icons[key]}</svg>`;
+  });
+});
+</script>
+{{ end }}

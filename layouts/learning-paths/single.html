@@ -1,0 +1,106 @@
+{{ define "main" }}
+{{- $data := site.Data.laws -}}
+<div class="page-hero" data-pagefind-body>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="{{ partial "iu.html" "" }}">หน้าแรก</a> /
+      <a href="{{ partial "iu.html" "learning-paths/" }}">เส้นทางการเรียนรู้</a> /
+      {{ .Title }}
+    </div>
+    <h1>{{ .Title }}</h1>
+    <p>{{ .Description }}</p>
+  </div>
+</div>
+
+<section class="lp-section">
+  <div class="container">
+  <div class="lp-layout">
+    <article class="lp-article content-body" data-pagefind-body>
+      {{ partial "legal-disclaimer.html" . }}
+      {{ .Content }}
+
+      {{- with .Params.steps }}
+      <h2 id="learning-steps">ลำดับการเรียนรู้ที่แนะนำ</h2>
+      <ol class="lp-steps">
+        {{- range . }}
+        <li class="lp-step">
+          <strong>{{ .title }}</strong>
+          {{- with .detail }}<p>{{ . }}</p>{{ end }}
+        </li>
+        {{- end }}
+      </ol>
+      {{- end }}
+
+      {{- with .Params.related_laws }}
+      <h2 id="related-laws">กฎหมายที่เกี่ยวข้องในคลัง</h2>
+      <ul class="lp-law-links">
+        {{- range . }}
+        {{- $law := index (where $data.laws "id" .) 0 -}}
+        {{- if $law }}
+        <li><a href="{{ partial "iu.html" (printf "laws/%s/" $law.id) }}">{{ $law.title }}</a></li>
+        {{- end }}
+        {{- end }}
+      </ul>
+      {{- end }}
+    </article>
+
+    <aside class="lp-sidebar" data-pagefind-ignore>
+      <div class="lp-sidebar-card">
+        <h3>ทรัพยากรที่เกี่ยวข้อง</h3>
+        <ul class="lp-resource-links">
+          <li><a href="{{ partial "iu.html" "laws/" }}">คลังกฎหมาย</a></li>
+          <li><a href="{{ partial "iu.html" "search/" }}">ค้นหาในเว็บไซต์</a></li>
+          <li><a href="{{ partial "iu.html" "quiz/" }}">แบบทดสอบความรู้</a></li>
+          <li><a href="{{ partial "iu.html" "categories/" }}">สำรวจตามหมวด</a></li>
+          <li><a href="{{ partial "iu.html" "audiences/" }}">สำรวจตามกลุ่มผู้ใช้</a></li>
+        </ul>
+      </div>
+
+      {{- with .Params.taxonomy_links }}
+      <div class="lp-sidebar-card">
+        <h3>สำรวจเพิ่มเติม</h3>
+        <ul class="lp-resource-links">
+          {{- range . }}
+          <li><a href="{{ partial "iu.html" .url }}">{{ .label }}</a></li>
+          {{- end }}
+        </ul>
+      </div>
+      {{- end }}
+
+      {{- with .Params.search_terms }}
+      <div class="lp-sidebar-card">
+        <h3>คำค้นที่แนะนำ</h3>
+        <ul class="lp-resource-links">
+          {{- range . }}
+          <li><a href="{{ partial "iu.html" (printf "search/?q=%s" (. | urlquery)) }}">{{ . }}</a></li>
+          {{- end }}
+        </ul>
+      </div>
+      {{- end }}
+
+      {{- with .Params.quiz_note }}
+      <div class="lp-sidebar-card lp-sidebar-card--quiz">
+        <h3>แบบทดสอบที่เกี่ยวข้อง</h3>
+        <p class="lp-sidebar-note">{{ . }}</p>
+        <a class="btn btn-gold btn-sm" href="{{ partial "iu.html" "quiz/" }}">ไปที่แบบทดสอบ</a>
+      </div>
+      {{- end }}
+
+      <div class="lp-sidebar-card">
+        <h3>นโยบายและความน่าเชื่อถือ</h3>
+        <ul class="lp-resource-links">
+          <li><a href="{{ partial "iu.html" "about/source-policy/" }}">นโยบายแหล่งข้อมูล</a></li>
+          <li><a href="{{ partial "iu.html" "about/update-policy/" }}">นโยบายการปรับปรุงข้อมูล</a></li>
+          <li><a href="{{ partial "iu.html" "about/reliability/" }}">ความน่าเชื่อถือและข้อจำกัด</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <div class="lp-cta-row">
+    <a class="btn btn-outline" href="{{ partial "iu.html" "learning-paths/" }}">← เลือกเส้นทางอื่น</a>
+    <a class="btn btn-gold" href="{{ partial "iu.html" "laws/" }}">เปิดคลังกฎหมาย</a>
+  </div>
+  </div>
+</section>
+{{ end }}
