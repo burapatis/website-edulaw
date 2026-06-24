@@ -264,9 +264,13 @@
         ? 'ไม่พบกฎหมายที่ตรงกับตัวกรองที่เลือก'
         : 'ไม่พบกฎหมายในหมวดนี้ ลองเลือกหมวดอื่นหรือค้นหาด้วยคำสำคัญ';
       grid.innerHTML =
-        '<div class="empty-state" style="grid-column:1/-1;"><p>' +
-        msg +
-        '</p></div>';
+        '<div class="empty-state empty-state--laws" style="grid-column:1/-1;">' +
+        '<p class="empty-state__title">' + msg + '</p>' +
+        '<p class="empty-state__hint">ลองล้างตัวกรอง เปลี่ยนหมวดหมู่ หรือค้นหาด้วยคำอื่น</p>' +
+        '<button type="button" class="btn btn-outline empty-state__reset" data-empty-reset>ล้างตัวกรอง</button>' +
+        '</div>';
+      const resetBtn = grid.querySelector('[data-empty-reset]');
+      if (resetBtn) resetBtn.addEventListener('click', resetFilters);
       return;
     }
 

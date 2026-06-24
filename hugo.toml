@@ -38,19 +38,19 @@ enableRobotsTXT = true
     url = '/laws/'
     weight = 2
   [[menu.main]]
-    name = 'สรุปกฎหมาย'
-    url = '/summaries/'
+    name = 'ค้นหา'
+    url = '/search/'
     weight = 3
   [[menu.main]]
-    name = 'คำถามที่พบบ่อย'
-    url = '/faq/'
+    name = 'เส้นทางการเรียนรู้'
+    url = '/learning-paths/'
     weight = 4
   [[menu.main]]
     name = 'แบบทดสอบ'
     url = '/quiz/'
     weight = 5
   [[menu.main]]
-    name = 'เกี่ยวกับเว็บไซต์'
+    name = 'เกี่ยวกับ'
     url = '/about/'
     weight = 6
 

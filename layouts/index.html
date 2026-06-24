@@ -7,13 +7,16 @@
       <div class="eyebrow">คลังความรู้กฎหมายการศึกษาไทย</div>
       <h1>กฎหมายการศึกษาที่กระจัดกระจาย<br>รวบรวมไว้ใน<em> ที่เดียว</em></h1>
       <p class="lead">{{ site.Params.description }}</p>
-      <form class="hero-search" action="{{ partial "iu.html" "search/" }}" method="get">
-        <input type="search" name="q" id="heroSearchInput" placeholder="ค้นหา เช่น วิทยฐานะ, ใบประกอบวิชาชีพ, เรียนฟรี 12 ปี...">
-        <button type="submit">ค้นหา</button>
+      <form class="hero-search" action="{{ partial "iu.html" "search/" }}" method="get" role="search">
+        <label class="visually-hidden" for="heroSearchInput">ค้นหากฎหมายการศึกษา</label>
+        <input type="search" name="q" id="heroSearchInput" placeholder="ค้นหา เช่น วิทยฐานะ, ใบประกอบวิชาชีพ, เรียนฟรี 12 ปี..." autocomplete="off">
+        <button type="submit">ค้นหากฎหมาย</button>
       </form>
-      <div class="hero-actions">
-        <a class="btn btn-gold" href="{{ partial "iu.html" "laws/" }}">สำรวจคลังกฎหมาย</a>
-        <a class="btn btn-outline on-dark" href="{{ partial "iu.html" "quiz/" }}">ทดสอบความรู้ตนเอง</a>
+      <div class="hero-cta-grid">
+        <a class="btn btn-gold" href="{{ partial "iu.html" "search/" }}">ค้นหากฎหมาย</a>
+        <a class="btn btn-outline on-dark" href="{{ partial "iu.html" "laws/" }}">ดูคลังกฎหมาย</a>
+        <a class="btn btn-outline on-dark" href="{{ partial "iu.html" "learning-paths/" }}">เริ่มจากเส้นทางการเรียนรู้</a>
+        <a class="btn btn-outline on-dark" href="{{ partial "iu.html" "quiz/" }}">ทำแบบทดสอบ</a>
       </div>
       <div class="hero-stats">
         <div class="stat"><b>{{ len $data.laws }}</b><span>ฉบับที่คัดสรรแล้ว</span></div>

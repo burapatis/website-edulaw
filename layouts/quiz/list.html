@@ -82,6 +82,7 @@
           </div>
         </div>
         <div class="quiz-nav-row">
+          <button type="button" class="btn btn-outline" id="quitQuizBtn">เริ่มใหม่</button>
           <button type="button" class="btn btn-primary" id="nextBtn" disabled>ข้อต่อไป</button>
         </div>
       </div>
@@ -108,5 +109,5 @@
 {{ end }}
 
 {{ define "scripts" }}
-<script src="{{ printf "%s?v=3" (partial "iu.html" "js/quiz.js") }}"></script>
+<script src="{{ printf "%s?v=4" (partial "iu.html" "js/quiz.js") }}"></script>
 {{ end }}

@@ -71,6 +71,7 @@
     qRelated: document.getElementById('qRelated'),
     qRelatedLinks: document.getElementById('qRelatedLinks'),
     nextBtn: document.getElementById('nextBtn'),
+    quitQuizBtn: document.getElementById('quitQuizBtn'),
     retryBtn: document.getElementById('retryBtn'),
     backCatBtn: document.getElementById('backCatBtn'),
   };
@@ -341,13 +342,13 @@
     if (isRight) {
       btn.classList.add('correct');
       quiz.score += 1;
-      els.qFeedback.textContent = LABELS.correct;
+      els.qFeedback.textContent = `✓ ${LABELS.correct}`;
       els.qFeedback.classList.add('is-correct');
     } else {
       btn.classList.add('incorrect');
       const correctBtn = els.qOptions.querySelector(`.q-option[data-i="${correct}"]`);
       if (correctBtn) correctBtn.classList.add('correct');
-      els.qFeedback.textContent = `${LABELS.incorrect} — ${LABELS.yourAnswer}: ${q.choices[chosen] || '—'}`;
+      els.qFeedback.textContent = `✗ ${LABELS.incorrect} — ${LABELS.yourAnswer}: ${q.choices[chosen] || '—'}`;
       els.qFeedback.classList.add('is-incorrect');
     }
 
@@ -429,6 +430,7 @@
     els.filterDifficulty?.addEventListener('change', onFilterChange);
     els.startBtn?.addEventListener('click', () => startQuiz(resolveSelectedKey()));
     els.nextBtn?.addEventListener('click', nextQuestion);
+    els.quitQuizBtn?.addEventListener('click', () => showStage('stageSelect'));
     els.retryBtn?.addEventListener('click', () => startQuiz(currentSetKey));
     els.backCatBtn?.addEventListener('click', () => showStage('stageSelect'));
   }
