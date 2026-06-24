@@ -25,6 +25,8 @@ npm run dev
 
 ดู taxonomy และการกรองกฎหมาย: [docs/TAXONOMY.md](docs/TAXONOMY.md)
 
+ดูแบบทดสอบและวิธีเพิ่มคำถาม: [docs/QUIZ.md](docs/QUIZ.md)
+
 ## Build
 
 ```bash

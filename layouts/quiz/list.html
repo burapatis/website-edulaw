@@ -1,36 +1,86 @@
 {{ define "main" }}
+{{- $quiz := site.Data.quizzes -}}
+{{- $lawsBase := partial "iu.html" "laws/" -}}
 <div class="page-hero" data-pagefind-body>
   <div class="container">
     <div class="breadcrumb"><a href="{{ partial "iu.html" "" }}">หน้าแรก</a> / แบบทดสอบความรู้</div>
     <h1>{{ .Title }}</h1>
     <p>{{ .Description }}</p>
+    <div class="quiz-intro-note">{{ .Content }}</div>
   </div>
 </div>
 
-<section style="padding-top:46px;">
-  <div class="container" id="quizApp" data-laws-url="{{ partial "iu.html" "laws/" }}" data-pagefind-ignore>
+<section class="quiz-section">
+  <div class="container" id="quizApp" data-laws-base="{{ $lawsBase }}" data-pagefind-ignore>
+
+    <div class="quiz-disclaimer" role="note">
+      <strong>หมายเหตุ:</strong> แบบทดสอบนี้จัดทำขึ้นเพื่อการเรียนรู้เบื้องต้น ไม่ใช่การวินิจฉัยข้อกฎหมายเฉพาะกรณี
+    </div>
 
     <div class="quiz-stage active" id="stageSelect">
       <div class="section-head">
         <div>
-          <div class="eyebrow">เลือกหมวดทดสอบ</div>
-          <h2 class="mt-0">หมวดแบบทดสอบ</h2>
-          <p style="margin:8px 0 0;color:var(--ink-soft);max-width:640px;">รวม 40 ข้อ แบ่งเป็น 5 หมวด หมวดละ 8 ข้อ หรือเลือกแบบทดสอบรวมสุ่ม 20 ข้อจากทุกหมวด</p>
+          <div class="eyebrow">เลือกชุดแบบทดสอบ</div>
+          <h2 class="mt-0">แบบทดสอบความรู้กฎหมายการศึกษา</h2>
+          <p class="quiz-select-lead">รวม <b>{{ len $quiz.questions }}</b> ข้อ แบ่งเป็น {{ len $quiz.categories }} หมวด หมวดละ 8 ข้อ หรือเลือกทำแบบทดสอบรวมสุ่ม 20 ข้อ</p>
         </div>
       </div>
-      <div class="quiz-cat-grid" id="quizCatGrid"></div>
+
+      <div class="quiz-filter-panel" aria-label="ตัวกรองแบบทดสอบ">
+        <label class="quiz-filter-field">
+          <span>เลือกหมวดแบบทดสอบ</span>
+          <select id="filterCategory">
+            <option value="">ทุกหมวด</option>
+            {{- range $quiz.categories }}
+            <option value="{{ .key }}">{{ .title }}</option>
+            {{- end }}
+            <option value="mixed">แบบทดสอบรวม (สุ่ม 20 ข้อ)</option>
+          </select>
+        </label>
+        <label class="quiz-filter-field">
+          <span>เลือกกลุ่มผู้ใช้</span>
+          <select id="filterAudience">
+            <option value="">ทุกกลุ่ม</option>
+          </select>
+        </label>
+        <label class="quiz-filter-field">
+          <span>ระดับความยาก</span>
+          <select id="filterDifficulty">
+            <option value="">ทุกระดับ</option>
+          </select>
+        </label>
+      </div>
+
+      <p class="quiz-filter-summary" id="filterSummary" aria-live="polite"></p>
+      <p class="quiz-empty-state" id="filterEmpty" hidden>ไม่พบข้อสอบที่ตรงกับตัวกรอง</p>
+
+      <div class="quiz-cat-grid" id="quizCatGrid" role="list"></div>
+
+      <div class="quiz-start-row">
+        <button type="button" class="btn btn-gold" id="startQuizBtn">เริ่มทำแบบทดสอบ</button>
+      </div>
     </div>
 
     <div class="quiz-stage" id="stageQuiz">
       <div class="quiz-paper">
         <div class="quiz-progress-row">
-          <span class="pnum" id="qProgressText"></span>
-          <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-          <span class="quiz-score-pill" id="scorePill">คะแนน 0</span>
+          <span class="pnum" id="qProgressText">ข้อที่ 1</span>
+          <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar">
+            <div class="progress-fill" id="progressFill" style="width:0%"></div>
+          </div>
+          <span class="quiz-score-pill" id="scorePill">คะแนนรวม 0</span>
         </div>
         <p class="q-text" id="qText"></p>
-        <div class="q-options" id="qOptions"></div>
-        <div class="q-explain" id="qExplain"></div>
+        <div class="q-options" id="qOptions" role="group" aria-label="ตัวเลือกคำตอบ"></div>
+        <div class="q-feedback" id="qFeedback" aria-live="polite"></div>
+        <div class="q-explain" id="qExplain">
+          <h3 class="q-explain__title">คำอธิบาย</h3>
+          <p class="q-explain__body" id="qExplainBody"></p>
+          <div class="q-related" id="qRelated" hidden>
+            <h4 class="q-related__title">อ่านต่อ</h4>
+            <p class="q-related__links" id="qRelatedLinks"></p>
+          </div>
+        </div>
         <div class="quiz-nav-row">
           <button type="button" class="btn btn-primary" id="nextBtn" disabled>ข้อต่อไป</button>
         </div>
@@ -44,19 +94,19 @@
         <p class="score-big" id="scoreBig"></p>
         <p class="score-label" id="scoreLabel"></p>
         <div class="result-actions">
-          <button type="button" class="btn btn-primary" id="retryBtn">ทำแบบทดสอบหมวดนี้อีกครั้ง</button>
-          <button type="button" class="btn btn-outline" id="backCatBtn">เลือกหมวดอื่น</button>
-          <a class="btn btn-outline" id="reviewLawsBtn" href="{{ partial "iu.html" "laws/" }}">ทบทวนในคลังกฎหมาย</a>
+          <button type="button" class="btn btn-primary" id="retryBtn">ทำใหม่อีกครั้ง</button>
+          <button type="button" class="btn btn-outline" id="backCatBtn">เลือกชุดอื่น</button>
+          <a class="btn btn-outline" id="reviewLawsBtn" href="{{ $lawsBase }}">ทบทวนในคลังกฎหมาย</a>
         </div>
         <div class="review-list" id="reviewList"></div>
       </div>
     </div>
 
+    <script type="application/json" id="quizData">{{ dict "categories" $quiz.categories "questions" $quiz.questions | jsonify | safeJS }}</script>
   </div>
 </section>
 {{ end }}
 
 {{ define "scripts" }}
-<script src="{{ partial "iu.html" "js/quiz-data.js" }}"></script>
-<script src="{{ partial "iu.html" "js/quiz.js" }}"></script>
+<script src="{{ printf "%s?v=3" (partial "iu.html" "js/quiz.js") }}"></script>
 {{ end }}
