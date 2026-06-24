@@ -30,7 +30,7 @@
     <div class="law-grid" id="lawGrid">
       {{- range $data.laws }}
       {{- $page := site.GetPage (printf "/laws/%s" .id) -}}
-      <article class="law-card law-card--data" id="{{ .id }}"
+      <article class="law-card law-card--data law-card--{{ .category }}" id="{{ .id }}"
         data-id="{{ .id }}"
         data-category="{{ .category }}"
         data-title="{{ .title }}"
@@ -38,16 +38,22 @@
         data-year="{{ .year }}"
         data-status="{{ .status }}"
         data-summary="{{ .summary }}">
-        <span class="law-card-tag">{{ .status }}</span>
+        <div class="law-card-top">
+          <span class="law-tag{{ if ne .status "บังคับใช้" }} is-draft{{ end }}">{{ .type }}</span>
+          <span class="law-year">{{ index (split .year "·") 0 }}</span>
+        </div>
         <h3>{{ .title }}</h3>
-        <p>{{ .summary }}</p>
-        <span class="law-card-meta">{{ .agency }} · {{ .year }}</span>
+        <p class="law-summary">{{ .summary }}</p>
+        <div class="law-card-foot">
+          <span class="agency">{{ .agency }}</span>
+          <span class="law-status-pill">{{ .status }}</span>
+        </div>
         {{- if $page }}
         <a class="btn btn-outline btn-sm" href="{{ $page.RelPermalink }}" style="margin-top:12px;display:inline-flex;">อ่านรายละเอียด</a>
-        {{- else }}
-        <details style="margin-top:12px;">
-          <summary style="cursor:pointer;font-size:14px;color:var(--navy);font-weight:600;">ดูสาระสำคัญ</summary>
-          <ul style="margin:10px 0 0;padding-left:18px;font-size:14px;color:var(--ink-soft);">
+        {{- else if .points }}
+        <details class="law-points" style="margin-top:12px;">
+          <summary>ดูสาระสำคัญ</summary>
+          <ul>
             {{- range .points }}
             <li>{{ . }}</li>
             {{- end }}

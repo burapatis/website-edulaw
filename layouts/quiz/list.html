@@ -1,0 +1,62 @@
+{{ define "main" }}
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="{{ "/" | relURL }}">หน้าแรก</a> / แบบทดสอบความรู้</div>
+    <h1>{{ .Title }}</h1>
+    <p>{{ .Description }}</p>
+  </div>
+</div>
+
+<section style="padding-top:46px;">
+  <div class="container" id="quizApp" data-laws-url="{{ "/laws/" | relURL }}">
+
+    <div class="quiz-stage active" id="stageSelect">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">เลือกหมวดทดสอบ</div>
+          <h2 class="mt-0">หมวดแบบทดสอบ</h2>
+          <p style="margin:8px 0 0;color:var(--ink-soft);max-width:640px;">รวม 40 ข้อ แบ่งเป็น 5 หมวด หมวดละ 8 ข้อ หรือเลือกแบบทดสอบรวมสุ่ม 20 ข้อจากทุกหมวด</p>
+        </div>
+      </div>
+      <div class="quiz-cat-grid" id="quizCatGrid"></div>
+    </div>
+
+    <div class="quiz-stage" id="stageQuiz">
+      <div class="quiz-paper">
+        <div class="quiz-progress-row">
+          <span class="pnum" id="qProgressText"></span>
+          <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+          <span class="quiz-score-pill" id="scorePill">คะแนน 0</span>
+        </div>
+        <p class="q-text" id="qText"></p>
+        <div class="q-options" id="qOptions"></div>
+        <div class="q-explain" id="qExplain"></div>
+        <div class="quiz-nav-row">
+          <button type="button" class="btn btn-primary" id="nextBtn" disabled>ข้อต่อไป</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-stage" id="stageResult">
+      <div class="quiz-paper quiz-result">
+        <img class="site-logo site-logo--lg" src="{{ "assets/logo.png" | relURL }}" alt="">
+        <span class="grade-badge" id="gradeBadge"></span>
+        <p class="score-big" id="scoreBig"></p>
+        <p class="score-label" id="scoreLabel"></p>
+        <div class="result-actions">
+          <button type="button" class="btn btn-primary" id="retryBtn">ทำแบบทดสอบหมวดนี้อีกครั้ง</button>
+          <button type="button" class="btn btn-outline" id="backCatBtn">เลือกหมวดอื่น</button>
+          <a class="btn btn-outline" id="reviewLawsBtn" href="{{ "/laws/" | relURL }}">ทบทวนในคลังกฎหมาย</a>
+        </div>
+        <div class="review-list" id="reviewList"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+{{ end }}
+
+{{ define "scripts" }}
+<script src="{{ "js/quiz-data.js" | relURL }}"></script>
+<script src="{{ "js/quiz.js" | relURL }}"></script>
+{{ end }}

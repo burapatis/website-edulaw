@@ -1,0 +1,74 @@
+{{ define "main" }}
+{{- $data := site.Data.laws -}}
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="{{ "/" | relURL }}">หน้าแรก</a> / สรุปกฎหมาย</div>
+    <h1>{{ .Title }}</h1>
+    <p>{{ .Description }}</p>
+  </div>
+</div>
+
+<section>
+  <div class="container content-body">
+    {{ .Content }}
+    <div class="cat-grid summary-topic-grid">
+      <a class="cat-card cat-card--national" href="{{ "/laws/nea-2542/" | relURL }}">
+        <span class="cat-icon" data-icon="book"></span>
+        <h3>สิทธิเรียนฟรี 12 ปี</h3>
+        <p>หลักการสิทธิการศึกษาในรัฐธรรมนูญและ พ.ร.บ.การศึกษาแห่งชาติ ที่มาของนโยบายเรียนฟรีและการศึกษาภาคบังคับ</p>
+        <span class="cat-count">อ่านสรุป →</span>
+      </a>
+      <a class="cat-card cat-card--personnel" href="{{ "/laws/?cat=personnel" | relURL }}">
+        <span class="cat-icon" data-icon="users"></span>
+        <h3>วิทยฐานะและสิทธิครู</h3>
+        <p>กฎหมายที่เกี่ยวกับการพัฒนาวิชาชีพ วิทยฐานะ สิทธิประโยชน์ และการบริหารบุคลากรทางการศึกษา</p>
+        <span class="cat-count">{{ len (where $data.laws "category" "personnel") }} ฉบับในหมวดนี้</span>
+      </a>
+      <a class="cat-card cat-card--personnel" href="{{ "/laws/?q=ใบประกอบวิชาชีพ" | relURL }}">
+        <span class="cat-icon" data-icon="stamp"></span>
+        <h3>ใบประกอบวิชาชีพครู</h3>
+        <p>เกณฑ์ ขั้นตอน และกฎหมายที่เกี่ยวข้องกับการขอและรักษาใบประกอบวิชาชีพครู</p>
+        <span class="cat-count">ค้นหาในคลัง →</span>
+      </a>
+      <a class="cat-card cat-card--child" href="{{ "/laws/?cat=child" | relURL }}">
+        <span class="cat-icon" data-icon="heart"></span>
+        <h3>คุ้มครองเด็กและความเสมอภาค</h3>
+        <p>กฎหมายด้านสิทธิเด็ก ความปลอดภัยในโรงเรียน กองทุนการศึกษา และการช่วยเหลือผู้เรียน</p>
+        <span class="cat-count">{{ len (where $data.laws "category" "child") }} ฉบับในหมวดนี้</span>
+      </a>
+      <a class="cat-card cat-card--higher" href="{{ "/laws/?cat=higher" | relURL }}">
+        <span class="cat-icon" data-icon="cap"></span>
+        <h3>อุดมศึกษาและอาชีวศึกษา</h3>
+        <p>กฎหมายการจัดการศึกษาระดับสูง มหาวิทยาลัย วิทยาลัยอาชีวศึกษา และการประกันคุณภาพ</p>
+        <span class="cat-count">{{ len (where $data.laws "category" "higher") }} ฉบับในหมวดนี้</span>
+      </a>
+      <a class="cat-card cat-card--draft" href="{{ "/laws/?cat=draft" | relURL }}">
+        <span class="cat-icon" data-icon="flag"></span>
+        <h3>ร่างกฎหมายที่ควรติดตาม</h3>
+        <p>กฎหมายและความเคลื่อนไหวที่อยู่ระหว่างพิจารณา ควรติดตามผลกระทบต่อสถานศึกษาและบุคลากร</p>
+        <span class="cat-count">{{ len (where $data.laws "category" "draft") }} ฉบับในหมวดนี้</span>
+      </a>
+    </div>
+    <p style="margin-top:28px;font-size:14px;color:var(--ink-soft);">สรุปเพิ่มเติมจะค่อย ๆ เผยแพร่ต่อเนื่อง ข้อมูลกฎหมายฉบับเต็มดูได้ที่ <a href="{{ "/laws/" | relURL }}">คลังกฎหมาย</a></p>
+  </div>
+</section>
+{{ end }}
+
+{{ define "scripts" }}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const icons = {
+    book:'<path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5v-13ZM20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5v-13Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+    users:'<path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm8 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM2 20c0-3 2.5-5 6-5s6 2 6 5M12 20c0-2.5 2-4.5 5-4.5s5 2 5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+    stamp:'<circle cx="12" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 9.5 11 11.5 15.5 7M8 21l1.5-5h5L16 21M12 15v1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+    heart:'<path d="M12 20.5s-7.5-4.6-9.8-9C.6 7.8 2.4 4 6 4c2 0 3.4 1.1 4 2.2C10.6 5.1 12 4 14 4c3.6 0 5.4 3.8 3.8 7.5-2.3 4.4-9.8 9-9.8 9Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+    cap:'<path d="M12 4 2 9l10 5 8.5-4.25V15M2 9v5.5M22 9 12 4M6 12.2V17c0 1.5 3 3 6 3s6-1.5 6-3v-4.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+    flag:'<path d="M5 21V4M5 4h12l-3 4 3 4H5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>'
+  };
+  document.querySelectorAll('[data-icon]').forEach(el => {
+    const name = el.getAttribute('data-icon');
+    el.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">${icons[name]||''}</svg>`;
+  });
+});
+</script>
+{{ end }}

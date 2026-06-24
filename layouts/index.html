@@ -11,11 +11,11 @@
         <button type="submit">ค้นหา</button>
       </form>
       <div class="hero-actions">
-        <a class="btn btn-gold" href="{{ "/laws/" | relURL }}">สำรวจคลังกฎหมายทั้งหมด</a>
+        <a class="btn btn-gold" href="{{ "/laws/" | relURL }}">สำรวจคลังกฎหมาย</a>
         <a class="btn btn-outline on-dark" href="{{ "/quiz/" | relURL }}">ทดสอบความรู้ตนเอง</a>
       </div>
       <div class="hero-stats">
-        <div class="stat"><b>{{ len $data.laws }}</b><span>ฉบับกฎหมาย/ระเบียบ</span></div>
+        <div class="stat"><b>{{ len $data.laws }}</b><span>ฉบับที่คัดสรรแล้ว</span></div>
         <div class="stat"><b>{{ len $data.categories }}</b><span>หมวดหมู่</span></div>
         <div class="stat"><b>40</b><span>ข้อคำถามแบบทดสอบ</span></div>
         <div class="stat"><b>2542–ปัจจุบัน</b><span>ครอบคลุมช่วงเวลา</span></div>
@@ -35,11 +35,11 @@
         <h2>หมวดหมู่กฎหมายการศึกษา</h2>
         <p>จัดกลุ่มกฎหมายตามภารกิจการใช้งานจริง ตั้งแต่กฎหมายแม่บทไปจนถึงระเบียบที่ใช้ปฏิบัติงานในสถานศึกษา</p>
       </div>
-      <a class="btn btn-outline" href="{{ "/laws/" | relURL }}">ดูคลังกฎหมายทั้งหมด</a>
+      <a class="btn btn-outline" href="{{ "/laws/" | relURL }}">ดูคลังกฎหมาย</a>
     </div>
     <div class="cat-grid">
       {{- range $data.categories }}
-      <a class="cat-card" href="{{ printf "/laws/?cat=%s" .key | relURL }}">
+      <a class="cat-card cat-card--{{ .key }}" href="{{ printf "/laws/?cat=%s" .key | relURL }}">
         <span class="cat-icon" data-icon="{{ .icon }}"></span>
         <h3>{{ .label }}</h3>
         <p>{{ .desc }}</p>
@@ -62,12 +62,7 @@
     <div class="law-grid">
       {{- range first 6 $data.laws }}
       {{- $page := site.GetPage (printf "/laws/%s" .id) -}}
-      <a class="law-card" href="{{ if $page }}{{ $page.RelPermalink }}{{ else }}{{ printf "/laws/#%s" .id | relURL }}{{ end }}">
-        <span class="law-card-tag">{{ .status }}</span>
-        <h3>{{ .title }}</h3>
-        <p>{{ .summary }}</p>
-        <span class="law-card-meta">{{ .agency }} · {{ .year }}</span>
-      </a>
+      {{ partial "law-card.html" (dict "law" . "page" $page) }}
       {{- end }}
     </div>
   </div>
@@ -82,20 +77,23 @@
       </div>
     </div>
     <div class="cat-grid" style="grid-template-columns:repeat(3,1fr);">
-      <a class="cat-card" href="{{ "/summaries/" | relURL }}">
+      <a class="cat-card cat-card--tool-summary" href="{{ "/summaries/" | relURL }}">
         <span class="cat-icon" data-icon="doc"></span>
         <h3>สรุปกฎหมาย</h3>
         <p>บทความสรุปแบบอ่านง่าย จัดกลุ่มตามหัวข้อที่ใช้งานจริง</p>
+        <span class="cat-count">6 หัวข้อสรุป</span>
       </a>
-      <a class="cat-card" href="{{ "/quiz/" | relURL }}">
+      <a class="cat-card cat-card--tool-quiz" href="{{ "/quiz/" | relURL }}">
         <span class="cat-icon" data-icon="check"></span>
         <h3>แบบทดสอบ</h3>
         <p>ทดสอบความเข้าใจกฎหมายการศึกษา พร้อมคำอธิบายทุกข้อ</p>
+        <span class="cat-count">40 ข้อคำถาม</span>
       </a>
-      <a class="cat-card" href="{{ "/faq/" | relURL }}">
+      <a class="cat-card cat-card--tool-faq" href="{{ "/faq/" | relURL }}">
         <span class="cat-icon" data-icon="info"></span>
         <h3>คำถามที่พบบ่อย</h3>
         <p>คำตอบสั้น ๆ สำหรับประเด็นที่ผู้ใช้ถามบ่อย</p>
+        <span class="cat-count">4 คำถามหลัก</span>
       </a>
     </div>
   </div>

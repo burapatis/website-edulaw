@@ -360,6 +360,55 @@ section{padding:74px 0;}
   font-family:var(--f-mono);font-size:12px;color:var(--maroon);
   margin-top:auto;
 }
+
+/* สีพื้นการ์ดหมวดหมู่ — แยกหัวข้อให้มองเห็นชัด */
+.cat-card--constitution{background:linear-gradient(145deg,#e8eef4 0%,#f7faff 100%);border-color:#b8c9dc;}
+.cat-card--constitution .cat-icon{background:#d4e0ec;color:#0e2a47;}
+.cat-card--national{background:linear-gradient(145deg,#f5ecd4 0%,#fdfaf2 100%);border-color:#d9c48a;}
+.cat-card--national .cat-icon{background:#f0e2bc;color:#7a5a12;}
+.cat-card--admin{background:linear-gradient(145deg,#e6edf3 0%,#f4f8fb 100%);border-color:#a8bccf;}
+.cat-card--admin .cat-icon{background:#cddbe8;color:#16395e;}
+.cat-card--personnel{background:linear-gradient(145deg,#e5efe7 0%,#f4faf5 100%);border-color:#a8c9b2;}
+.cat-card--personnel .cat-icon{background:#cfe3d6;color:#3e6b57;}
+.cat-card--higher{background:linear-gradient(145deg,#ece8f4 0%,#f8f6fc 100%);border-color:#c4b8dc;}
+.cat-card--higher .cat-icon{background:#ddd4ee;color:#4a3d6b;}
+.cat-card--institution{background:linear-gradient(145deg,#f3ebe3 0%,#fbf7f2 100%);border-color:#d4bda8;}
+.cat-card--institution .cat-icon{background:#ead9c8;color:#6b4f35;}
+.cat-card--child{background:linear-gradient(145deg,#f6e7e5 0%,#fdf6f5 100%);border-color:#d9b0a8;}
+.cat-card--child .cat-icon{background:#ecd0ca;color:#7a2331;}
+.cat-card--subordinate{background:linear-gradient(145deg,#f2ead8 0%,#faf6ec 100%);border-color:#d8c99a;}
+.cat-card--subordinate .cat-icon{background:#e8d9b0;color:#6b5416;}
+.cat-card--draft{background:linear-gradient(145deg,#f0f0f0 0%,#fafafa 100%);border-color:#c8c8c8;}
+.cat-card--draft .cat-icon{background:#e2e2e2;color:#5b554a;}
+.cat-card--tool-summary{background:linear-gradient(145deg,#e5efe7 0%,#f7fcf8 100%);border-color:#a8c9b2;}
+.cat-card--tool-summary .cat-icon{background:#cfe3d6;color:#3e6b57;}
+.cat-card--tool-quiz{background:linear-gradient(145deg,#f5ecd4 0%,#fffaf0 100%);border-color:#d9c48a;}
+.cat-card--tool-quiz .cat-icon{background:#f0e2bc;color:#7a5a12;}
+.cat-card--tool-faq{background:linear-gradient(145deg,#e8eef4 0%,#f7faff 100%);border-color:#b8c9dc;}
+.cat-card--tool-faq .cat-icon{background:#d4e0ec;color:#0e2a47;}
+
+.summary-topic-grid{grid-template-columns:repeat(3,1fr);margin-top:28px;}
+@media (max-width:980px){.summary-topic-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:560px){.summary-topic-grid{grid-template-columns:1fr;}}
+
+/* การ์ดกฎหมายตามหมวด — เส้นขอบซ้ายสีหมวด */
+.law-card--constitution{border-left:4px solid #0e2a47;}
+.law-card--national{border-left:4px solid #b8902e;}
+.law-card--admin{border-left:4px solid #16395e;}
+.law-card--personnel{border-left:4px solid #3e6b57;}
+.law-card--higher{border-left:4px solid #4a3d6b;}
+.law-card--institution{border-left:4px solid #6b4f35;}
+.law-card--child{border-left:4px solid #7a2331;}
+.law-card--subordinate{border-left:4px solid #6b5416;}
+.law-card--draft{border-left:4px solid #8a8a8a;}
+.law-status-pill{
+  font-family:var(--f-mono);font-size:11px;padding:3px 9px;border-radius:999px;
+  background:var(--sage-tint);color:var(--sage);
+}
+.law-card--draft .law-status-pill{background:var(--maroon-tint);color:var(--maroon);}
+.law-points summary{cursor:pointer;font-size:14px;color:var(--navy);font-weight:600;}
+.law-points ul{margin:10px 0 0;padding-left:18px;font-size:14px;color:var(--ink-soft);}
+
 @media (max-width:980px){.cat-grid{grid-template-columns:repeat(2,1fr);}}
 @media (max-width:560px){.cat-grid{grid-template-columns:1fr;}}
 
@@ -397,7 +446,7 @@ section{padding:74px 0;}
   background:#fff;border:1px solid var(--paper-line);border-radius:var(--radius-m);
   padding:22px;display:flex;flex-direction:column;gap:10px;cursor:pointer;
   transition:box-shadow .18s, transform .18s, border-color .18s;
-  position:relative;
+  position:relative;text-decoration:none;color:inherit;
 }
 .law-card:hover{box-shadow:var(--shadow-soft);transform:translateY(-3px);border-color:var(--gold);}
 .law-card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;}
@@ -502,6 +551,12 @@ section{padding:74px 0;}
 .quiz-cat-card h3{font-size:18px;margin:6px 0 2px;}
 .quiz-cat-card p{font-size:13.5px;color:var(--ink-soft);margin:0;}
 .quiz-cat-card .qmeta{font-family:var(--f-mono);font-size:12px;color:var(--ink-soft);margin-top:auto;padding-top:10px;}
+.quiz-cat-card--constitution{background:linear-gradient(145deg,#e8eef4 0%,#f7faff 100%);border-color:#b8c9dc;}
+.quiz-cat-card--national{background:linear-gradient(145deg,#f5ecd4 0%,#fdfaf2 100%);border-color:#d9c48a;}
+.quiz-cat-card--personnel{background:linear-gradient(145deg,#e5efe7 0%,#f4faf5 100%);border-color:#a8c9b2;}
+.quiz-cat-card--admin{background:linear-gradient(145deg,#ece8f4 0%,#f8f6fc 100%);border-color:#c4b8dc;}
+.quiz-cat-card--child{background:linear-gradient(145deg,#f6e7e5 0%,#fdf6f5 100%);border-color:#d9b0a8;}
+.quiz-cat-card--mixed{background:linear-gradient(145deg,#f2ead8 0%,#fffaf0 100%);border-color:#d8c99a;}
 @media (max-width:920px){.quiz-cat-grid{grid-template-columns:repeat(2,1fr);}}
 @media (max-width:600px){.quiz-cat-grid{grid-template-columns:1fr;}}
 
@@ -774,6 +829,11 @@ section{padding:74px 0;}
 .main-nav a.active{color:var(--gold);font-weight:700;}
 .law-detail-grid{display:grid;grid-template-columns:1.4fr .8fr;gap:36px;align-items:start;}
 .law-detail-badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+.law-detail-badges .law-tag,.law-detail-badges .law-card-tag{
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;
+  padding:4px 10px;border-radius:999px;background:var(--navy-tint);color:var(--navy);
+  white-space:nowrap;
+}
 .law-side-card{
   background:#fff;border:1px solid var(--paper-line);border-radius:var(--radius-m);
   padding:22px;margin-bottom:16px;

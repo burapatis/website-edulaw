@@ -1,0 +1,22 @@
+{{- $law := .law -}}
+{{- $page := .page -}}
+{{- $href := .href -}}
+{{- if not $href -}}
+  {{- if $page -}}
+    {{- $href = $page.RelPermalink -}}
+  {{- else -}}
+    {{- $href = printf "/laws/#%s" $law.id | relURL -}}
+  {{- end -}}
+{{- end -}}
+<a class="law-card" href="{{ $href }}">
+  <div class="law-card-top">
+    <span class="law-tag{{ if ne $law.status "บังคับใช้" }} is-draft{{ end }}">{{ $law.type }}</span>
+    <span class="law-year">{{ index (split $law.year "·") 0 }}</span>
+  </div>
+  <h3>{{ $law.title }}</h3>
+  <p class="law-summary">{{ $law.summary }}</p>
+  <div class="law-card-foot">
+    <span class="agency">{{ $law.agency }}</span>
+    <span class="read-more">อ่านสาระสำคัญ →</span>
+  </div>
+</a>
