@@ -1,4 +1,8 @@
 {{- $catalog := site.Data.laws -}}
+{{- $structuralReviewDate := "2026-06-24" -}}
+{{- $defaultAudiences := slice "ครูและบุคลากรทางการศึกษา" "นักศึกษา" "ผู้สนใจทั่วไป" -}}
+{{- $officialPlaceholder := "ต้องตรวจสอบจากแหล่งทางการ" -}}
+
 {{- range $catalog.laws }}
   {{- $law := . -}}
 
@@ -11,29 +15,71 @@
   {{- end }}
   {{- $body = printf "%s\n## หมายเหตุ\n\nเนื้อหานี้เป็นการสรุปสาระสำคัญเพื่อการเรียนรู้ ไม่ใช่ถ้อยคามตามกฎหมายฉบับเต็ม โปรดตรวจสอบฉบับเต็มจากแหล่งอ้างอิงทางการก่อนนำไปอ้างอิง" $body -}}
 
-  {{- $source := "https://ratchakitcha.soc.go.th" -}}
-  {{- with $law.links }}
-    {{- range . }}
-      {{- if in .url "ratchakitcha.soc.go.th" }}
-        {{- $source = .url -}}
-      {{- end }}
-    {{- end }}
-  {{- end }}
+  {{- /* short_title: ใช้จากข้อมูลหรือตัดจาก title โดยไม่เปลี่ยนความหมาย */ -}}
+  {{- $shortTitle := $law.short_title | default "" -}}
+  {{- if not $shortTitle -}}
+    {{- $shortTitle = $law.title -}}
+    {{- if strings.Contains $shortTitle " (" -}}
+      {{- $shortTitle = index (split $shortTitle " (") 0 -}}
+    {{- end -}}
+    {{- if strings.Contains $shortTitle " และที่แก้ไข" -}}
+      {{- $shortTitle = index (split $shortTitle " และที่แก้ไข") 0 -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- /* source_url: ใช้เฉพาะค่าที่มีในข้อมูลเดิม ไม่เดา URL ฉบับเต็ม */ -}}
+  {{- $sourceURL := $law.source_url | default "" -}}
+  {{- if not $sourceURL -}}
+    {{- with $law.links -}}
+      {{- range . -}}
+        {{- if eq .label "ราชกิจจานุเบกษา" -}}
+          {{- $sourceURL = .url -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- /* official_source: จากข้อมูลเดิม หรือป้ายกำกับลิงก์ที่ระบุชัด มิฉะนั้นใช้ placeholder */ -}}
+  {{- $officialSource := $law.official_source | default "" -}}
+  {{- if not $officialSource -}}
+    {{- with $law.links -}}
+      {{- range . -}}
+        {{- if or (eq .label "ราชกิจจานุเบกษา") (eq .label "สำนักงานคณะกรรมการกฤษฎีกา") -}}
+          {{- $officialSource = .label -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- if and (not $officialSource) (strings.Contains ($law.citation | default "") "ราชกิจจานุเบกษา") -}}
+      {{- $officialSource = "ราชกิจจานุเบกษา" -}}
+    {{- end -}}
+    {{- if not $officialSource -}}
+      {{- $officialSource = $officialPlaceholder -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- $audiences := $law.audiences | default $defaultAudiences -}}
+  {{- $lawType := $law.law_type | default $law.type | default "" -}}
 
   {{- $params := dict
+    "title" $law.title
+    "short_title" $shortTitle
+    "law_type" $lawType
+    "year" $law.year
     "category" $law.category
     "agency" $law.agency
-    "year" $law.year
     "status" $law.status
-    "type" $law.type
+    "source_url" $sourceURL
+    "official_source" $officialSource
+    "last_checked" $structuralReviewDate
+    "audiences" $audiences
+    "tags" ($law.tags | default slice)
+    "draft" false
+    "type" $lawType
     "law_id" $law.id
     "citation" ($law.citation | default "")
     "links" ($law.links | default slice)
-    "tags" ($law.tags | default slice)
     "categories" ($law.categories | default (slice $law.category))
     "relatedLaws" ($law.relatedLaws | default slice)
-    "last_checked" ($law.lastUpdated | default $catalog.updatedAt)
-    "source_url" $source
   -}}
 
   {{- $content := dict "mediaType" "text/markdown" "value" $body -}}

@@ -14,7 +14,7 @@
       <article class="law-detail-main content-body">
         <div class="law-detail-badges">
           <span class="law-card-tag">{{ .Params.status }}</span>
-          <span class="law-card-tag" style="background:var(--navy-tint);color:var(--navy);">{{ .Params.type }}</span>
+          <span class="law-card-tag" style="background:var(--navy-tint);color:var(--navy);">{{ .Params.law_type | default .Params.type }}</span>
           {{- range .Params.tags }}
           <span class="law-card-tag" style="background:var(--paper-alt);color:var(--ink-soft);">{{ . }}</span>
           {{- end }}
@@ -51,7 +51,11 @@
             <dt>สถานะ</dt>
             <dd>{{ .Params.status }}</dd>
             <dt>ประเภท</dt>
-            <dd>{{ .Params.type }}</dd>
+            <dd>{{ .Params.law_type | default .Params.type }}</dd>
+            {{- with .Params.official_source }}
+            <dt>แหล่งอ้างอิงทางการ</dt>
+            <dd>{{ . }}</dd>
+            {{- end }}
             {{- with .Params.law_id }}
             <dt>รหัส</dt>
             <dd><code>{{ . }}</code></dd>
