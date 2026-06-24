@@ -1,0 +1,15 @@
+{
+  "name": "website-edulaw",
+  "private": true,
+  "description": "Thai Education Law Hub — Hugo static site with Pagefind search",
+  "scripts": {
+    "build": "hugo --gc --minify",
+    "index": "pagefind --site public",
+    "serve:search": "pagefind --site public --serve",
+    "build:search": "hugo --gc --minify && pagefind --site public",
+    "dev": "hugo server -D"
+  },
+  "devDependencies": {
+    "pagefind": "^1.3.0"
+  }
+}

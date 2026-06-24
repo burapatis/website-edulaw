@@ -30,8 +30,17 @@ jobs:
           hugo-version: '0.163.3'
           extended: true
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
       - name: Build
-        run: hugo --minify
+        run: npm run build:search
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

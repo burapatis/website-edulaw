@@ -5,10 +5,13 @@
 ## รันในเครื่อง
 
 ```bash
-hugo server
+npm install
+npm run dev
 ```
 
 เปิด http://localhost:1313/website-edulaw/
+
+สำหรับทดสอบ **การค้นหา Pagefind** ดู [docs/SEARCH.md](docs/SEARCH.md)
 
 ## โครงสร้างหลัก
 
@@ -23,10 +26,16 @@ hugo server
 ## Build
 
 ```bash
-hugo --minify
+npm run build:search
 ```
 
-ผลลัพธ์อยู่ใน `public/`
+ผลลัพธ์อยู่ใน `public/` พร้อมดัชนีค้นหาใน `public/pagefind/`
+
+Build Hugo อย่างเดียว (ไม่มีดัชนีค้นหา):
+
+```bash
+npm run build
+```
 
 ## เว็บเดิม
 

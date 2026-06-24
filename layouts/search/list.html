@@ -1,0 +1,59 @@
+{{ define "main" }}
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="{{ partial "iu.html" "" }}">หน้าแรก</a> / {{ .Title }}</div>
+    <h1>ค้นหากฎหมายการศึกษา</h1>
+    <p class="search-page-intro">{{ .Description }}</p>
+    <p class="search-page-help">พิมพ์คำที่ต้องการค้นหา เช่น ใบอนุญาตประกอบวิชาชีพครู วิทยฐานะ โรงเรียนเอกชน การศึกษาภาคบังคับ หรือ ก.ค.ศ.</p>
+  </div>
+</div>
+<section class="search-page-section" data-pagefind-ignore>
+  <div class="container">
+    <div id="pagefind-search" class="pagefind-host" aria-label="ผลการค้นหาในเว็บไซต์"></div>
+    <p class="search-page-note">การค้นหานี้ครอบคลุมเนื้อหาที่เผยแพร่เป็นหน้าเว็บในไซต์ คำถามในแบบทดสอบแบบโต้ตอบอาจไม่ปรากฏในผลลัพธ์</p>
+  </div>
+</section>
+{{ end }}
+
+{{ define "scripts" }}
+{{- $bundlePath := printf "%spagefind/" (urls.Parse site.BaseURL).Path -}}
+<link href="{{ print $bundlePath "pagefind-ui.css" | relURL }}" rel="stylesheet">
+<script src="{{ print $bundlePath "pagefind-ui.js" | relURL }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const bundlePath = '{{ $bundlePath }}';
+  const initialQuery = new URLSearchParams(window.location.search).get('q') || '';
+
+  new PagefindUI({
+    element: '#pagefind-search',
+    bundlePath: bundlePath,
+    showSubResults: true,
+    showImages: false,
+    translations: {
+      placeholder: 'ค้นหาชื่อกฎหมาย ประเด็น หน่วยงาน หรือคำสำคัญ…',
+      clear_search: 'ล้างคำค้นหา',
+      load_more: 'โหลดผลลัพธ์เพิ่มเติม',
+      search_label: 'ค้นหาในเว็บไซต์นี้',
+      filters_label: 'ตัวกรอง',
+      zero_results: 'ไม่พบผลลัพธ์สำหรับ “[SEARCH_TERM]”',
+      many_results: 'พบ [COUNT] รายการสำหรับ “[SEARCH_TERM]”',
+      one_result: 'พบ [COUNT] รายการสำหรับ “[SEARCH_TERM]”',
+      alt_search: 'ไม่พบผลลัพธ์สำหรับ “[SEARCH_TERM]” แสดงผลลัพธ์สำหรับ “[DIFFERENT_TERM]” แทน',
+      search_suggestion: 'ไม่พบผลลัพธ์สำหรับ “[SEARCH_TERM]” ลองค้นหาดังนี้:',
+      searching: 'กำลังค้นหา “[SEARCH_TERM]”…'
+    }
+  });
+
+  if (initialQuery) {
+    const tryPrefill = () => {
+      const input = document.querySelector('#pagefind-search input[type="search"]');
+      if (!input) return;
+      input.value = initialQuery;
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+    };
+    tryPrefill();
+    window.setTimeout(tryPrefill, 120);
+  }
+});
+</script>
+{{ end }}

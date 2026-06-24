@@ -1,13 +1,13 @@
 {{ define "main" }}
 {{- $data := site.Data.laws -}}
 {{- $featuredIds := slice "nea-2542" "teacher-civil-2547" "teacher-council-2546" "child-protect-2546" "eef-2561" "vocational-2551" "higher-ed-2562" "qa-edu-2546" -}}
-<section class="hero">
+<section class="hero" data-pagefind-body>
   <div class="container hero-grid">
     <div>
       <div class="eyebrow">คลังความรู้กฎหมายการศึกษาไทย</div>
       <h1>กฎหมายการศึกษาที่กระจัดกระจาย<br>รวบรวมไว้ใน<em> ที่เดียว</em></h1>
       <p class="lead">{{ site.Params.description }}</p>
-      <form class="hero-search" action="{{ partial "iu.html" "laws/" }}" method="get">
+      <form class="hero-search" action="{{ partial "iu.html" "search/" }}" method="get">
         <input type="search" name="q" id="heroSearchInput" placeholder="ค้นหา เช่น วิทยฐานะ, ใบประกอบวิชาชีพ, เรียนฟรี 12 ปี...">
         <button type="submit">ค้นหา</button>
       </form>
@@ -28,7 +28,7 @@
   </div>
 </section>
 
-<section>
+<section data-pagefind-ignore>
   <div class="container">
     <div class="section-head">
       <div>
@@ -57,7 +57,7 @@
   </div>
 </section>
 
-<section class="section-alt">
+<section class="section-alt" data-pagefind-ignore>
   <div class="container">
     <div class="section-head">
       <div>
@@ -91,7 +91,7 @@
   </div>
 </section>
 
-<section>
+<section data-pagefind-ignore>
   <div class="container">
     <div class="section-head">
       <div>
@@ -111,7 +111,7 @@
   </div>
 </section>
 
-<section class="section-alt">
+<section class="section-alt" data-pagefind-ignore>
   <div class="container">
     <div class="section-head">
       <div>
@@ -142,7 +142,7 @@
   </div>
 </section>
 
-<section>
+<section data-pagefind-ignore>
   <div class="container">
     <div class="cta-banner">
       <div>
@@ -154,7 +154,7 @@
   </div>
 </section>
 
-<section class="section-alt">
+<section class="section-alt" data-pagefind-ignore>
   <div class="container">
     <div class="section-head">
       <div>

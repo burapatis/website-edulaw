@@ -10,7 +10,7 @@
 
 <section style="padding-top:46px;">
   <div class="container">
-    <div class="law-toolbar">
+    <div class="law-toolbar" data-pagefind-ignore>
       <input type="search" id="searchInput" placeholder="พิมพ์ชื่อกฎหมาย หน่วยงาน หรือคำสำคัญ เช่น วิทยฐานะ, เรียนฟรี, คุรุสภา...">
       <div class="chip-row" id="chipRow">
         <button type="button" class="chip active" data-cat="">ทั้งหมด</button>
@@ -19,7 +19,7 @@
         {{- end }}
       </div>
     </div>
-    <div class="law-meta-row">
+    <div class="law-meta-row" data-pagefind-ignore>
       <span class="result-count" id="resultCount"></span>
       <select id="sortSelect">
         <option value="default">เรียงตามลำดับหมวดหมู่</option>
@@ -27,9 +27,9 @@
         <option value="year">เรียงตามปี (ใหม่ไปเก่า)</option>
       </select>
     </div>
-    <script type="application/json" id="lawsCatalog">{{ $data | jsonify | safeJS }}</script>
-    <div class="law-grid" id="lawGrid" data-law-base="{{ partial "iu.html" "laws/" }}"></div>
-    <noscript>
+    <script type="application/json" id="lawsCatalog" data-pagefind-ignore>{{ $data | jsonify | safeJS }}</script>
+    <div class="law-grid" id="lawGrid" data-law-base="{{ partial "iu.html" "laws/" }}" data-pagefind-ignore></div>
+    <noscript data-pagefind-body>
       <div class="law-grid" style="margin-top:16px;">
         {{- range $data.laws }}
         <a class="law-card law-card--{{ .category }}" href="{{ partial "iu.html" (printf "laws/%s/" .id) }}">

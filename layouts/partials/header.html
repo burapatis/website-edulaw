@@ -1,4 +1,4 @@
-<header class="site-header">
+<header class="site-header" data-pagefind-ignore>
   <div class="header-inner">
     <a class="brand" href="{{ partial "iu.html" "" }}">
       <img class="site-logo" src="{{ partial "iu.html" "assets/logo.png" }}" alt="" width="42" height="42">
@@ -10,8 +10,8 @@
       {{- end }}
     </nav>
     <div class="header-tools">
-      <form class="search-mini" action="{{ partial "iu.html" "laws/" }}" method="get">
-        <input type="search" name="q" placeholder="ค้นหากฎหมาย..." aria-label="ค้นหากฎหมาย">
+      <form class="search-mini" action="{{ partial "iu.html" "search/" }}" method="get">
+        <input type="search" name="q" placeholder="ค้นหา..." aria-label="ค้นหาในเว็บไซต์">
         <button type="submit" aria-label="ค้นหา"></button>
       </form>
       <button class="nav-toggle" aria-label="เปิดเมนู" aria-expanded="false"><span></span><span></span><span></span></button>

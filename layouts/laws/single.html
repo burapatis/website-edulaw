@@ -1,6 +1,6 @@
 {{ define "main" }}
 {{- $data := site.Data.laws -}}
-<div class="page-hero">
+<div class="page-hero" data-pagefind-body>
   <div class="container">
     <div class="breadcrumb"><a href="{{ partial "iu.html" "" }}">หน้าแรก</a> / <a href="{{ partial "iu.html" "laws/" }}">คลังกฎหมาย</a> / {{ .Title }}</div>
     <h1>{{ .Title }}</h1>
@@ -13,7 +13,10 @@
     {{ partial "law-meta-card.html" . }}
 
     <div class="law-detail-grid">
-      <article class="law-detail-main content-body">
+      <article class="law-detail-main content-body" data-pagefind-body>
+        <span data-pagefind-meta="หน่วยงาน" hidden>{{ .Params.agency }}</span>
+        <span data-pagefind-meta="ประเภท" hidden>{{ .Params.law_type | default .Params.type }}</span>
+        <span data-pagefind-meta="สถานะ" hidden>{{ .Params.status }}</span>
         <div class="law-detail-badges">
           <span class="law-card-tag">{{ .Params.status }}</span>
           <span class="law-card-tag" style="background:var(--navy-tint);color:var(--navy);">{{ .Params.law_type | default .Params.type }}</span>
@@ -33,7 +36,7 @@
         {{ partial "legal-disclaimer.html" . }}
       </article>
 
-      <aside class="law-detail-side">
+      <aside class="law-detail-side" data-pagefind-ignore>
         {{- if .Params.links }}
         <div class="law-side-card">
           <h4>ลิงก์อ้างอิงเพิ่มเติม</h4>
