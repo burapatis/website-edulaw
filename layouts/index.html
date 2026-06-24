@@ -1,5 +1,8 @@
 {{ define "main" }}
 {{- $data := site.Data.laws -}}
+{{- $quizData := site.Data.quizzes -}}
+{{- partial "dashboard-stats-compute.html" . -}}
+{{- $dash := .Scratch.Get "dashboardStats" -}}
 {{- $featuredIds := slice "nea-2542" "teacher-civil-2547" "teacher-council-2546" "child-protect-2546" "eef-2561" "vocational-2551" "higher-ed-2562" "qa-edu-2546" -}}
 <section class="hero" data-pagefind-body>
   <div class="container hero-grid">
@@ -19,11 +22,12 @@
         <a class="btn btn-outline on-dark" href="{{ partial "iu.html" "quiz/" }}">ทำแบบทดสอบ</a>
       </div>
       <div class="hero-stats">
-        <div class="stat"><b>{{ len $data.laws }}</b><span>ฉบับที่คัดสรรแล้ว</span></div>
-        <div class="stat"><b>{{ len $data.categories }}</b><span>หมวดหมู่</span></div>
-        <div class="stat"><b>40</b><span>ข้อคำถามแบบทดสอบ</span></div>
+        <div class="stat"><b>{{ $dash.lawCount }}</b><span>ฉบับที่คัดสรรแล้ว</span></div>
+        <div class="stat"><b>{{ $dash.categoryTermCount }}</b><span>หมวดหมู่</span></div>
+        <div class="stat"><b>{{ $dash.quizQuestions }}</b><span>ข้อคำถามแบบทดสอบ</span></div>
         <div class="stat"><b>2542–ปัจจุบัน</b><span>ครอบคลุมช่วงเวลา</span></div>
       </div>
+      {{ partial "content-status-summary.html" (dict "stats" $dash "compact" true) }}
     </div>
     <div class="hero-emblem">
       <img class="hero-feature spin-in" src="{{ partial "iu.html" "assets/feature-graphic.png" }}" alt="{{ site.Title }} — {{ site.Params.author }}">
@@ -127,19 +131,19 @@
         <span class="cat-icon" data-icon="users"></span>
         <h3>เส้นทางการเรียนรู้</h3>
         <p>เลือกเส้นทางตามบทบาท เพื่อเริ่มศึกษากฎหมายอย่างเป็นระบบ</p>
-        <span class="cat-count">6 เส้นทาง</span>
+        <span class="cat-count">{{ $dash.learningPaths }} เส้นทาง</span>
       </a>
       <a class="cat-card cat-card--tool-summary" href="{{ partial "iu.html" "summaries/" }}">
         <span class="cat-icon" data-icon="doc"></span>
         <h3>สรุปกฎหมาย</h3>
         <p>บทความสรุปแบบอ่านง่าย จัดกลุ่มตามหัวข้อที่ใช้งานจริง</p>
-        <span class="cat-count">6 หัวข้อสรุป</span>
+        <span class="cat-count">{{ $dash.summaryTopics }} หัวข้อสรุป</span>
       </a>
       <a class="cat-card cat-card--tool-quiz" href="{{ partial "iu.html" "quiz/" }}">
         <span class="cat-icon" data-icon="check"></span>
         <h3>แบบทดสอบ</h3>
         <p>ทดสอบความเข้าใจกฎหมายการศึกษา พร้อมคำอธิบายทุกข้อ</p>
-        <span class="cat-count">40 ข้อคำถาม</span>
+        <span class="cat-count">{{ $dash.quizQuestions }} ข้อคำถาม</span>
       </a>
       <a class="cat-card cat-card--tool-faq" href="{{ partial "iu.html" "faq/" }}">
         <span class="cat-icon" data-icon="info"></span>

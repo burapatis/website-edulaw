@@ -1,0 +1,24 @@
+{{- $stats := .stats -}}
+{{- if not $stats -}}
+  {{- partial "dashboard-stats-compute.html" . -}}
+  {{- $stats = .Scratch.Get "dashboardStats" -}}
+{{- end -}}
+{{- $compact := .compact | default false -}}
+
+<div class="content-status-summary{{ if $compact }} content-status-summary--compact{{ end }}" role="region" aria-label="ภาพรวมเว็บไซต์">
+  <div class="content-status-summary__body">
+    <p class="content-status-summary__lead">
+      <strong>{{ $stats.lawCount }}</strong> หน้ากฎหมาย ·
+      <strong>{{ $stats.categoryTermCount }}</strong> หมวดหมู่ ·
+      <strong>{{ $stats.quizQuestions }}</strong> ข้อแบบทดสอบ ·
+      <strong>{{ $stats.learningPaths }}</strong> เส้นทางการเรียนรู้
+    </p>
+    {{- if not $compact }}
+    <p class="content-status-summary__meta">
+      มีข้อมูลแหล่งทางการแล้ว <strong>{{ $stats.reviewGood }}</strong> รายการ ·
+      ควรตรวจสอบเพิ่มเติม <strong>{{ $stats.reviewNeeds }}</strong> รายการ
+    </p>
+    {{- end }}
+    <a class="btn btn-outline btn-sm{{ if $compact }} on-dark{{ end }}" href="{{ partial "iu.html" "dashboard/" }}">ดูภาพรวมเว็บไซต์: จำนวนกฎหมาย หมวดหมู่ และสถานะการตรวจสอบข้อมูล</a>
+  </div>
+</div>

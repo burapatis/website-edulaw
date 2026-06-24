@@ -10,6 +10,7 @@
     "check:content": "node scripts/check-content-quality.js",
     "check:content:full": "node scripts/check-content-quality.js --full",
     "check:build": "hugo --gc --minify",
+    "report:stats": "node scripts/report-site-stats.js",
     "dev": "hugo server -D"
   },
   "devDependencies": {

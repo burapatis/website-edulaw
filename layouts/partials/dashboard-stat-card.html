@@ -1,0 +1,10 @@
+{{- $label := .label -}}
+{{- $value := .value -}}
+{{- $hint := .hint | default "" -}}
+<div class="dash-stat-card">
+  <div class="dash-stat-card__value">{{ $value }}</div>
+  <div class="dash-stat-card__label">{{ $label }}</div>
+  {{- with $hint }}
+  <div class="dash-stat-card__hint">{{ . }}</div>
+  {{- end }}
+</div>

@@ -1,0 +1,166 @@
+{{ define "main" }}
+{{- partial "dashboard-stats-compute.html" . -}}
+{{- $s := .Scratch.Get "dashboardStats" -}}
+{{- $catLabels := dict -}}
+{{- range site.Data.laws.categories }}{{ $catLabels = merge $catLabels (dict .key .label) }}{{ end -}}
+
+<div class="page-hero" data-pagefind-body>
+  <div class="container">
+    <div class="breadcrumb"><a href="{{ partial "iu.html" "" }}">หน้าแรก</a> / {{ .Title }}</div>
+    <h1>{{ .Title }}</h1>
+    <p>{{ .Description }}</p>
+    <p class="dash-meta-line">
+      อัปเดตคลังข้อมูลล่าสุด: {{ with $s.catalogUpdatedAt }}{{ . }}{{ else }}—{{ end }}
+      · สร้างหน้าเว็บ: {{ $s.buildDate }}
+    </p>
+  </div>
+</div>
+
+<section class="dash-section">
+  <div class="container">
+    <article class="content-body dash-intro" data-pagefind-body>
+      {{ .Content }}
+    </article>
+
+    <h2 id="content-counts" class="dash-section-title">จำนวนเนื้อหาในเว็บไซต์</h2>
+    <div class="dash-stat-grid">
+      {{ partial "dashboard-stat-card.html" (dict "label" "หน้ากฎหมาย" "value" $s.lawCount "hint" "จากคลัง data/laws.json") }}
+      {{ partial "dashboard-stat-card.html" (dict "label" "หัวข้อสรุป" "value" $s.summaryTopics "hint" "หน้าสรุปกฎหมายแบบอ่านง่าย") }}
+      {{ partial "dashboard-stat-card.html" (dict "label" "ข้อคำถามแบบทดสอบ" "value" $s.quizQuestions "hint" (printf "%d หมวดในแบบทดสอบ" $s.quizCategories)) }}
+      {{ partial "dashboard-stat-card.html" (dict "label" "เส้นทางการเรียนรู้" "value" $s.learningPaths) }}
+      {{ partial "dashboard-stat-card.html" (dict "label" "หมวดหมู่กฎหมาย" "value" $s.categoryTermCount) }}
+      {{ partial "dashboard-stat-card.html" (dict "label" "หน่วยงาน" "value" $s.agencyTermCount) }}
+      {{ partial "dashboard-stat-card.html" (dict "label" "กลุ่มผู้ใช้" "value" $s.audienceTermCount) }}
+      {{ partial "dashboard-stat-card.html" (dict "label" "ประเภทกฎหมาย" "value" $s.lawtypeTermCount) }}
+      {{ partial "dashboard-stat-card.html" (dict "label" "คำสำคัญ (tags)" "value" $s.tagCount) }}
+      {{ partial "dashboard-stat-card.html" (dict "label" "ควรตรวจสอบเพิ่มเติม" "value" $s.reviewNeeds "hint" "จาก metadata ในคลังข้อมูล") }}
+    </div>
+
+    <h2 id="law-overview" class="dash-section-title">ภาพรวมคลังกฎหมาย</h2>
+    <p class="dash-note">คลังนี้คัดสรรกฎหมายการศึกษาที่น่าสนใจเพื่อการเรียนรู้ — ไม่ได้อ้างว่าครบทุกฉบับในประเทศ</p>
+
+    <div class="dash-table-grid">
+      <div class="dash-table-block">
+        <h3 id="by-lawtype">กฎหมายแยกตามประเภท</h3>
+        <div class="table-wrap">
+          <table class="dash-table">
+            <thead><tr><th scope="col">ประเภท</th><th scope="col">จำนวน</th></tr></thead>
+            <tbody>
+              {{- range $s.lawtypeRows }}
+              <tr><td>{{ .label }}</td><td>{{ .count }}</td></tr>
+              {{- end }}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="dash-table-block">
+        <h3 id="by-agency">กฎหมายแยกตามหน่วยงาน</h3>
+        <div class="table-wrap">
+          <table class="dash-table">
+            <thead><tr><th scope="col">หน่วยงาน</th><th scope="col">จำนวน</th></tr></thead>
+            <tbody>
+              {{- range $s.agencyRows }}
+              <tr><td>{{ .label }}</td><td>{{ .count }}</td></tr>
+              {{- end }}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="dash-table-block">
+        <h3 id="by-audience">กฎหมายแยกตามกลุ่มผู้ใช้</h3>
+        <div class="table-wrap">
+          <table class="dash-table">
+            <thead><tr><th scope="col">กลุ่มผู้ใช้</th><th scope="col">จำนวน (นับซ้ำได้)</th></tr></thead>
+            <tbody>
+              {{- range $s.audienceRows }}
+              <tr><td>{{ .label }}</td><td>{{ .count }}</td></tr>
+              {{- end }}
+            </tbody>
+          </table>
+        </div>
+        <p class="dash-table-note">กฎหมายหนึ่งฉบับอาจอยู่ในหลายกลุ่มผู้ใช้</p>
+      </div>
+
+      <div class="dash-table-block">
+        <h3 id="by-category">กฎหมายแยกตามหมวดหมู่</h3>
+        <div class="table-wrap">
+          <table class="dash-table">
+            <thead><tr><th scope="col">หมวดหมู่</th><th scope="col">จำนวน</th></tr></thead>
+            <tbody>
+              {{- range $s.categoryRows }}
+              <tr>
+                <td><a href="{{ partial "iu.html" (printf "laws/?cat=%s" .key) }}">{{ .label }}</a></td>
+                <td>{{ .count }}</td>
+              </tr>
+              {{- end }}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <h2 id="review-status" class="dash-section-title">สถานะการตรวจสอบข้อมูล</h2>
+    <p class="dash-note">สถานะนี้อ้างอิงจาก metadata ใน <code>data/laws.json</code> และกฎการ derive แหล่งข้อมูล — เป็นการช่วยวางแผนตรวจสอบ ไม่ใช่การตัดสินว่ากฎหมายใช้ไม่ได้</p>
+
+    <div class="dash-review-grid">
+      <div class="dash-review-card dash-review-card--good">
+        <h3>มีข้อมูลแหล่งทางการแล้ว</h3>
+        <p class="dash-review-card__count">{{ $s.reviewGood }}</p>
+        <p>มีลิงก์แหล่งทางการและชื่อแหล่งที่ไม่ใช่ข้อความ placeholder</p>
+      </div>
+      <div class="dash-review-card dash-review-card--needs">
+        <h3>ควรตรวจสอบเพิ่มเติม</h3>
+        <p class="dash-review-card__count">{{ $s.reviewNeeds }}</p>
+        <p>ขาดลิงก์แหล่งทางการ หรือยังใช้ป้ายกำกับแหล่งที่ต้องตรวจสอบ</p>
+      </div>
+      <div class="dash-review-card dash-review-card--progress">
+        <h3>อยู่ระหว่างตรวจสอบแหล่งข้อมูล</h3>
+        <p class="dash-review-card__count">{{ add $s.reviewInProgress $s.backlogInReview }}</p>
+        <p>แหล่งที่ควรทบทวน หรือรายการในคิววางแผน (in_review)</p>
+      </div>
+    </div>
+
+    <div class="dash-detail-list">
+      <h3>รายละเอียดการตรวจสอบ (เบื้องต้น)</h3>
+      <ul>
+        <li>ไม่มี <code>source_url</code> (หลัง derive): <strong>{{ $s.missingSource }}</strong> รายการ</li>
+        <li>แหล่งทางการเป็น placeholder: <strong>{{ $s.placeholderOfficial }}</strong> รายการ</li>
+        <li>ไม่มี <code>last_checked</code> ในคลังข้อมูล: <strong>{{ $s.missingLastChecked }}</strong> รายการ</li>
+        <li><code>last_checked</code> เก่ากว่า {{ 180 }} วัน: <strong>{{ $s.staleLastChecked }}</strong> รายการ</li>
+        <li>คิววางแผน (pending_review): <strong>{{ $s.backlogPending }}</strong> หัวข้อ — ยังไม่สร้างหน้าเว็บ</li>
+      </ul>
+    </div>
+
+    {{- with $s.recentChecked }}
+    <div class="dash-recent">
+      <h3>รายการที่มีวันตรวจสอบในคลังข้อมูล (ล่าสุด)</h3>
+      <ul class="dash-recent-list">
+        {{- range . }}
+        <li>
+          <a href="{{ partial "iu.html" (printf "laws/%s/" .id) }}">{{ .title }}</a>
+          <span class="dash-recent-date">ตรวจเมื่อ {{ .date }}</span>
+        </li>
+        {{- end }}
+      </ul>
+      <p class="dash-table-note">แสดงเฉพาะรายการที่ระบุ <code>last_checked</code> ใน data/laws.json โดยตรง</p>
+    </div>
+    {{- end }}
+
+    <h2 id="limitations" class="dash-section-title">ข้อจำกัดของข้อมูลในหน้านี้</h2>
+    <div class="dash-limit-note" role="note">
+      <p>ตัวเลขในหน้านี้คำนวณจากเนื้อหาที่เผยแพร่ในเว็บไซต์ ณ เวลาที่สร้างหน้าเว็บ และไม่ได้หมายความว่าคลังกฎหมายนี้ครบถ้วนหรือเป็นฉบับทางการทั้งหมด</p>
+      <p>เว็บไซต์จัดทำเพื่อการศึกษาและค้นคว้าเบื้องต้น ไม่ใช่การรับรองความถูกต้องทางกฎหมาย ก่อนใช้อ้างอิงอย่างเป็นทางการ ควรตรวจสอบตัวบทฉบับทางการด้วยตนเอง</p>
+    </div>
+
+    <div class="dash-cta-row">
+      <a class="btn btn-gold" href="{{ partial "iu.html" "laws/" }}">คลังกฎหมาย</a>
+      <a class="btn btn-outline" href="{{ partial "iu.html" "search/" }}">ค้นหา</a>
+      <a class="btn btn-outline" href="{{ partial "iu.html" "learning-paths/" }}">เส้นทางการเรียนรู้</a>
+      <a class="btn btn-outline" href="{{ partial "iu.html" "quiz/" }}">แบบทดสอบ</a>
+      <a class="btn btn-outline" href="{{ partial "iu.html" "feedback/" }}">แจ้งข้อผิดพลาด/เสนอแนะ</a>
+    </div>
+  </div>
+</section>
+{{ end }}

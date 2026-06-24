@@ -1,0 +1,154 @@
+{{- $placeholder := "ต้องตรวจสอบจากแหล่งทางการ" -}}
+{{- $staleDays := 180 -}}
+{{- $laws := site.Data.laws.laws -}}
+{{- $catalog := site.Data.laws -}}
+{{- $quizData := site.Data.quizzes -}}
+
+{{- /* derive helpers */ -}}
+{{- $lawtypeMap := dict -}}
+{{- $agencyMap := dict -}}
+{{- $audienceMap := dict -}}
+{{- $categoryMap := dict -}}
+{{- $tagSet := dict -}}
+
+{{- $missingSource := 0 -}}
+{{- $placeholderOfficial := 0 -}}
+{{- $missingLastChecked := 0 -}}
+{{- $staleLastChecked := 0 -}}
+{{- $reviewGood := 0 -}}
+{{- $reviewNeeds := 0 -}}
+{{- $reviewInProgress := 0 -}}
+{{- $recentList := slice -}}
+
+{{- range $laws }}
+  {{- $law := . -}}
+  {{- $lt := $law.law_type | default $law.type | default "ไม่ระบุ" -}}
+  {{- $ag := $law.agency | default "ไม่ระบุ" -}}
+  {{- $lawtypeMap = merge $lawtypeMap (dict $lt (add (index $lawtypeMap $lt | default 0) 1)) -}}
+  {{- $agencyMap = merge $agencyMap (dict $ag (add (index $agencyMap $ag | default 0) 1)) -}}
+
+  {{- $cats := $law.categories | default (slice $law.category) -}}
+  {{- range $cats }}
+    {{- if . }}{{ $categoryMap = merge $categoryMap (dict . (add (index $categoryMap . | default 0) 1)) }}{{ end -}}
+  {{- end -}}
+
+  {{- $auds := $law.audiences | default slice -}}
+  {{- range $auds }}
+    {{- if . }}{{ $audienceMap = merge $audienceMap (dict . (add (index $audienceMap . | default 0) 1)) }}{{ end -}}
+  {{- end -}}
+
+  {{- range $law.tags | default slice }}
+    {{- if . }}{{ $tagSet = merge $tagSet (dict . true) }}{{ end -}}
+  {{- end -}}
+
+  {{- /* source_url derive */ -}}
+  {{- $src := $law.source_url | default "" -}}
+  {{- if not $src -}}
+    {{- range $law.links | default slice -}}
+      {{- if and (eq .label "ราชกิจจานุเบกษา") .url }}{{ $src = .url }}{{ end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- /* official_source derive */ -}}
+  {{- $official := $law.official_source | default "" -}}
+  {{- if not $official -}}
+    {{- range $law.links | default slice -}}
+      {{- if or (eq .label "ราชกิจจานุเบกษา") (eq .label "สำนักงานคณะกรรมการกฤษฎีกา") }}{{ $official = .label }}{{ end -}}
+    {{- end -}}
+    {{- if and (not $official) (strings.Contains ($law.citation | default "") "ราชกิจจานุเบกษา") }}{{ $official = "ราชกิจจานุเบกษา" }}{{ end -}}
+    {{- if not $official }}{{ $official = $placeholder }}{{ end -}}
+  {{- end -}}
+
+  {{- $rawLastChecked := $law.last_checked | default "" -}}
+  {{- $isStale := false -}}
+  {{- if $rawLastChecked -}}
+    {{- $lcTime := time $rawLastChecked -}}
+    {{- $threshold := now.AddDate 0 0 (mul $staleDays -1) -}}
+    {{- if $lcTime.Before $threshold }}{{ $isStale = true }}{{ end -}}
+    {{- $recentList = $recentList | append (dict "id" $law.id "title" $law.title "date" $rawLastChecked) -}}
+  {{- end -}}
+
+  {{- if not $src }}{{ $missingSource = add $missingSource 1 }}{{ end -}}
+  {{- if eq $official $placeholder }}{{ $placeholderOfficial = add $placeholderOfficial 1 }}{{ end -}}
+  {{- if not $rawLastChecked }}{{ $missingLastChecked = add $missingLastChecked 1 }}{{ end -}}
+  {{- if $isStale }}{{ $staleLastChecked = add $staleLastChecked 1 }}{{ end -}}
+
+  {{- if and $src (ne $official $placeholder) -}}
+    {{- $reviewGood = add $reviewGood 1 -}}
+  {{- else -}}
+    {{- $reviewNeeds = add $reviewNeeds 1 -}}
+  {{- end -}}
+
+  {{- if or $isStale (and $src (eq $official $placeholder)) -}}
+    {{- $reviewInProgress = add $reviewInProgress 1 -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $pathCount := 0 -}}
+{{- range where site.RegularPages "Section" "learning-paths" -}}
+  {{- if ne .File.BaseFileName "_index" }}{{ $pathCount = add $pathCount 1 }}{{ end -}}
+{{- end -}}
+
+{{- $backlogPending := 0 -}}
+{{- $backlogInReview := 0 -}}
+{{- with site.Data.law_backlog.items -}}
+  {{- range . -}}
+    {{- if eq .review_status "pending_review" }}{{ $backlogPending = add $backlogPending 1 }}{{ end -}}
+    {{- if eq .review_status "in_review" }}{{ $backlogInReview = add $backlogInReview 1 }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $recentSorted := sort $recentList "date" "desc" -}}
+{{- if gt (len $recentSorted) 5 }}{{ $recentSorted = first 5 $recentSorted }}{{ end -}}
+
+{{- /* sort maps to slices for tables */ -}}
+{{- $lawtypeRows := slice -}}
+{{- range $k, $v := $lawtypeMap }}{{ $lawtypeRows = $lawtypeRows | append (dict "label" $k "count" $v) }}{{ end -}}
+{{- $lawtypeRows = sort $lawtypeRows "count" "desc" -}}
+
+{{- $agencyRows := slice -}}
+{{- range $k, $v := $agencyMap }}{{ $agencyRows = $agencyRows | append (dict "label" $k "count" $v) }}{{ end -}}
+{{- $agencyRows = sort $agencyRows "count" "desc" -}}
+
+{{- $audienceRows := slice -}}
+{{- range $k, $v := $audienceMap }}{{ $audienceRows = $audienceRows | append (dict "label" $k "count" $v) }}{{ end -}}
+{{- $audienceRows = sort $audienceRows "count" "desc" -}}
+
+{{- $categoryRows := slice -}}
+{{- range $catalog.categories }}
+  {{- $key := .key -}}
+  {{- $cnt := index $categoryMap $key | default 0 -}}
+  {{- $categoryRows = $categoryRows | append (dict "label" .label "key" $key "count" $cnt) -}}
+{{- end -}}
+{{- $categoryRows = sort $categoryRows "count" "desc" -}}
+
+{{- $stats := dict
+  "lawCount" (len $laws)
+  "summaryTopics" 6
+  "quizQuestions" (len ($quizData.questions | default slice))
+  "quizCategories" (len ($quizData.categories | default slice))
+  "learningPaths" $pathCount
+  "categoryTermCount" (len site.Taxonomies.categories)
+  "agencyTermCount" (len site.Taxonomies.agencies)
+  "audienceTermCount" (len site.Taxonomies.audiences)
+  "lawtypeTermCount" (len site.Taxonomies.lawtypes)
+  "tagCount" (len $tagSet)
+  "catalogUpdatedAt" ($catalog.updatedAt | default "")
+  "buildDate" (now.Format "2006-01-02")
+  "lawtypeRows" $lawtypeRows
+  "agencyRows" $agencyRows
+  "audienceRows" $audienceRows
+  "categoryRows" $categoryRows
+  "missingSource" $missingSource
+  "placeholderOfficial" $placeholderOfficial
+  "missingLastChecked" $missingLastChecked
+  "staleLastChecked" $staleLastChecked
+  "reviewGood" $reviewGood
+  "reviewNeeds" $reviewNeeds
+  "reviewInProgress" $reviewInProgress
+  "backlogPending" $backlogPending
+  "backlogInReview" $backlogInReview
+  "recentChecked" $recentSorted
+-}}
+
+{{- $.Scratch.Set "dashboardStats" $stats -}}
