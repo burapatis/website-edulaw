@@ -1,0 +1,14 @@
+{{- $p := . -}}
+<a class="guide-card cat-card cat-card--{{ $p.Params.card_theme | default "national" }}" href="{{ $p.RelPermalink }}">
+  <span class="cat-icon" data-icon="{{ $p.Params.icon | default "book" }}"></span>
+  <h3>{{ $p.Title }}</h3>
+  <p>{{ $p.Params.card_summary | default $p.Description }}</p>
+  {{- with $p.Params.audiences }}
+  <div class="guide-card__meta">
+    {{- range first 2 . }}
+    <span class="guide-card__tag">{{ . }}</span>
+    {{- end }}
+  </div>
+  {{- end }}
+  <span class="cat-count">อ่านคู่มือ →</span>
+</a>

@@ -48,13 +48,17 @@ enableRobotsTXT = true
     url = '/learning-paths/'
     weight = 4
   [[menu.main]]
+    name = 'คู่มือ'
+    url = '/guides/'
+    weight = 5
+  [[menu.main]]
     name = 'แบบทดสอบ'
     url = '/quiz/'
-    weight = 5
+    weight = 6
   [[menu.main]]
     name = 'เกี่ยวกับ'
     url = '/about/'
-    weight = 6
+    weight = 7
 
 [outputs]
   home = ['HTML', 'RSS']

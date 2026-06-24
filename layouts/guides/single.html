@@ -1,0 +1,80 @@
+{{ define "main" }}
+{{- $data := site.Data.laws -}}
+<div class="page-hero" data-pagefind-body>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="{{ partial "iu.html" "" }}">หน้าแรก</a> /
+      <a href="{{ partial "iu.html" "guides/" }}">คู่มือและบทความอธิบาย</a> /
+      {{ .Title }}
+    </div>
+    <h1>{{ .Title }}</h1>
+    <p>{{ .Description }}</p>
+    {{- if .Date }}
+    <p class="guide-meta-line">เผยแพร่: {{ .Date.Format "2006-01-02" }}</p>
+    {{- end }}
+  </div>
+</div>
+
+<section class="guide-section">
+  <div class="container">
+    <div class="guide-layout">
+      <article class="guide-article content-body" data-pagefind-body>
+        {{- with .Params.categories }}
+        <div class="guide-taxonomy" data-pagefind-ignore>
+          <span class="guide-taxonomy__label">หมวดหมู่:</span>
+          {{- range . }}
+          <a class="guide-badge" href="{{ partial "iu.html" (printf "categories/%s/" .) }}">{{ partial "category-label.html" (dict "key" .) }}</a>
+          {{- end }}
+        </div>
+        {{- end }}
+
+        {{- with .Params.audiences }}
+        <div class="guide-taxonomy" data-pagefind-ignore>
+          <span class="guide-taxonomy__label">กลุ่มผู้ใช้:</span>
+          {{- range . }}
+          <a class="guide-badge guide-badge--audience" href="{{ partial "iu.html" (printf "audiences/%s/" .) }}">{{ . }}</a>
+          {{- end }}
+        </div>
+        {{- end }}
+
+        {{- with .Params.tags }}
+        <span data-pagefind-meta="คำสำคัญ" hidden>{{ delimit . ", " }}</span>
+        <div class="guide-taxonomy" data-pagefind-ignore>
+          <span class="guide-taxonomy__label">คำสำคัญ:</span>
+          {{- range . }}
+          <a class="guide-badge guide-badge--tag" href="{{ partial "iu.html" (printf "tags/%s/" .) }}">{{ . }}</a>
+          {{- end }}
+        </div>
+        {{- end }}
+
+        {{ partial "legal-disclaimer.html" . }}
+        {{ .Content }}
+
+        {{ partial "related-resources.html" (dict "page" .) }}
+
+        {{ partial "feedback-callout.html" . }}
+      </article>
+
+      <aside class="guide-sidebar" data-pagefind-ignore>
+        <div class="guide-sidebar-card">
+          <h3>กลับไปคู่มือทั้งหมด</h3>
+          <a class="btn btn-outline btn-sm" href="{{ partial "iu.html" "guides/" }}" style="width:100%;justify-content:center;">← รายการคู่มือ</a>
+        </div>
+        {{- with .Params.related_laws }}
+        <div class="guide-sidebar-card">
+          <h3>กฎหมายที่เกี่ยวข้อง</h3>
+          <ul class="guide-sidebar-links">
+            {{- range first 5 . }}
+            {{- $law := index (where $data.laws "id" .) 0 -}}
+            {{- if $law }}
+            <li><a href="{{ partial "iu.html" (printf "laws/%s/" $law.id) }}">{{ $law.short_title | default $law.title }}</a></li>
+            {{- end }}
+            {{- end }}
+          </ul>
+        </div>
+        {{- end }}
+      </aside>
+    </div>
+  </div>
+</section>
+{{ end }}

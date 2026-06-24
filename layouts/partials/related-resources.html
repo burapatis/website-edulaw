@@ -1,0 +1,58 @@
+{{- $data := site.Data.laws -}}
+{{- $page := .page | default . -}}
+{{- $quizData := site.Data.quizzes -}}
+
+<section class="guide-related" id="related-resources">
+  <h2>ลิงก์ที่เกี่ยวข้อง</h2>
+
+  {{- with $page.Params.related_laws }}
+  <div class="guide-related__block">
+    <h3>กฎหมายในคลัง</h3>
+    <ul class="guide-related__list">
+      {{- range . }}
+      {{- $law := index (where $data.laws "id" .) 0 -}}
+      {{- if $law }}
+      <li><a href="{{ partial "iu.html" (printf "laws/%s/" $law.id) }}">{{ $law.title }}</a></li>
+      {{- end }}
+      {{- end }}
+    </ul>
+  </div>
+  {{- end }}
+
+  {{- with $page.Params.related_learning_paths }}
+  <div class="guide-related__block">
+    <h3>เส้นทางการเรียนรู้</h3>
+    <ul class="guide-related__list">
+      {{- range . }}
+      {{- $lp := site.GetPage (printf "/learning-paths/%s" .) -}}
+      {{- if $lp }}
+      <li><a href="{{ $lp.RelPermalink }}">{{ $lp.Title }}</a></li>
+      {{- end }}
+      {{- end }}
+    </ul>
+  </div>
+  {{- end }}
+
+  {{- with $page.Params.related_quiz }}
+  <div class="guide-related__block">
+    <h3>แบบทดสอบ</h3>
+  {{- $catKey := . -}}
+  {{- $catTitle := . -}}
+  {{- range $quizData.categories }}
+    {{- if eq .key $catKey }}{{ $catTitle = .title }}{{ end }}
+  {{- end }}
+    <p class="guide-related__note">แนะนำหมวด「{{ $catTitle }}」ใน <a href="{{ partial "iu.html" "quiz/" }}">แบบทดสอบความรู้</a> — ใช้ทบทวนเบื้องต้นเท่านั้น</p>
+  </div>
+  {{- end }}
+
+  <div class="guide-related__block guide-related__tools">
+    <h3>เครื่องมืออื่น</h3>
+    <div class="guide-cta-row">
+      <a class="btn btn-outline btn-sm" href="{{ partial "iu.html" "laws/" }}">คลังกฎหมาย</a>
+      <a class="btn btn-outline btn-sm" href="{{ partial "iu.html" "search/" }}">ค้นหา</a>
+      <a class="btn btn-outline btn-sm" href="{{ partial "iu.html" "learning-paths/" }}">เส้นทางการเรียนรู้</a>
+      <a class="btn btn-outline btn-sm" href="{{ partial "iu.html" "quiz/" }}">แบบทดสอบ</a>
+      <a class="btn btn-outline btn-sm" href="{{ partial "iu.html" "dashboard/" }}">ภาพรวมเว็บไซต์</a>
+    </div>
+  </div>
+</section>

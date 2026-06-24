@@ -1297,6 +1297,60 @@ body.nav-open{overflow:hidden;}
 .content-status-summary .btn-outline.on-dark{border-color:rgba(255,255,255,.35);color:#fff;}
 .content-status-summary .btn-outline.on-dark:hover{background:rgba(255,255,255,.1);}
 
+/* Guides */
+.guide-section{padding:40px 0 64px;}
+.guide-intro{margin-top:12px;font-size:16px;line-height:1.7;}
+.guide-lead{color:var(--ink-soft);margin:8px 0 0;}
+.guide-grid,.guide-tools{margin-bottom:8px;}
+.guide-meta-line{font-size:14px;color:var(--ink-soft);margin:8px 0 0;}
+
+.guide-layout{
+  display:grid;grid-template-columns:1fr 280px;gap:32px;align-items:start;
+}
+.guide-article{min-width:0;}
+.guide-taxonomy{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:14px;
+}
+.guide-taxonomy__label{font-size:13px;font-weight:600;color:var(--ink-soft);}
+.guide-badge{
+  display:inline-block;padding:4px 10px;font-size:13px;
+  background:var(--navy-tint);color:var(--navy);border-radius:999px;text-decoration:none;
+}
+.guide-badge--audience{background:var(--paper-alt);color:var(--ink);}
+.guide-badge--tag{background:var(--gold-tint);color:var(--ink);}
+
+.guide-card__meta{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px;}
+.guide-card__tag{
+  font-size:12px;padding:3px 8px;background:var(--paper-alt);
+  border-radius:999px;color:var(--ink-soft);
+}
+
+.guide-related{
+  margin-top:36px;padding-top:28px;border-top:1px solid var(--paper-line);
+}
+.guide-related h2{font-size:22px;margin:0 0 16px;}
+.guide-related__block{margin-bottom:20px;}
+.guide-related__block h3{font-size:17px;margin:0 0 10px;}
+.guide-related__list{margin:0;padding-left:1.25rem;line-height:1.75;}
+.guide-related__note{font-size:15px;line-height:1.65;color:var(--ink-soft);margin:0;}
+.guide-cta-row{display:flex;flex-wrap:wrap;gap:8px;}
+
+.guide-sidebar-card{
+  padding:18px 20px;background:var(--paper-alt);border:1px solid var(--paper-line);
+  border-radius:var(--radius-md);margin-bottom:16px;
+}
+.guide-sidebar-card h3{font-size:16px;margin:0 0 12px;}
+.guide-sidebar-links{margin:0;padding:0;list-style:none;line-height:1.65;font-size:14.5px;}
+.guide-sidebar-links li{padding:6px 0;border-bottom:1px solid var(--paper-line);}
+.guide-sidebar-links li:last-child{border-bottom:none;}
+
+.cat-card--tool-guides{border-color:rgba(26,54,93,.15);}
+
+@media (max-width:920px){
+  .guide-layout{grid-template-columns:1fr;}
+  .guide-sidebar{order:2;}
+}
+
 /* Feedback */
 .feedback-callout{
   margin-top:32px;padding:22px 24px;
