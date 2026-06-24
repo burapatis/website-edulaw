@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.Lang }}">
+<head>
+  {{- partial "head.html" . -}}
+</head>
+<body>
+<a class="skip-link" href="#main">ข้ามไปยังเนื้อหาหลัก</a>
+{{- partial "header.html" . -}}
+<main id="main">
+  {{- block "main" . }}{{- end }}
+</main>
+{{- partial "footer.html" . -}}
+<script src="{{ "js/main.js" | relURL }}"></script>
+{{- block "scripts" . }}{{- end }}
+</body>
+</html>

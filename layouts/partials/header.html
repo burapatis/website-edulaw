@@ -1,0 +1,20 @@
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="{{ "/" | relURL }}">
+      <img class="site-logo" src="{{ "assets/logo.png" | relURL }}" alt="" width="42" height="42">
+      <span class="brand-text"><strong>{{ site.Title }}</strong><span>{{ site.Params.tagline }}</span></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      {{- range site.Menus.main }}
+      <a href="{{ .URL | relURL }}"{{ if $.IsMenuCurrent "main" . }} class="active"{{ end }}>{{ .Name }}</a>
+      {{- end }}
+    </nav>
+    <div class="header-tools">
+      <form class="search-mini" action="{{ "/laws/" | relURL }}" method="get">
+        <input type="search" name="q" placeholder="ค้นหากฎหมาย..." aria-label="ค้นหากฎหมาย" value="{{ .Params.q }}">
+        <button type="submit" aria-label="ค้นหา"></button>
+      </form>
+      <button class="nav-toggle" aria-label="เปิดเมนู" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,27 @@
+{{ define "main" }}
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="{{ "/" | relURL }}">หน้าแรก</a> / {{ .Title }}</div>
+    <h1>{{ .Title }}</h1>
+    {{- with .Description }}
+    <p>{{ . }}</p>
+    {{- end }}
+  </div>
+</div>
+<section>
+  <div class="container content-body">
+    {{ .Content }}
+    {{- if .Pages }}
+    <div class="law-grid" style="margin-top:32px;">
+      {{- range .Pages }}
+      <a class="law-card" href="{{ .RelPermalink }}">
+        <span class="law-card-tag">{{ .Params.status | default "เอกสาร" }}</span>
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Summary }}</p>
+      </a>
+      {{- end }}
+    </div>
+    {{- end }}
+  </div>
+</section>
+{{ end }}

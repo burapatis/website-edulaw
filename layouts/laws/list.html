@@ -1,0 +1,129 @@
+{{ define "main" }}
+{{- $data := site.Data.laws -}}
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="{{ "/" | relURL }}">หน้าแรก</a> / คลังกฎหมาย</div>
+    <h1>{{ .Title }}</h1>
+    <p>{{ .Description }}</p>
+  </div>
+</div>
+
+<section style="padding-top:46px;">
+  <div class="container">
+    <div class="law-toolbar">
+      <input type="search" id="searchInput" placeholder="พิมพ์ชื่อกฎหมาย หน่วยงาน หรือคำสำคัญ เช่น วิทยฐานะ, เรียนฟรี, คุรุสภา...">
+      <div class="chip-row" id="chipRow">
+        <button type="button" class="chip active" data-cat="">ทั้งหมด</button>
+        {{- range $data.categories }}
+        <button type="button" class="chip" data-cat="{{ .key }}">{{ .label }}</button>
+        {{- end }}
+      </div>
+    </div>
+    <div class="law-meta-row">
+      <span class="result-count" id="resultCount"></span>
+      <select id="sortSelect">
+        <option value="default">เรียงตามลำดับหมวดหมู่</option>
+        <option value="az">เรียงตามชื่อ (ก–ฮ)</option>
+        <option value="year">เรียงตามปี (ใหม่ไปเก่า)</option>
+      </select>
+    </div>
+    <div class="law-grid" id="lawGrid">
+      {{- range $data.laws }}
+      {{- $page := site.GetPage (printf "/laws/%s" .id) -}}
+      <article class="law-card law-card--data" id="{{ .id }}"
+        data-id="{{ .id }}"
+        data-category="{{ .category }}"
+        data-title="{{ .title }}"
+        data-agency="{{ .agency }}"
+        data-year="{{ .year }}"
+        data-status="{{ .status }}"
+        data-summary="{{ .summary }}">
+        <span class="law-card-tag">{{ .status }}</span>
+        <h3>{{ .title }}</h3>
+        <p>{{ .summary }}</p>
+        <span class="law-card-meta">{{ .agency }} · {{ .year }}</span>
+        {{- if $page }}
+        <a class="btn btn-outline btn-sm" href="{{ $page.RelPermalink }}" style="margin-top:12px;display:inline-flex;">อ่านรายละเอียด</a>
+        {{- else }}
+        <details style="margin-top:12px;">
+          <summary style="cursor:pointer;font-size:14px;color:var(--navy);font-weight:600;">ดูสาระสำคัญ</summary>
+          <ul style="margin:10px 0 0;padding-left:18px;font-size:14px;color:var(--ink-soft);">
+            {{- range .points }}
+            <li>{{ . }}</li>
+            {{- end }}
+          </ul>
+        </details>
+        {{- end }}
+      </article>
+      {{- end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{ define "scripts" }}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = [...document.querySelectorAll('.law-card--data')];
+  const searchInput = document.getElementById('searchInput');
+  const resultCount = document.getElementById('resultCount');
+  const chipRow = document.getElementById('chipRow');
+  const sortSelect = document.getElementById('sortSelect');
+  const params = new URLSearchParams(location.search);
+  let activeCat = params.get('cat') || '';
+
+  if (params.get('q')) searchInput.value = params.get('q');
+
+  if (activeCat) {
+    chipRow.querySelectorAll('.chip').forEach(c => {
+      c.classList.toggle('active', (c.dataset.cat || '') === activeCat);
+    });
+  }
+
+  function normalize(s){ return (s||'').toLowerCase(); }
+
+  function filterCards(){
+    const q = normalize(searchInput.value.trim());
+    let visible = 0;
+    cards.forEach(card => {
+      const hay = normalize([card.dataset.title, card.dataset.agency, card.dataset.summary, card.dataset.year].join(' '));
+      const catOk = !activeCat || card.dataset.category === activeCat;
+      const qOk = !q || hay.includes(q);
+      const show = catOk && qOk;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    resultCount.innerHTML = `พบ <b>${visible}</b> ฉบับ`;
+  }
+
+  chipRow.addEventListener('click', e => {
+    const btn = e.target.closest('.chip');
+    if (!btn) return;
+    chipRow.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    activeCat = btn.dataset.cat || '';
+    filterCards();
+  });
+
+  searchInput.addEventListener('input', filterCards);
+  sortSelect.addEventListener('change', () => {
+    const grid = document.getElementById('lawGrid');
+    const sorted = [...cards].sort((a,b) => {
+      if (sortSelect.value === 'az') return a.dataset.title.localeCompare(b.dataset.title, 'th');
+      if (sortSelect.value === 'year') return b.dataset.year.localeCompare(a.dataset.year, 'th');
+      return 0;
+    });
+    sorted.forEach(c => grid.appendChild(c));
+    filterCards();
+  });
+
+  filterCards();
+
+  const hash = location.hash.replace('#','');
+  if (hash) {
+    const el = document.getElementById(hash);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+});
+</script>
+{{ end }}

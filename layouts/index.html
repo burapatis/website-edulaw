@@ -1,0 +1,129 @@
+{{ define "main" }}
+{{- $data := site.Data.laws -}}
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">คลังความรู้กฎหมายการศึกษาไทย</div>
+      <h1>กฎหมายการศึกษาที่กระจัดกระจาย<br>รวบรวมไว้ใน<em> ที่เดียว</em></h1>
+      <p class="lead">{{ site.Params.description }}</p>
+      <form class="hero-search" action="{{ "/laws/" | relURL }}" method="get">
+        <input type="search" name="q" placeholder="ค้นหา เช่น วิทยฐานะ, ใบประกอบวิชาชีพ, เรียนฟรี 12 ปี...">
+        <button type="submit">ค้นหา</button>
+      </form>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="{{ "/laws/" | relURL }}">สำรวจคลังกฎหมายทั้งหมด</a>
+        <a class="btn btn-outline on-dark" href="{{ "/quiz/" | relURL }}">ทดสอบความรู้ตนเอง</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b>{{ len $data.laws }}</b><span>ฉบับกฎหมาย/ระเบียบ</span></div>
+        <div class="stat"><b>{{ len $data.categories }}</b><span>หมวดหมู่</span></div>
+        <div class="stat"><b>40</b><span>ข้อคำถามแบบทดสอบ</span></div>
+        <div class="stat"><b>2542–ปัจจุบัน</b><span>ครอบคลุมช่วงเวลา</span></div>
+      </div>
+    </div>
+    <div class="hero-emblem">
+      <img class="hero-feature spin-in" src="{{ "assets/feature-graphic.png" | relURL }}" alt="{{ site.Title }} — {{ site.Params.author }}">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">สำรวจตามหมวดหมู่</div>
+        <h2>หมวดหมู่กฎหมายการศึกษา</h2>
+        <p>จัดกลุ่มกฎหมายตามภารกิจการใช้งานจริง ตั้งแต่กฎหมายแม่บทไปจนถึงระเบียบที่ใช้ปฏิบัติงานในสถานศึกษา</p>
+      </div>
+      <a class="btn btn-outline" href="{{ "/laws/" | relURL }}">ดูคลังกฎหมายทั้งหมด</a>
+    </div>
+    <div class="cat-grid">
+      {{- range $data.categories }}
+      <a class="cat-card" href="{{ printf "/laws/?cat=%s" .key | relURL }}">
+        <span class="cat-icon" data-icon="{{ .icon }}"></span>
+        <h3>{{ .label }}</h3>
+        <p>{{ .desc }}</p>
+        <span class="cat-count">{{ len (where $data.laws "category" .key) }} ฉบับ</span>
+      </a>
+      {{- end }}
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">เริ่มต้นเรียนรู้</div>
+        <h2>กฎหมายสำคัญที่ควรรู้</h2>
+        <p>ฉบับที่มักถูกอ้างอิงและใช้งานบ่อยในระบบการศึกษาไทย</p>
+      </div>
+    </div>
+    <div class="law-grid">
+      {{- range first 6 $data.laws }}
+      {{- $page := site.GetPage (printf "/laws/%s" .id) -}}
+      <a class="law-card" href="{{ if $page }}{{ $page.RelPermalink }}{{ else }}{{ printf "/laws/#%s" .id | relURL }}{{ end }}">
+        <span class="law-card-tag">{{ .status }}</span>
+        <h3>{{ .title }}</h3>
+        <p>{{ .summary }}</p>
+        <span class="law-card-meta">{{ .agency }} · {{ .year }}</span>
+      </a>
+      {{- end }}
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">เครื่องมือเรียนรู้</div>
+        <h2>เรียนรู้ได้หลายรูปแบบ</h2>
+      </div>
+    </div>
+    <div class="cat-grid" style="grid-template-columns:repeat(3,1fr);">
+      <a class="cat-card" href="{{ "/summaries/" | relURL }}">
+        <span class="cat-icon" data-icon="doc"></span>
+        <h3>สรุปกฎหมาย</h3>
+        <p>บทความสรุปแบบอ่านง่าย จัดกลุ่มตามหัวข้อที่ใช้งานจริง</p>
+      </a>
+      <a class="cat-card" href="{{ "/quiz/" | relURL }}">
+        <span class="cat-icon" data-icon="check"></span>
+        <h3>แบบทดสอบ</h3>
+        <p>ทดสอบความเข้าใจกฎหมายการศึกษา พร้อมคำอธิบายทุกข้อ</p>
+      </a>
+      <a class="cat-card" href="{{ "/faq/" | relURL }}">
+        <span class="cat-icon" data-icon="info"></span>
+        <h3>คำถามที่พบบ่อย</h3>
+        <p>คำตอบสั้น ๆ สำหรับประเด็นที่ผู้ใช้ถามบ่อย</p>
+      </a>
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{ define "scripts" }}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const icons = {
+    scale:'<path d="M12 3v18M5 7h14M5 7 2 14a3 3 0 0 0 6 0L5 7Zm14 0-3 7a3 3 0 0 0 6 0l-3-7ZM8 21h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+    book:'<path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5v-13ZM20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5c.8 0 1.5-.7 1.5-1.5v-13Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+    building:'<path d="M4 21V6l8-3 8 3v15M4 21h16M9 21v-4h6v4M9 10h.01M9 14h.01M15 10h.01M15 14h.01" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+    users:'<path d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm8 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM2 20c0-3 2.5-5 6-5s6 2 6 5M12 20c0-2.5 2-4.5 5-4.5s5 2 5 4.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+    cap:'<path d="M12 4 2 9l10 5 8.5-4.25V15M2 9v5.5M22 9 12 4M6 12.2V17c0 1.5 3 3 6 3s6-1.5 6-3v-4.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+    school:'<path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6M12 5v0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+    heart:'<path d="M12 20.5s-7.5-4.6-9.8-9C.6 7.8 2.4 4 6 4c2 0 3.4 1.1 4 2.2C10.6 5.1 12 4 14 4c3.6 0 5.4 3.8 3.8 7.5-2.3 4.4-9.8 9-9.8 9Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+    stamp:'<circle cx="12" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9 9.5 11 11.5 15.5 7M8 21l1.5-5h5L16 21M12 15v1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>',
+    flag:'<path d="M5 21V4M5 4h12l-3 4 3 4H5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+    doc:'<path d="M7 3h7l3 3v15H7V3Z M14 3v3h3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9.5 11h5M9.5 14h5M9.5 17h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>',
+    check:'<path d="M5 12.5 9.5 17 19 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+    info:'<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 8h.01M11 11h1v6h1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>'
+  };
+  document.querySelectorAll('[data-icon]').forEach(el => {
+    const name = el.getAttribute('data-icon');
+    const svg = icons[name] || '';
+    el.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">${svg}</svg>`;
+  });
+});
+</script>
+{{ end }}

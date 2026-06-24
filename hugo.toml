@@ -1,0 +1,50 @@
+baseURL = 'https://burapatis.github.io/website-edulaw/'
+locale = 'th-th'
+defaultContentLanguage = 'th'
+title = 'กฎหมายการศึกษา'
+theme = ''
+
+[params]
+  description = 'คลังรวบรวม จัดระบบ และเผยแพร่กฎหมายการศึกษาไทยทุกฉบับไว้ในที่เดียว พร้อมสรุปความรู้ แบบทดสอบ และลิงก์แหล่งอ้างอิงทางการ'
+  author = 'Boorapatis Ploysuwan'
+  tagline = 'EDUCATION LAW HUB'
+  ogImage = '/assets/feature-graphic.png'
+
+[languages.th]
+  label = 'ไทย'
+  weight = 1
+  title = 'กฎหมายการศึกษา'
+
+[menu]
+  [[menu.main]]
+    name = 'หน้าแรก'
+    url = '/'
+    weight = 1
+  [[menu.main]]
+    name = 'คลังกฎหมาย'
+    url = '/laws/'
+    weight = 2
+  [[menu.main]]
+    name = 'สรุปกฎหมาย'
+    url = '/summaries/'
+    weight = 3
+  [[menu.main]]
+    name = 'คำถามที่พบบ่อย'
+    url = '/faq/'
+    weight = 4
+  [[menu.main]]
+    name = 'แบบทดสอบ'
+    url = '/quiz/'
+    weight = 5
+  [[menu.main]]
+    name = 'เกี่ยวกับเว็บไซต์'
+    url = '/about/'
+    weight = 6
+
+[outputs]
+  home = ['HTML', 'RSS']
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

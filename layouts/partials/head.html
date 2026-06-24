@@ -1,0 +1,13 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ if .IsHome }}{{ site.Title }} | คลังความรู้กฎหมายการศึกษาไทยฉบับสมบูรณ์{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
+{{- with .Description }}
+<meta name="description" content="{{ . }}">
+{{- else }}
+<meta name="description" content="{{ site.Params.description }}">
+{{- end }}
+<link rel="icon" href="{{ "assets/favicon.png" | relURL }}" type="image/png">
+<link rel="apple-touch-icon" href="{{ "assets/favicon.png" | relURL }}">
+<meta property="og:image" content="{{ site.Params.ogImage | absURL }}">
+<link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+<link rel="canonical" href="{{ .Permalink }}">
