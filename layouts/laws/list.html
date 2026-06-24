@@ -10,6 +10,48 @@
 
 <section style="padding-top:46px;">
   <div class="container">
+    {{ partial "law-browse-links.html" . }}
+
+    <div class="law-filter-panel" data-pagefind-ignore>
+      <div class="law-filter-row">
+        <label class="law-filter-field">
+          <span>ประเภทกฎหมาย</span>
+          <select id="filterLawtype">
+            <option value="">ทั้งหมด</option>
+          </select>
+        </label>
+        <label class="law-filter-field">
+          <span>หมวดหมู่</span>
+          <select id="filterCategory">
+            <option value="">ทั้งหมด</option>
+            {{- range $data.categories }}
+            <option value="{{ .key }}">{{ .label }}</option>
+            {{- end }}
+          </select>
+        </label>
+        <label class="law-filter-field">
+          <span>หน่วยงาน</span>
+          <select id="filterAgency">
+            <option value="">ทั้งหมด</option>
+          </select>
+        </label>
+        <label class="law-filter-field">
+          <span>กลุ่มผู้ใช้</span>
+          <select id="filterAudience">
+            <option value="">ทั้งหมด</option>
+          </select>
+        </label>
+        <button type="button" class="btn btn-outline law-filter-reset" id="filterReset">ล้างตัวกรอง</button>
+      </div>
+      <p class="law-filter-hint">
+        <a href="{{ partial "iu.html" "lawtypes/" }}">ดูตามประเภทกฎหมาย</a> ·
+        <a href="{{ partial "iu.html" "categories/" }}">ดูตามหมวดหมู่</a> ·
+        <a href="{{ partial "iu.html" "agencies/" }}">ดูตามหน่วยงาน</a> ·
+        <a href="{{ partial "iu.html" "audiences/" }}">ดูตามกลุ่มผู้ใช้</a> ·
+        <a href="{{ partial "iu.html" "tags/" }}">ดูตามคำสำคัญ</a>
+      </p>
+    </div>
+
     <div class="law-toolbar" data-pagefind-ignore>
       <input type="search" id="searchInput" placeholder="พิมพ์ชื่อกฎหมาย หน่วยงาน หรือคำสำคัญ เช่น วิทยฐานะ, เรียนฟรี, คุรุสภา...">
       <div class="chip-row" id="chipRow">
@@ -28,18 +70,19 @@
       </select>
     </div>
     <script type="application/json" id="lawsCatalog" data-pagefind-ignore>{{ $data | jsonify | safeJS }}</script>
+    <script type="application/json" id="lawsCategoryLabels" data-pagefind-ignore>{{ $data.categories | jsonify | safeJS }}</script>
     <div class="law-grid" id="lawGrid" data-law-base="{{ partial "iu.html" "laws/" }}" data-pagefind-ignore></div>
     <noscript data-pagefind-body>
       <div class="law-grid" style="margin-top:16px;">
         {{- range $data.laws }}
+        {{- with site.GetPage (printf "laws/%s" .id) }}
+        {{ partial "law-page-card.html" . }}
+        {{- else }}
         <a class="law-card law-card--{{ .category }}" href="{{ partial "iu.html" (printf "laws/%s/" .id) }}">
-          <div class="law-card-top">
-            <span class="law-tag{{ if ne .status "บังคับใช้" }} is-draft{{ end }}">{{ .type }}</span>
-            <span class="law-year">{{ index (split .year "·") 0 }}</span>
-          </div>
           <h3>{{ .title }}</h3>
           <p class="law-summary">{{ .summary }}</p>
         </a>
+        {{- end }}
         {{- end }}
       </div>
     </noscript>

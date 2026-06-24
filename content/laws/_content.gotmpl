@@ -59,6 +59,8 @@
 
   {{- $audiences := $law.audiences | default $defaultAudiences -}}
   {{- $lawType := $law.law_type | default $law.type | default "" -}}
+  {{- $catKeys := $law.categories | default (slice $law.category) -}}
+  {{- $tags := $law.tags | default slice -}}
 
   {{- $params := dict
     "title" $law.title
@@ -72,23 +74,33 @@
     "official_source" $officialSource
     "last_checked" $structuralReviewDate
     "audiences" $audiences
-    "tags" ($law.tags | default slice)
+    "tags" $tags
     "draft" false
     "type" $lawType
     "law_id" $law.id
     "citation" ($law.citation | default "")
+    "summary" $law.summary
     "links" ($law.links | default slice)
     "categories" ($law.categories | default (slice $law.category))
     "relatedLaws" ($law.relatedLaws | default slice)
   -}}
 
   {{- $content := dict "mediaType" "text/markdown" "value" $body -}}
+  {{- $agencies := slice -}}
+  {{- if $law.agency }}{{ $agencies = slice $law.agency }}{{ end -}}
+  {{- $lawtypes := slice -}}
+  {{- if $lawType }}{{ $lawtypes = slice $lawType }}{{ end -}}
   {{- $page := dict
     "content" $content
     "kind" "page"
     "path" $law.id
     "title" $law.title
     "params" $params
+    "tags" $tags
+    "categories" $catKeys
+    "agencies" $agencies
+    "lawtypes" $lawtypes
+    "audiences" $audiences
   -}}
   {{- $.AddPage $page -}}
 {{- end }}

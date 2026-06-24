@@ -922,3 +922,78 @@ section{padding:74px 0;}
   .search-page-section{padding:28px 0 56px;}
 }
 
+/* =========================================================
+   Taxonomy — หน้าสำรวจตามหมวดข้อมูล
+   ========================================================= */
+.law-browse-links{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;
+  margin-bottom:22px;padding:14px 16px;background:var(--paper-alt);
+  border:1px solid var(--paper-line);border-radius:var(--radius-m);
+}
+.law-browse-links__label{font-size:13px;font-weight:700;color:var(--ink-soft);margin-right:4px;}
+.law-browse-links__link{
+  font-size:13.5px;font-weight:600;color:var(--navy);
+  padding:5px 12px;border-radius:999px;background:#fff;border:1px solid var(--paper-line);
+}
+.law-browse-links__link:hover{background:var(--navy-tint);border-color:transparent;}
+
+.law-filter-panel{
+  margin-bottom:20px;padding:18px 18px 14px;background:#fff;
+  border:1px solid var(--paper-line);border-radius:var(--radius-m);
+}
+.law-filter-row{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) auto;gap:12px;align-items:end;
+}
+.law-filter-field{display:flex;flex-direction:column;gap:6px;}
+.law-filter-field span{font-size:12.5px;font-weight:700;color:var(--ink-soft);}
+.law-filter-field select{
+  width:100%;border:1.5px solid var(--paper-line);border-radius:10px;
+  padding:10px 12px;font-family:var(--f-body);font-size:14px;background:#fff;
+}
+.law-filter-reset{white-space:nowrap;align-self:end;height:42px;}
+.law-filter-hint{margin:12px 0 0;font-size:13px;color:var(--ink-soft);}
+.law-filter-hint a{color:var(--navy-2);font-weight:600;}
+
+.taxonomy-term-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-top:20px;
+}
+.taxonomy-term-card{
+  display:flex;flex-direction:column;gap:8px;padding:18px 20px;background:#fff;
+  border:1px solid var(--paper-line);border-radius:var(--radius-m);
+  transition:border-color .15s,box-shadow .15s;
+}
+.taxonomy-term-card:hover{border-color:var(--navy);box-shadow:var(--shadow-soft);}
+.taxonomy-term-card h3{margin:0;font-size:16px;color:var(--navy);line-height:1.45;}
+.taxonomy-term-card__count{font-size:12.5px;color:var(--ink-soft);font-family:var(--f-mono);}
+.taxonomy-back{margin-top:28px;font-size:14px;}
+.taxonomy-back a{color:var(--navy);font-weight:600;}
+
+.law-card--rich .law-short-title{margin:0 0 8px;font-size:14px;color:var(--ink-soft);line-height:1.5;}
+.law-card-meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 8px;}
+.law-card-meta__item{
+  font-size:12px;padding:3px 9px;border-radius:999px;background:var(--paper-alt);color:var(--ink-soft);
+}
+.law-card-meta__item--status{background:var(--navy-tint);color:var(--navy);font-weight:600;}
+.law-source-badge{
+  font-size:10.5px;padding:3px 8px;border-radius:999px;margin-left:auto;
+  background:var(--gold-tint, #f5edd8);color:var(--navy);font-weight:700;white-space:nowrap;
+}
+.law-card-pills{
+  list-style:none;padding:0;margin:0 0 10px;display:flex;flex-wrap:wrap;gap:6px;
+}
+.law-card-pills li{
+  font-size:11.5px;padding:3px 9px;border-radius:999px;background:var(--paper-alt);color:var(--ink-soft);
+}
+.law-card-pills--tags li{background:var(--navy-tint);color:var(--navy);}
+.law-meta-card__pills a{color:inherit;text-decoration:underline;text-underline-offset:2px;}
+.law-meta-card__pills a:hover{color:var(--navy);}
+
+@media (max-width:900px){
+  .law-filter-row{grid-template-columns:1fr 1fr;}
+  .law-filter-reset{grid-column:1/-1;width:100%;}
+}
+@media (max-width:560px){
+  .law-filter-row{grid-template-columns:1fr;}
+  .law-browse-links__link{font-size:13px;padding:4px 10px;}
+}
+

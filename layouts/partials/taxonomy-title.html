@@ -1,0 +1,9 @@
+{{- $plural := . -}}
+{{- $titles := dict
+  "tags" "คำสำคัญ"
+  "categories" "หมวดหมู่กฎหมาย"
+  "agencies" "หน่วยงานที่เกี่ยวข้อง"
+  "lawtypes" "ประเภทกฎหมาย"
+  "audiences" "กลุ่มผู้ใช้"
+-}}
+{{- index $titles $plural | default $plural -}}

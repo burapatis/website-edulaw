@@ -1,0 +1,31 @@
+{{ define "main" }}
+{{- $taxonomy := .Data.Singular -}}
+{{- $plural := .Data.Plural -}}
+{{- $thaiTitle := partial "taxonomy-title.html" $plural -}}
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb"><a href="{{ partial "iu.html" "" }}">หน้าแรก</a> / <a href="{{ partial "iu.html" "laws/" }}">คลังกฎหมาย</a> / {{ $thaiTitle }}</div>
+    <h1>{{ $thaiTitle }}</h1>
+    <p>เลือก{{ $thaiTitle }}เพื่อดูกฎหมายที่เกี่ยวข้อง — รวม <b>{{ len .Data.Terms }}</b> รายการ</p>
+  </div>
+</div>
+<section>
+  <div class="container">
+    {{ partial "law-browse-links.html" . }}
+    <div class="taxonomy-term-grid" data-pagefind-body>
+      {{- range .Data.Terms.ByCount }}
+      {{- $termName := .Term -}}
+      {{- $termLabel := $termName -}}
+      {{- if eq $plural "categories" -}}
+        {{- $termLabel = partial "category-label.html" (dict "key" $termName) -}}
+      {{- end -}}
+      <a class="taxonomy-term-card" href="{{ .Page.RelPermalink }}">
+        <h3>{{ $termLabel }}</h3>
+        <span class="taxonomy-term-card__count">{{ .Count }} ฉบับ</span>
+      </a>
+      {{- end }}
+    </div>
+    <p class="taxonomy-back"><a href="{{ partial "iu.html" "laws/" }}">← กลับคลังกฎหมาย</a></p>
+  </div>
+</section>
+{{ end }}

@@ -47,7 +47,16 @@
 
     <div class="law-meta-card__row">
       <dt>ประเภทกฎหมาย</dt>
-      <dd>{{ if $lawType }}{{ $lawType }}{{ else }}{{ $placeholder }}{{ end }}</dd>
+      <dd>
+        {{- $lawtypeTerms := $page.GetTerms "lawtypes" -}}
+        {{- if $lawtypeTerms -}}
+          {{- range $lawtypeTerms }}<a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end -}}
+        {{- else if $lawType -}}
+          {{ $lawType }}
+        {{- else -}}
+          {{ $placeholder }}
+        {{- end -}}
+      </dd>
     </div>
 
     <div class="law-meta-card__row">
@@ -57,12 +66,32 @@
 
     <div class="law-meta-card__row">
       <dt>หมวดหมู่</dt>
-      <dd>{{ if $categoryLabel }}{{ $categoryLabel }}{{ else if $p.category }}{{ $p.category }}{{ else }}{{ $placeholder }}{{ end }}</dd>
+      <dd>
+        {{- $categoryTerms := $page.GetTerms "categories" -}}
+        {{- if $categoryTerms -}}
+          {{- range $categoryTerms }}<a href="{{ .RelPermalink }}">{{ partial "category-label.html" (dict "key" .Title) }}</a> {{ end -}}
+        {{- else if $categoryLabel -}}
+          {{ $categoryLabel }}
+        {{- else if $p.category -}}
+          {{ $p.category }}
+        {{- else -}}
+          {{ $placeholder }}
+        {{- end -}}
+      </dd>
     </div>
 
     <div class="law-meta-card__row">
       <dt>หน่วยงานที่เกี่ยวข้อง</dt>
-      <dd>{{ if $agency }}{{ $agency }}{{ else }}{{ $placeholder }}{{ end }}</dd>
+      <dd>
+        {{- $agencyTerms := $page.GetTerms "agencies" -}}
+        {{- if $agencyTerms -}}
+          {{- range $agencyTerms }}<a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ end -}}
+        {{- else if $agency -}}
+          {{ $agency }}
+        {{- else -}}
+          {{ $placeholder }}
+        {{- end -}}
+      </dd>
     </div>
 
     <div class="law-meta-card__row">
@@ -86,14 +115,21 @@
       <dd>{{ if $lastChecked }}{{ $lastChecked }}{{ else }}{{ $placeholder }}{{ end }}</dd>
     </div>
 
-  {{- if $audiences }}
+  {{- $audienceTerms := $page.GetTerms "audiences" -}}
+  {{- if or $audienceTerms $audiences }}
     <div class="law-meta-card__row law-meta-card__row--full">
       <dt>เหมาะสำหรับ</dt>
       <dd>
         <ul class="law-meta-card__pills">
-          {{- range $audiences }}
-          <li>{{ . }}</li>
-          {{- end }}
+          {{- if $audienceTerms -}}
+            {{- range $audienceTerms -}}
+            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+            {{- end -}}
+          {{- else -}}
+            {{- range $audiences -}}
+            <li>{{ . }}</li>
+            {{- end -}}
+          {{- end -}}
         </ul>
       </dd>
     </div>
@@ -109,9 +145,16 @@
       <dt>คำสำคัญ</dt>
       <dd>
         <ul class="law-meta-card__pills law-meta-card__pills--tags">
-          {{- range $tags }}
-          <li>{{ . }}</li>
-          {{- end }}
+          {{- $tagTerms := $page.GetTerms "tags" -}}
+          {{- if $tagTerms -}}
+            {{- range $tagTerms -}}
+            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+            {{- end -}}
+          {{- else -}}
+            {{- range $tags -}}
+            <li>{{ . }}</li>
+            {{- end -}}
+          {{- end -}}
         </ul>
       </dd>
     </div>

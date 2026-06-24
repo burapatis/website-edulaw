@@ -1,0 +1,7 @@
+{{- $key := .key | default "" -}}
+{{- $fallback := .fallback | default $key -}}
+{{- $label := $fallback -}}
+{{- range site.Data.laws.categories -}}
+  {{- if eq .key $key -}}{{- $label = .label -}}{{- end -}}
+{{- end -}}
+{{- $label -}}

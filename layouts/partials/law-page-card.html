@@ -1,0 +1,43 @@
+{{- $p := .Params -}}
+{{- $lawType := $p.law_type | default $p.type | default "" -}}
+{{- $yearLabel := "" -}}
+{{- with $p.year }}{{ $yearLabel = index (split . "·") 0 | strings.TrimSpace }}{{ end -}}
+{{- $catKey := $p.category | default "" -}}
+{{- $catLabel := partial "category-label.html" (dict "key" $catKey) -}}
+{{- $hasOfficial := false -}}
+{{- if $p.source_url }}{{ $hasOfficial = true }}{{ end -}}
+{{- if and (not $hasOfficial) $p.official_source -}}
+  {{- if ne $p.official_source "ต้องตรวจสอบจากแหล่งทางการ" -}}{{ $hasOfficial = true }}{{ end -}}
+{{- end -}}
+<a class="law-card law-card--rich law-card--{{ $catKey }}" href="{{ .RelPermalink }}">
+  <div class="law-card-top">
+    <span class="law-tag{{ if ne $p.status "บังคับใช้" }} is-draft{{ end }}">{{ $lawType }}</span>
+    {{- if $yearLabel }}<span class="law-year">{{ $yearLabel }}</span>{{ end }}
+    {{- if $hasOfficial }}<span class="law-source-badge" title="มีลิงก์แหล่งข้อมูลทางการ">แหล่งทางการ</span>{{ end }}
+  </div>
+  <h3>{{ .Title }}</h3>
+  {{- with $p.short_title }}
+  {{- if and . (ne . $.Title) }}
+  <p class="law-short-title">{{ . }}</p>
+  {{- end }}
+  {{- end }}
+  <p class="law-summary">{{ $p.summary | default (.Plain | plainify) | truncate 180 }}</p>
+  <div class="law-card-meta">
+  {{- if $catLabel }}<span class="law-card-meta__item">{{ $catLabel }}</span>{{ end }}
+  {{- with $p.agency }}<span class="law-card-meta__item">{{ . }}</span>{{ end }}
+  {{- with $p.status }}<span class="law-card-meta__item law-card-meta__item--status">{{ . }}</span>{{ end }}
+  </div>
+  {{- with $p.audiences }}
+  <ul class="law-card-pills law-card-pills--audience">
+    {{- range . }}<li>{{ . }}</li>{{ end }}
+  </ul>
+  {{- end }}
+  {{- with $p.tags }}
+  <ul class="law-card-pills law-card-pills--tags">
+    {{- range . }}<li>{{ . }}</li>{{ end }}
+  </ul>
+  {{- end }}
+  <div class="law-card-foot">
+    <span class="read-more">อ่านสาระสำคัญ →</span>
+  </div>
+</a>

@@ -23,6 +23,8 @@ npm run dev
 | `static/` | CSS, JS, โลโก้, favicon |
 | `legacy-site/` | เว็บ HTML เดิม (สำรอง) |
 
+ดู taxonomy และการกรองกฎหมาย: [docs/TAXONOMY.md](docs/TAXONOMY.md)
+
 ## Build
 
 ```bash

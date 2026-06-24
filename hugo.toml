@@ -1,9 +1,16 @@
 baseURL = 'https://burapatis.github.io/website-edulaw/'
 canonifyURLs = true
-disableKinds = ['taxonomy', 'term']
+disableKinds = []
 locale = 'th-th'
 defaultContentLanguage = 'th'
 title = 'กฎหมายการศึกษา'
+
+[taxonomies]
+  tag = 'tags'
+  category = 'categories'
+  agency = 'agencies'
+  lawtype = 'lawtypes'
+  audience = 'audiences'
 
 [params]
   description = 'คลังรวบรวม จัดระบบ และเผยแพร่กฎหมายการศึกษาไทยที่น่าสนใจให้มากที่สุดเท่าที่จะทำได้ไว้ในที่เดียว พร้อมสรุปความรู้ แบบทดสอบ และลิงก์แหล่งอ้างอิงทางการ'
