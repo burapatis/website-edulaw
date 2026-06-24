@@ -11,6 +11,9 @@
 <section>
   <div class="container content-body" data-pagefind-body>
     {{ .Content }}
+    {{- if ne .Params.feedback_enabled false }}
+    {{ partial "feedback-callout.html" . }}
+    {{- end }}
   </div>
 </section>
 {{ end }}

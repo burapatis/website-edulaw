@@ -72,7 +72,7 @@ description: "หลักการด้านความน่าเชื่
 
 การมีส่วนร่วมจากผู้ใช้ช่วยให้เว็บไซต์น่าเชื่อถือขึ้น สามารถแจ้งได้ที่:
 
-- [GitHub Issues — website-edulaw](https://github.com/burapatis/website-edulaw/issues)
-- หน้า [เกี่ยวกับเว็บไซต์](/about/) สำหรับข้อมูลผู้จัดทำ
+- หน้า **[แจ้งข้อผิดพลาดและเสนอแนะ](/feedback/)** — ช่องทางหลักสำหรับผู้ใช้ทั่วไป
+- [GitHub Issues — website-edulaw](https://github.com/burapatis/website-edulaw/issues/new/choose) — สำหรับผู้ใช้ทางเทคนิค (ข้อมูลสาธารณะ)
 
 อ่านรายละเอียดเพิ่มเติมเกี่ยวกับแหล่งข้อมูลได้ที่ [นโยบายแหล่งข้อมูล](/about/source-policy/) และการอัปเดตได้ที่ [นโยบายการตรวจสอบและปรับปรุงข้อมูล](/about/update-policy/)

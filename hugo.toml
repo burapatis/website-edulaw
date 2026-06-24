@@ -18,6 +18,8 @@ enableRobotsTXT = true
   author = 'Boorapatis Ploysuwan'
   tagline = 'EDUCATION LAW HUB'
   ogImage = 'assets/feature-graphic.png'
+  feedbackGithubIssuesNew = 'https://github.com/burapatis/website-edulaw/issues/new/choose'
+  feedbackGoogleForm = ''
 
 [sitemap]
   changefreq = 'weekly'

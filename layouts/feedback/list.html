@@ -1,0 +1,71 @@
+{{ define "main" }}
+<div class="page-hero" data-pagefind-body>
+  <div class="container">
+    <div class="breadcrumb"><a href="{{ partial "iu.html" "" }}">หน้าแรก</a> / {{ .Title }}</div>
+    <h1>{{ .Title }}</h1>
+    <p>{{ .Description }}</p>
+  </div>
+</div>
+
+<section class="feedback-section">
+  <div class="container">
+    <div id="feedbackContext" class="feedback-context" hidden role="status" aria-live="polite"></div>
+
+    <article class="content-body feedback-body" data-pagefind-body>
+      {{ .Content }}
+    </article>
+
+    <div class="feedback-channels" data-pagefind-ignore>
+      <h2 class="feedback-channels__title">ช่องทางแจ้งข้อมูล</h2>
+      <p class="feedback-channels__lead">เลือกช่องทางที่สะดวก — ข้อเสนอแนะจะถูกพิจารณาก่อนมีการแก้ไขเนื้อหา</p>
+
+      <div class="feedback-channel-grid">
+        <div class="feedback-channel-card">
+          <h3>แบบฟอร์ม Google (สำหรับผู้ใช้ทั่วไป)</h3>
+          <p>เหมาะสำหรับผู้ที่ไม่ใช้ GitHub — ไม่จำเป็นต้องระบุข้อมูลส่วนตัว</p>
+          {{- $form := site.Params.feedbackGoogleForm -}}
+          {{- if $form }}
+          <a class="btn btn-gold" href="{{ $form }}" target="_blank" rel="noopener noreferrer">เปิดแบบฟอร์มแจ้งข้อเสนอแนะ</a>
+          {{- else }}
+          <p class="feedback-placeholder"><strong>TODO:</strong> ใส่ลิงก์ Google Form สำหรับรับข้อเสนอแนะใน <code>hugo.toml</code> → <code>params.feedbackGoogleForm</code></p>
+          {{- end }}
+        </div>
+
+        <div class="feedback-channel-card">
+          <h3>GitHub Issues (สำหรับผู้ใช้ทางเทคนิค)</h3>
+          <p>เปิด Issue สาธารณะ — เหมาะเมื่อมีลิงก์แหล่งทางการชัดเจน หรือต้องการเสนอ Pull Request ตามมา</p>
+          <a class="btn btn-outline" href="{{ site.Params.feedbackGithubIssuesNew | default "https://github.com/burapatis/website-edulaw/issues/new/choose" }}">เปิด GitHub Issues</a>
+          <p class="feedback-channel-note">การส่งผ่าน GitHub เป็นข้อมูลสาธารณะ</p>
+        </div>
+      </div>
+
+      <div class="feedback-privacy-note" role="note">
+        <strong>ความเป็นส่วนตัว:</strong> กรุณาหลีกเลี่ยงการส่งข้อมูลส่วนบุคคลที่ไม่จำเป็น เช่น เลขประจำตัวประชาชน ข้อมูลสุขภาพ ข้อมูลเด็ก หรือรายละเอียดคดี/ข้อพิพาทส่วนบุคคล
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}
+
+{{ define "scripts" }}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const box = document.getElementById('feedbackContext');
+  if (!box) return;
+  const params = new URLSearchParams(window.location.search);
+  const page = params.get('page');
+  const url = params.get('url');
+  if (!page) return;
+  box.hidden = false;
+  box.classList.add('feedback-context--visible');
+  const safePage = page.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  let html = '<strong>หน้าที่คุณแจ้ง:</strong> ' + safePage;
+  if (url) {
+    const safeUrl = url.replace(/"/g, '&quot;');
+    html += ' <span class="feedback-context__url">(<a href="' + safeUrl + '">เปิดหน้านี้</a>)</span>';
+  }
+  html += '<p class="feedback-context__hint">กรุณาคัดลอกชื่อหน้านี้ไปใส่ในแบบฟอร์มหรือ Issue</p>';
+  box.innerHTML = html;
+});
+</script>
+{{ end }}

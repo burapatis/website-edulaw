@@ -1,0 +1,28 @@
+{{- $page := . -}}
+{{- $enabled := true -}}
+
+{{- if reflect.IsMap . -}}
+  {{- with .page }}{{ $page = . }}{{ end -}}
+  {{- if eq .enabled false }}{{ $enabled = false }}{{ end -}}
+{{- else if eq .Params.feedback_enabled false -}}
+  {{- $enabled = false -}}
+{{- end -}}
+
+{{- if $enabled -}}
+{{- $title := $page.Title -}}
+{{- $url := $page.Permalink -}}
+{{- $feedbackBase := partial "iu.html" "feedback/" -}}
+{{- $href := $feedbackBase -}}
+{{- if $title -}}
+  {{- $href = printf "%s?page=%s" $feedbackBase ($title | urlquery) -}}
+  {{- if $url -}}
+    {{- $href = printf "%s?page=%s&url=%s" $feedbackBase ($title | urlquery) ($url | urlquery) -}}
+  {{- end -}}
+{{- end -}}
+
+<aside class="feedback-callout" role="note" aria-label="แจ้งข้อผิดพลาดหรือเสนอแนะ">
+  <h2 class="feedback-callout__title">พบข้อมูลที่ควรแก้ไข?</h2>
+  <p class="feedback-callout__text">แจ้งข้อผิดพลาด ลิงก์เสีย หรือเสนอแหล่งข้อมูลทางการเพิ่มเติม — ทีมงานจะพิจารณาก่อนแก้ไขเนื้อหา</p>
+  <a class="btn btn-outline btn-sm feedback-callout__btn" href="{{ $href }}">แจ้งข้อผิดพลาดหรือเสนอแหล่งข้อมูล</a>
+</aside>
+{{- end -}}

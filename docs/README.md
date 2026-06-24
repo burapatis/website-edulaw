@@ -30,6 +30,7 @@
 | [LEARNING_PATHS.md](LEARNING_PATHS.md) | เส้นทางการเรียนรู้ |
 | [SEO.md](SEO.md) | SEO และ structured metadata |
 | [UX_UI_GUIDE.md](UX_UI_GUIDE.md) | หลักการ UX/UI |
+| [FEEDBACK_WORKFLOW.md](FEEDBACK_WORKFLOW.md) | รับและจัดการข้อเสนอแนะจากผู้ใช้ |
 
 ## คำสั่งที่ใช้บ่อย
 

@@ -1,0 +1,70 @@
+name: แจ้งแก้ไขเนื้อหา
+description: แจ้งข้อมูลผิดพลาด ล้าสมัย ลิงก์เสีย หรือสรุปที่อาจทำให้เข้าใจคลาดเคลื่อน
+title: "[แก้ไขเนื้อหา] "
+labels:
+  - content-correction
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ขอบคุณที่ช่วยตรวจสอบคุณภาพเนื้อหา
+
+        - ข้อเสนอแนะจะถูก **พิจารณาก่อน** มีการแก้ไข — ไม่รับประกันว่าจะแก้ไขทุกเรื่อง
+        - การส่งผ่าน GitHub Issues เป็น **ข้อมูลสาธารณะ**
+        - กรุณา **อย่าส่ง** ข้อมูลส่วนบุคคลที่อ่อนไหว (เลขประชาชน ข้อมูลสุขภาพ ข้อมูลเด็ก รายละเอียดคดี/ข้อพิพาท)
+        - ช่องทางนี้ **ไม่ใช่** การขอคำปรึกษาทางกฎหมายเฉพาะกรณี
+
+        ทางเลือกอื่น: หน้า [แจ้งข้อผิดพลาดและเสนอแนะ](https://burapatis.github.io/website-edulaw/feedback/) (แบบฟอร์ม Google เมื่อเปิดใช้งาน)
+
+  - type: dropdown
+    id: feedback_type
+    attributes:
+      label: ประเภทของข้อเสนอแนะ
+      description: เลือกประเภทที่ใกล้เคียงที่สุด
+    validations:
+      required: true
+    options:
+      - ข้อมูลผิดพลาดหรือล้าสมัย
+      - ลิงก์แหล่งทางการเปิดไม่ได้
+      - สรุปเนื้อหาอาจทำให้เข้าใจคลาดเคลื่อน
+      - ข้อเสนอแนะเรื่อง metadata (ชื่อ หน่วยงาน ปี สถานะ)
+      - อื่นๆ
+
+  - type: input
+    id: page_ref
+    attributes:
+      label: URL หรือชื่อหน้าที่เกี่ยวข้อง
+      description: เช่น https://burapatis.github.io/website-edulaw/laws/.../ หรือชื่อกฎหมาย
+      placeholder: ชื่อหน้าหรือ URL
+    validations:
+      required: true
+
+  - type: textarea
+    id: correction_detail
+    attributes:
+      label: รายละเอียดที่ควรแก้ไข
+      description: อธิบายสิ่งที่พบและสิ่งที่คิดว่าควรเป็น (กระชับ ชัดเจน)
+    validations:
+      required: true
+
+  - type: textarea
+    id: official_sources
+    attributes:
+      label: แหล่งข้อมูลทางการที่เกี่ยวข้อง
+      description: ลิงก์ราชกิจจานุเบกษา กฤษฎีกา หรือหน่วยงานรัฐ (ถ้ามี)
+      placeholder: https://...
+
+  - type: textarea
+    id: extra_context
+    attributes:
+      label: เหตุผลหรือคำอธิบายเพิ่มเติม
+      description: ข้อมูลเสริมที่ช่วยให้ตรวจสอบได้เร็วขึ้น (ไม่บังคับ)
+
+  - type: checkboxes
+    id: privacy_confirm
+    attributes:
+      label: ยืนยันความเป็นส่วนตัว
+      options:
+        - label: ยืนยันว่าไม่ได้ส่งข้อมูลส่วนบุคคลที่อ่อนไหวในรายงานนี้
+    validations:
+      required: true

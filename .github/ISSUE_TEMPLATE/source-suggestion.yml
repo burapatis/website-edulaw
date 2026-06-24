@@ -1,0 +1,71 @@
+name: เสนอแหล่งข้อมูลหรือกฎหมายใหม่
+description: เสนอกฎหมาย ระเบียบ ประกาศ หรือเอกสารทางการที่ควรเพิ่มในคลัง
+title: "[เสนอแหล่งข้อมูล] "
+labels:
+  - source-suggestion
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ขอบคุณที่ช่วยขยายคลังกฎหมายการศึกษา
+
+        - การเสนอ **ไม่เท่ากับ** การรับเข้าคลังทันที — ต้องตรวจแหล่งทางการก่อน
+        - การส่งผ่าน GitHub Issues เป็น **ข้อมูลสาธารณะ**
+        - กรุณา **อย่าส่ง** ข้อมูลส่วนบุคคลที่ไม่จำเป็น
+        - ช่องทางนี้ **ไม่ใช่** การขอคำปรึกษาทางกฎหมายเฉพาะกรณี
+
+        ทางเลือกอื่น: หน้า [แจ้งข้อผิดพลาดและเสนอแนะ](https://burapatis.github.io/website-edulaw/feedback/)
+
+  - type: dropdown
+    id: doc_type
+    attributes:
+      label: ประเภทเอกสารที่เสนอ
+    validations:
+      required: true
+    options:
+      - พระราชบัญญัติ
+      - พระราชกฤษฎีกา
+      - ระเบียบ/ข้อบังคับ
+      - ประกาศหน่วยงาน
+      - คู่มือ/เอกสารทางการอื่น
+      - ไม่แน่ใจ
+
+  - type: input
+    id: doc_title
+    attributes:
+      label: ชื่อเรื่องหรือชื่อกฎหมาย
+      placeholder: เช่น พ.ร.บ.การศึกษาแห่งชาติ พ.ศ. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: official_url
+    attributes:
+      label: ลิงก์แหล่งข้อมูลทางการ
+      description: URL จากราชกิจจานุเบกษา กฤษฎีกา หรือหน่วยงานรัฐ (ถ้ามี)
+      placeholder: https://...
+    validations:
+      required: true
+
+  - type: textarea
+    id: relevance
+    attributes:
+      label: เหตุผลที่ควรเพิ่มในคลัง
+      description: เกี่ยวข้องกับการศึกษาอย่างไร กลุ่มผู้ใช้ใดน่าสนใจ
+    validations:
+      required: true
+
+  - type: textarea
+    id: related_pages
+    attributes:
+      label: หน้าหรือหัวข้อที่เกี่ยวข้องในเว็บไซต์ (ถ้ามี)
+      description: เช่น กฎหมายอื่นในคลัง หรือเส้นทางการเรียนรู้
+
+  - type: checkboxes
+    id: privacy_confirm
+    attributes:
+      label: ยืนยันความเป็นส่วนตัว
+      options:
+        - label: ยืนยันว่าไม่ได้ส่งข้อมูลส่วนบุคคลที่อ่อนไหวในรายงานนี้
+    validations:
+      required: true
