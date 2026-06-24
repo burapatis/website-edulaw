@@ -79,11 +79,21 @@
           "label": "สำนักงานคณะกรรมการกฤษฎีกา",
           "url": "https://www.krisdika.go.th"
         }
+      ],
+      "tags": [
+        "รัฐธรรมนูญ",
+        "สิทธิการศึกษา",
+        "เรียนฟรี 12 ปี"
+      ],
+      "relatedLaws": [
+        "nea-2542",
+        "compulsory-2545"
       ]
     },
     {
       "id": "nea-2542",
       "category": "national",
+      "categories": ["national", "constitution"],
       "title": "พระราชบัญญัติการศึกษาแห่งชาติ พ.ศ. 2542 และที่แก้ไขเพิ่มเติม",
       "year": "พ.ศ. 2542 · แก้ไขเพิ่มเติม พ.ศ. 2545, 2553, 2562",
       "type": "พระราชบัญญัติ",
@@ -108,11 +118,23 @@
           "label": "ราชกิจจานุเบกษา",
           "url": "https://ratchakitcha.soc.go.th"
         }
+      ],
+      "tags": [
+        "การศึกษาแห่งชาติ",
+        "แผนการศึกษา",
+        "เรียนฟรี 12 ปี",
+        "สภาการศึกษา"
+      ],
+      "relatedLaws": [
+        "const-2560",
+        "compulsory-2545",
+        "qa-edu-2546"
       ]
     },
     {
       "id": "compulsory-2545",
       "category": "national",
+      "categories": ["national", "constitution"],
       "title": "พระราชบัญญัติการศึกษาภาคบังคับ พ.ศ. 2545",
       "year": "พ.ศ. 2545",
       "type": "พระราชบัญญัติ",
@@ -130,6 +152,10 @@
           "label": "สพฐ.",
           "url": "https://www.obec.go.th"
         }
+      ],
+      "relatedLaws": [
+        "const-2560",
+        "nea-2542"
       ]
     },
     {

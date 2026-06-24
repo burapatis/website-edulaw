@@ -1,14 +1,6 @@
 {{- $law := .law -}}
-{{- $page := .page -}}
-{{- $href := .href -}}
-{{- if not $href -}}
-  {{- if $page -}}
-    {{- $href = $page.RelPermalink -}}
-  {{- else -}}
-    {{- $href = printf "/laws/#%s" $law.id | relURL -}}
-  {{- end -}}
-{{- end -}}
-<a class="law-card" href="{{ $href }}">
+{{- $href := .href | default (partial "iu.html" (printf "laws/%s/" $law.id)) -}}
+<a class="law-card law-card--{{ $law.category }}" href="{{ $href }}">
   <div class="law-card-top">
     <span class="law-tag{{ if ne $law.status "บังคับใช้" }} is-draft{{ end }}">{{ $law.type }}</span>
     <span class="law-year">{{ index (split $law.year "·") 0 }}</span>

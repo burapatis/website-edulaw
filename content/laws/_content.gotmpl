@@ -1,0 +1,48 @@
+{{- $catalog := site.Data.laws -}}
+{{- range $catalog.laws }}
+  {{- $law := . -}}
+
+  {{- $body := $law.summary -}}
+  {{- if $law.points }}
+    {{- $body = printf "%s\n\n## สาระสำคัญ\n\n" $body -}}
+    {{- range $law.points }}
+      {{- $body = printf "%s- %s\n" $body . -}}
+    {{- end }}
+  {{- end }}
+  {{- $body = printf "%s\n## หมายเหตุ\n\nเนื้อหานี้เป็นการสรุปสาระสำคัญเพื่อการเรียนรู้ ไม่ใช่ถ้อยคามตามกฎหมายฉบับเต็ม โปรดตรวจสอบฉบับเต็มจากแหล่งอ้างอิงทางการก่อนนำไปอ้างอิง" $body -}}
+
+  {{- $source := "https://ratchakitcha.soc.go.th" -}}
+  {{- with $law.links }}
+    {{- range . }}
+      {{- if in .url "ratchakitcha.soc.go.th" }}
+        {{- $source = .url -}}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+
+  {{- $params := dict
+    "category" $law.category
+    "agency" $law.agency
+    "year" $law.year
+    "status" $law.status
+    "type" $law.type
+    "law_id" $law.id
+    "citation" ($law.citation | default "")
+    "links" ($law.links | default slice)
+    "tags" ($law.tags | default slice)
+    "categories" ($law.categories | default (slice $law.category))
+    "relatedLaws" ($law.relatedLaws | default slice)
+    "last_checked" ($law.lastUpdated | default $catalog.updatedAt)
+    "source_url" $source
+  -}}
+
+  {{- $content := dict "mediaType" "text/markdown" "value" $body -}}
+  {{- $page := dict
+    "content" $content
+    "kind" "page"
+    "path" $law.id
+    "title" $law.title
+    "params" $params
+  -}}
+  {{- $.AddPage $page -}}
+{{- end }}

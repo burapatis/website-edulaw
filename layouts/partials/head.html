@@ -6,8 +6,8 @@
 {{- else }}
 <meta name="description" content="{{ site.Params.description }}">
 {{- end }}
-<link rel="icon" href="{{ "assets/favicon.png" | relURL }}" type="image/png">
-<link rel="apple-touch-icon" href="{{ "assets/favicon.png" | relURL }}">
-<meta property="og:image" content="{{ site.Params.ogImage | absURL }}">
-<link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+<link rel="icon" href="{{ partial "iu.html" "assets/favicon.png" }}" type="image/png">
+<link rel="apple-touch-icon" href="{{ partial "iu.html" "assets/favicon.png" }}">
+<meta property="og:image" content="{{ partial "iu.html" "assets/feature-graphic.png" }}">
+<link rel="stylesheet" href="{{ partial "iu.html" "css/style.css" }}">
 <link rel="canonical" href="{{ .Permalink }}">

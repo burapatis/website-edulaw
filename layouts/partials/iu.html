@@ -1,0 +1,7 @@
+{{- $p := . | default "" -}}
+{{- if $p -}}
+{{- if hasPrefix $p "/" -}}{{- $p = strings.TrimPrefix "/" $p -}}{{- end -}}
+{{- $p | absURL -}}
+{{- else -}}
+{{- site.Home.RelPermalink -}}
+{{- end -}}

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img class="site-logo site-logo--sm" src="{{ "assets/logo.png" | relURL }}" alt="" width="40" height="40">
+        <img class="site-logo site-logo--sm" src="{{ partial "iu.html" "assets/logo.png" }}" alt="" width="40" height="40">
         <div>
           <strong>{{ site.Title }}</strong>
           <p style="margin:6px 0 0;font-size:13px;line-height:1.6;">{{ site.Params.description }}</p>
@@ -11,24 +11,28 @@
       <div>
         <h5>สำรวจ</h5>
         <ul>
-          <li><a href="{{ "/laws/" | relURL }}">คลังกฎหมาย</a></li>
-          <li><a href="{{ "/summaries/" | relURL }}">สรุปกฎหมาย</a></li>
-          <li><a href="{{ "/faq/" | relURL }}">คำถามที่พบบ่อย</a></li>
-          <li><a href="{{ "/quiz/" | relURL }}">แบบทดสอบ</a></li>
+          <li><a href="{{ partial "iu.html" "laws/" }}">คลังกฎหมาย</a></li>
+          <li><a href="{{ partial "iu.html" "summaries/" }}">สรุปกฎหมาย</a></li>
+          <li><a href="{{ partial "iu.html" "faq/" }}">คำถามที่พบบ่อย</a></li>
+          <li><a href="{{ partial "iu.html" "quiz/" }}">แบบทดสอบ</a></li>
         </ul>
       </div>
       <div>
-        <h5>ข้อมูล</h5>
+        <h5>หมวดกฎหมายเด่น</h5>
         <ul>
-          <li><a href="{{ "/about/" | relURL }}">เกี่ยวกับเว็บไซต์</a></li>
+          <li><a href="{{ partial "iu.html" "laws/?cat=national" }}">การจัดการศึกษาแห่งชาติ</a></li>
+          <li><a href="{{ partial "iu.html" "laws/?cat=personnel" }}">ครูและบุคลากรทางการศึกษา</a></li>
+          <li><a href="{{ partial "iu.html" "laws/?cat=child" }}">คุ้มครองเด็กและกองทุนการศึกษา</a></li>
+          <li><a href="{{ partial "iu.html" "laws/?cat=draft" }}">ร่างกฎหมาย/ความเคลื่อนไหว</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>แหล่งอ้างอิงทางการ</h5>
+        <ul>
+          <li><a href="https://www.krisdika.go.th" target="_blank" rel="noopener">สำนักงานคณะกรรมการกฤษฎีกา</a></li>
           <li><a href="https://ratchakitcha.soc.go.th" target="_blank" rel="noopener">ราชกิจจานุเบกษา</a></li>
-        </ul>
-      </div>
-      <div>
-        <h5>ผู้จัดทำ</h5>
-        <ul>
-          <li>{{ site.Params.author }}</li>
-          <li><span style="font-size:13px;opacity:.8;">Education Law Hub</span></li>
+          <li><a href="https://www.moe.go.th" target="_blank" rel="noopener">กระทรวงศึกษาธิการ</a></li>
+          <li><a href="https://www.parliament.go.th" target="_blank" rel="noopener">รัฐสภาไทย</a></li>
         </ul>
       </div>
     </div>

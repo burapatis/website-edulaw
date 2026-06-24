@@ -2,7 +2,7 @@
 {{- $data := site.Data.laws -}}
 <div class="page-hero">
   <div class="container">
-    <div class="breadcrumb"><a href="{{ "/" | relURL }}">หน้าแรก</a> / สรุปกฎหมาย</div>
+    <div class="breadcrumb"><a href="{{ partial "iu.html" "" }}">หน้าแรก</a> / สรุปกฎหมาย</div>
     <h1>{{ .Title }}</h1>
     <p>{{ .Description }}</p>
   </div>
@@ -12,44 +12,44 @@
   <div class="container content-body">
     {{ .Content }}
     <div class="cat-grid summary-topic-grid">
-      <a class="cat-card cat-card--national" href="{{ "/laws/nea-2542/" | relURL }}">
+      <a class="cat-card cat-card--national" href="{{ partial "iu.html" "laws/nea-2542/" }}">
         <span class="cat-icon" data-icon="book"></span>
         <h3>สิทธิเรียนฟรี 12 ปี</h3>
         <p>หลักการสิทธิการศึกษาในรัฐธรรมนูญและ พ.ร.บ.การศึกษาแห่งชาติ ที่มาของนโยบายเรียนฟรีและการศึกษาภาคบังคับ</p>
         <span class="cat-count">อ่านสรุป →</span>
       </a>
-      <a class="cat-card cat-card--personnel" href="{{ "/laws/?cat=personnel" | relURL }}">
+      <a class="cat-card cat-card--personnel" href="{{ partial "iu.html" "laws/?cat=personnel" }}">
         <span class="cat-icon" data-icon="users"></span>
         <h3>วิทยฐานะและสิทธิครู</h3>
         <p>กฎหมายที่เกี่ยวกับการพัฒนาวิชาชีพ วิทยฐานะ สิทธิประโยชน์ และการบริหารบุคลากรทางการศึกษา</p>
         <span class="cat-count">{{ len (where $data.laws "category" "personnel") }} ฉบับในหมวดนี้</span>
       </a>
-      <a class="cat-card cat-card--personnel" href="{{ "/laws/?q=ใบประกอบวิชาชีพ" | relURL }}">
+      <a class="cat-card cat-card--personnel" href="{{ partial "iu.html" "laws/?q=ใบประกอบวิชาชีพ" }}">
         <span class="cat-icon" data-icon="stamp"></span>
         <h3>ใบประกอบวิชาชีพครู</h3>
         <p>เกณฑ์ ขั้นตอน และกฎหมายที่เกี่ยวข้องกับการขอและรักษาใบประกอบวิชาชีพครู</p>
         <span class="cat-count">ค้นหาในคลัง →</span>
       </a>
-      <a class="cat-card cat-card--child" href="{{ "/laws/?cat=child" | relURL }}">
+      <a class="cat-card cat-card--child" href="{{ partial "iu.html" "laws/?cat=child" }}">
         <span class="cat-icon" data-icon="heart"></span>
         <h3>คุ้มครองเด็กและความเสมอภาค</h3>
         <p>กฎหมายด้านสิทธิเด็ก ความปลอดภัยในโรงเรียน กองทุนการศึกษา และการช่วยเหลือผู้เรียน</p>
         <span class="cat-count">{{ len (where $data.laws "category" "child") }} ฉบับในหมวดนี้</span>
       </a>
-      <a class="cat-card cat-card--higher" href="{{ "/laws/?cat=higher" | relURL }}">
+      <a class="cat-card cat-card--higher" href="{{ partial "iu.html" "laws/?cat=higher" }}">
         <span class="cat-icon" data-icon="cap"></span>
         <h3>อุดมศึกษาและอาชีวศึกษา</h3>
         <p>กฎหมายการจัดการศึกษาระดับสูง มหาวิทยาลัย วิทยาลัยอาชีวศึกษา และการประกันคุณภาพ</p>
         <span class="cat-count">{{ len (where $data.laws "category" "higher") }} ฉบับในหมวดนี้</span>
       </a>
-      <a class="cat-card cat-card--draft" href="{{ "/laws/?cat=draft" | relURL }}">
+      <a class="cat-card cat-card--draft" href="{{ partial "iu.html" "laws/?cat=draft" }}">
         <span class="cat-icon" data-icon="flag"></span>
         <h3>ร่างกฎหมายที่ควรติดตาม</h3>
         <p>กฎหมายและความเคลื่อนไหวที่อยู่ระหว่างพิจารณา ควรติดตามผลกระทบต่อสถานศึกษาและบุคลากร</p>
         <span class="cat-count">{{ len (where $data.laws "category" "draft") }} ฉบับในหมวดนี้</span>
       </a>
     </div>
-    <p style="margin-top:28px;font-size:14px;color:var(--ink-soft);">สรุปเพิ่มเติมจะค่อย ๆ เผยแพร่ต่อเนื่อง ข้อมูลกฎหมายฉบับเต็มดูได้ที่ <a href="{{ "/laws/" | relURL }}">คลังกฎหมาย</a></p>
+    <p style="margin-top:28px;font-size:14px;color:var(--ink-soft);">สรุปเพิ่มเติมจะค่อย ๆ เผยแพร่ต่อเนื่อง ข้อมูลกฎหมายฉบับเต็มดูได้ที่ <a href="{{ partial "iu.html" "laws/" }}">คลังกฎหมาย</a></p>
   </div>
 </section>
 {{ end }}

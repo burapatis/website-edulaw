@@ -1,4 +1,6 @@
 baseURL = 'https://burapatis.github.io/website-edulaw/'
+canonifyURLs = true
+disableKinds = ['taxonomy', 'term']
 locale = 'th-th'
 defaultContentLanguage = 'th'
 title = 'กฎหมายการศึกษา'

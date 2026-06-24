@@ -1,7 +1,7 @@
 {{ define "main" }}
 <div class="page-hero">
   <div class="container">
-    <div class="breadcrumb"><a href="{{ "/" | relURL }}">หน้าแรก</a> / {{ .Title }}</div>
+    <div class="breadcrumb"><a href="{{ partial "iu.html" "" }}">หน้าแรก</a> / {{ .Title }}</div>
     <h1>{{ .Title }}</h1>
     {{- with .Description }}
     <p>{{ . }}</p>

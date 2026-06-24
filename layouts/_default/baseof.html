@@ -10,7 +10,7 @@
   {{- block "main" . }}{{- end }}
 </main>
 {{- partial "footer.html" . -}}
-<script src="{{ "js/main.js" | relURL }}"></script>
+<script src="{{ partial "iu.html" "js/main.js" }}"></script>
 {{- block "scripts" . }}{{- end }}
 </body>
 </html>

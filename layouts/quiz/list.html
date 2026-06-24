@@ -1,14 +1,14 @@
 {{ define "main" }}
 <div class="page-hero">
   <div class="container">
-    <div class="breadcrumb"><a href="{{ "/" | relURL }}">หน้าแรก</a> / แบบทดสอบความรู้</div>
+    <div class="breadcrumb"><a href="{{ partial "iu.html" "" }}">หน้าแรก</a> / แบบทดสอบความรู้</div>
     <h1>{{ .Title }}</h1>
     <p>{{ .Description }}</p>
   </div>
 </div>
 
 <section style="padding-top:46px;">
-  <div class="container" id="quizApp" data-laws-url="{{ "/laws/" | relURL }}">
+  <div class="container" id="quizApp" data-laws-url="{{ partial "iu.html" "laws/" }}">
 
     <div class="quiz-stage active" id="stageSelect">
       <div class="section-head">
@@ -39,14 +39,14 @@
 
     <div class="quiz-stage" id="stageResult">
       <div class="quiz-paper quiz-result">
-        <img class="site-logo site-logo--lg" src="{{ "assets/logo.png" | relURL }}" alt="">
+        <img class="site-logo site-logo--lg" src="{{ partial "iu.html" "assets/logo.png" }}" alt="">
         <span class="grade-badge" id="gradeBadge"></span>
         <p class="score-big" id="scoreBig"></p>
         <p class="score-label" id="scoreLabel"></p>
         <div class="result-actions">
           <button type="button" class="btn btn-primary" id="retryBtn">ทำแบบทดสอบหมวดนี้อีกครั้ง</button>
           <button type="button" class="btn btn-outline" id="backCatBtn">เลือกหมวดอื่น</button>
-          <a class="btn btn-outline" id="reviewLawsBtn" href="{{ "/laws/" | relURL }}">ทบทวนในคลังกฎหมาย</a>
+          <a class="btn btn-outline" id="reviewLawsBtn" href="{{ partial "iu.html" "laws/" }}">ทบทวนในคลังกฎหมาย</a>
         </div>
         <div class="review-list" id="reviewList"></div>
       </div>
@@ -57,6 +57,6 @@
 {{ end }}
 
 {{ define "scripts" }}
-<script src="{{ "js/quiz-data.js" | relURL }}"></script>
-<script src="{{ "js/quiz.js" | relURL }}"></script>
+<script src="{{ partial "iu.html" "js/quiz-data.js" }}"></script>
+<script src="{{ partial "iu.html" "js/quiz.js" }}"></script>
 {{ end }}

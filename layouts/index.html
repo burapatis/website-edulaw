@@ -1,18 +1,19 @@
 {{ define "main" }}
 {{- $data := site.Data.laws -}}
+{{- $featuredIds := slice "nea-2542" "teacher-civil-2547" "teacher-council-2546" "child-protect-2546" "eef-2561" "vocational-2551" "higher-ed-2562" "qa-edu-2546" -}}
 <section class="hero">
   <div class="container hero-grid">
     <div>
       <div class="eyebrow">คลังความรู้กฎหมายการศึกษาไทย</div>
       <h1>กฎหมายการศึกษาที่กระจัดกระจาย<br>รวบรวมไว้ใน<em> ที่เดียว</em></h1>
       <p class="lead">{{ site.Params.description }}</p>
-      <form class="hero-search" action="{{ "/laws/" | relURL }}" method="get">
-        <input type="search" name="q" placeholder="ค้นหา เช่น วิทยฐานะ, ใบประกอบวิชาชีพ, เรียนฟรี 12 ปี...">
+      <form class="hero-search" action="{{ partial "iu.html" "laws/" }}" method="get">
+        <input type="search" name="q" id="heroSearchInput" placeholder="ค้นหา เช่น วิทยฐานะ, ใบประกอบวิชาชีพ, เรียนฟรี 12 ปี...">
         <button type="submit">ค้นหา</button>
       </form>
       <div class="hero-actions">
-        <a class="btn btn-gold" href="{{ "/laws/" | relURL }}">สำรวจคลังกฎหมาย</a>
-        <a class="btn btn-outline on-dark" href="{{ "/quiz/" | relURL }}">ทดสอบความรู้ตนเอง</a>
+        <a class="btn btn-gold" href="{{ partial "iu.html" "laws/" }}">สำรวจคลังกฎหมาย</a>
+        <a class="btn btn-outline on-dark" href="{{ partial "iu.html" "quiz/" }}">ทดสอบความรู้ตนเอง</a>
       </div>
       <div class="hero-stats">
         <div class="stat"><b>{{ len $data.laws }}</b><span>ฉบับที่คัดสรรแล้ว</span></div>
@@ -22,7 +23,7 @@
       </div>
     </div>
     <div class="hero-emblem">
-      <img class="hero-feature spin-in" src="{{ "assets/feature-graphic.png" | relURL }}" alt="{{ site.Title }} — {{ site.Params.author }}">
+      <img class="hero-feature spin-in" src="{{ partial "iu.html" "assets/feature-graphic.png" }}" alt="{{ site.Title }} — {{ site.Params.author }}">
     </div>
   </div>
 </section>
@@ -35,15 +36,21 @@
         <h2>หมวดหมู่กฎหมายการศึกษา</h2>
         <p>จัดกลุ่มกฎหมายตามภารกิจการใช้งานจริง ตั้งแต่กฎหมายแม่บทไปจนถึงระเบียบที่ใช้ปฏิบัติงานในสถานศึกษา</p>
       </div>
-      <a class="btn btn-outline" href="{{ "/laws/" | relURL }}">ดูคลังกฎหมาย</a>
+      <a class="btn btn-outline" href="{{ partial "iu.html" "laws/" }}">ดูคลังกฎหมาย</a>
     </div>
     <div class="cat-grid">
       {{- range $data.categories }}
-      <a class="cat-card cat-card--{{ .key }}" href="{{ printf "/laws/?cat=%s" .key | relURL }}">
+      {{- $catKey := .key -}}
+      {{- $count := 0 -}}
+      {{- range $data.laws -}}
+        {{- $cats := .categories | default (slice .category) -}}
+        {{- if in $cats $catKey }}{{- $count = add $count 1 -}}{{- end -}}
+      {{- end -}}
+      <a class="cat-card cat-card--{{ .key }}" href="{{ partial "iu.html" (printf "laws/?cat=%s" .key) }}">
         <span class="cat-icon" data-icon="{{ .icon }}"></span>
         <h3>{{ .label }}</h3>
         <p>{{ .desc }}</p>
-        <span class="cat-count">{{ len (where $data.laws "category" .key) }} ฉบับ</span>
+        <span class="cat-count">{{ $count }} ฉบับ</span>
       </a>
       {{- end }}
     </div>
@@ -54,16 +61,32 @@
   <div class="container">
     <div class="section-head">
       <div>
-        <div class="eyebrow">เริ่มต้นเรียนรู้</div>
-        <h2>กฎหมายสำคัญที่ควรรู้</h2>
-        <p>ฉบับที่มักถูกอ้างอิงและใช้งานบ่อยในระบบการศึกษาไทย</p>
+        <div class="eyebrow">ปัญหาที่เว็บไซต์นี้อยากแก้ไข</div>
+        <h2>เพราะกฎหมายการศึกษา “กระจัดกระจาย” เกินไป</h2>
+        <p>กฎหมายที่เกี่ยวข้องกับการศึกษากระจายอยู่ในหลายหน่วยงาน ทำให้ครูและผู้สนใจเข้าถึงและศึกษาได้ยาก เว็บไซต์นี้จึงรวบรวมและจัดระบบใหม่</p>
       </div>
     </div>
-    <div class="law-grid">
-      {{- range first 6 $data.laws }}
-      {{- $page := site.GetPage (printf "/laws/%s" .id) -}}
-      {{ partial "law-card.html" (dict "law" . "page" $page) }}
-      {{- end }}
+    <div class="cat-grid">
+      <div class="cat-card cat-card--admin">
+        <span class="cat-icon" data-icon="building"></span>
+        <h3>กระจายอยู่หลายหน่วยงาน</h3>
+        <p>ตั้งแต่ สกศ. สพฐ. สอศ. อว. ก.ค.ศ. คุรุสภา กสศ. กยศ. ไปจนถึงรัฐสภา ทำให้ตามหายาก</p>
+      </div>
+      <div class="cat-card cat-card--national">
+        <span class="cat-icon" data-icon="book"></span>
+        <h3>ภาษากฎหมายเข้าใจยาก</h3>
+        <p>ตัวบทเต็มมีความซับซ้อน เว็บไซต์นี้สรุปสาระสำคัญให้กระชับ เข้าใจง่าย พร้อมลิงก์ไปฉบับเต็ม</p>
+      </div>
+      <div class="cat-card cat-card--tool-quiz">
+        <span class="cat-icon" data-icon="stamp"></span>
+        <h3>ขาดพื้นที่ทดสอบความเข้าใจ</h3>
+        <p>มีแบบทดสอบความรู้ความเข้าใจแยกตามหมวด พร้อมคำอธิบายเหตุผลของคำตอบทุกข้อ</p>
+      </div>
+      <div class="cat-card cat-card--tool-summary">
+        <span class="cat-icon" data-icon="doc"></span>
+        <h3>ขาดพื้นที่สรุปและคำถาม</h3>
+        <p>มีหน้าสรุปกฎหมายแบบอ่านง่าย และคำถามที่พบบ่อยเพื่อช่วยเริ่มต้นเรียนรู้</p>
+      </div>
     </div>
   </div>
 </section>
@@ -72,29 +95,78 @@
   <div class="container">
     <div class="section-head">
       <div>
-        <div class="eyebrow">เครื่องมือเรียนรู้</div>
+        <div class="eyebrow">ฉบับที่ครูและบุคลากรควรรู้</div>
+        <h2>กฎหมายที่ถูกค้นหามากที่สุด</h2>
+      </div>
+      <a class="btn btn-outline" href="{{ partial "iu.html" "laws/" }}">ดูคลังกฎหมาย</a>
+    </div>
+    <div class="law-grid">
+      {{- range $featuredIds }}
+      {{- $law := index (where $data.laws "id" .) 0 -}}
+      {{- if $law }}
+      {{ partial "law-card.html" (dict "law" $law "href" (partial "iu.html" (printf "laws/%s/" $law.id))) }}
+      {{- end }}
+      {{- end }}
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">เริ่มต้นเรียนรู้</div>
         <h2>เรียนรู้ได้หลายรูปแบบ</h2>
       </div>
     </div>
     <div class="cat-grid" style="grid-template-columns:repeat(3,1fr);">
-      <a class="cat-card cat-card--tool-summary" href="{{ "/summaries/" | relURL }}">
+      <a class="cat-card cat-card--tool-summary" href="{{ partial "iu.html" "summaries/" }}">
         <span class="cat-icon" data-icon="doc"></span>
         <h3>สรุปกฎหมาย</h3>
         <p>บทความสรุปแบบอ่านง่าย จัดกลุ่มตามหัวข้อที่ใช้งานจริง</p>
         <span class="cat-count">6 หัวข้อสรุป</span>
       </a>
-      <a class="cat-card cat-card--tool-quiz" href="{{ "/quiz/" | relURL }}">
+      <a class="cat-card cat-card--tool-quiz" href="{{ partial "iu.html" "quiz/" }}">
         <span class="cat-icon" data-icon="check"></span>
         <h3>แบบทดสอบ</h3>
         <p>ทดสอบความเข้าใจกฎหมายการศึกษา พร้อมคำอธิบายทุกข้อ</p>
         <span class="cat-count">40 ข้อคำถาม</span>
       </a>
-      <a class="cat-card cat-card--tool-faq" href="{{ "/faq/" | relURL }}">
+      <a class="cat-card cat-card--tool-faq" href="{{ partial "iu.html" "faq/" }}">
         <span class="cat-icon" data-icon="info"></span>
         <h3>คำถามที่พบบ่อย</h3>
         <p>คำตอบสั้น ๆ สำหรับประเด็นที่ผู้ใช้ถามบ่อย</p>
-        <span class="cat-count">4 คำถามหลัก</span>
+        <span class="cat-count">5 คำถามหลัก</span>
       </a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="cta-banner">
+      <div>
+        <h2>วัดความเข้าใจกฎหมายการศึกษาของคุณ</h2>
+        <p>เลือกหมวดที่สนใจ ทำแบบทดสอบ 8 ข้อต่อหมวด พร้อมคำอธิบายเหตุผลทุกข้อทันทีหลังตอบ</p>
+      </div>
+      <a class="btn btn-gold" href="{{ partial "iu.html" "quiz/" }}">เริ่มทำแบบทดสอบ</a>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">ความเคลื่อนไหวที่ควรติดตาม</div>
+        <h2>ร่างกฎหมายการศึกษาฉบับใหม่</h2>
+      </div>
+    </div>
+    <div class="law-grid">
+      {{- $draft := index (where $data.laws "id" "nea-draft") 0 -}}
+      {{- if $draft }}
+      {{ partial "law-card.html" (dict "law" $draft "href" (partial "iu.html" "laws/nea-draft/")) }}
+      {{- end }}
     </div>
   </div>
 </section>
