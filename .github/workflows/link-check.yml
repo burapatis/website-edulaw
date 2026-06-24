@@ -1,0 +1,52 @@
+name: Link Check
+
+on:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    # ทุกวันจันทร์ 06:00 UTC (13:00 น. เวลาไทย)
+    - cron: '0 6 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  lychee:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Link Checker
+        uses: lycheeorg/lychee-action@v2
+        with:
+          fail: true
+          args: >
+            --verbose
+            --no-progress
+            --max-retries 3
+            --retry-wait-time 5
+            --timeout 25
+            --max-concurrency 8
+            --accept 100..=399
+            --exclude-mail
+            --exclude-all-private
+            README.md
+            docs/**/*.md
+            content/**/*.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Write summary
+        if: always()
+        run: |
+          {
+            echo "## Link check"
+            echo ""
+            echo "Checked Markdown links in:"
+            echo "- \`README.md\`"
+            echo "- \`docs/**/*.md\`"
+            echo "- \`content/**/*.md\`"
+            echo ""
+            echo "Retries: 3 · Timeout: 25s · Accept: HTTP 100–399"
+          } >> "$GITHUB_STEP_SUMMARY"

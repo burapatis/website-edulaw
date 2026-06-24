@@ -1,0 +1,52 @@
+name: Quality Check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Content quality check
+        run: npm run check:content
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.163.3'
+          extended: true
+
+      - name: Build Hugo + Pagefind
+        run: npm run build:search
+
+      - name: Upload build summary
+        if: always()
+        run: |
+          {
+            echo "## Quality check summary"
+            echo ""
+            echo "- Content check: \`npm run check:content\`"
+            echo "- Build: \`npm run build:search\`"
+            echo "- Pages in \`public/\`: $(find public -type f | wc -l | tr -d ' ')"
+            if [ -d public/pagefind ]; then
+              echo "- Pagefind index: present"
+            else
+              echo "- Pagefind index: **missing**"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

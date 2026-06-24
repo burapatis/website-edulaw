@@ -27,9 +27,12 @@ npm run dev
 
 ดูแบบทดสอบและวิธีเพิ่มคำถาม: [docs/QUIZ.md](docs/QUIZ.md)
 
+ดูการตรวจคุณภาพเนื้อหาและลิงก์: [docs/QUALITY_CHECKS.md](docs/QUALITY_CHECKS.md)
+
 ## Build
 
 ```bash
+npm run check:content   # ตรวจ metadata กฎหมาย (ล้มเหลวถ้ามี critical issues)
 npm run build:search
 ```
 
