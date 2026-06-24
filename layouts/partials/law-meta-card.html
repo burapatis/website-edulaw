@@ -1,0 +1,128 @@
+{{- $page := . -}}
+{{- $p := $page.Params -}}
+{{- $placeholder := "อยู่ระหว่างตรวจสอบข้อมูล" -}}
+{{- $catalog := site.Data.laws -}}
+
+{{- $categoryLabel := "" -}}
+{{- range $catalog.categories }}
+  {{- if eq .key $p.category }}{{ $categoryLabel = .label }}{{ end }}
+{{- end }}
+
+{{- $title := $page.Title | default $p.title -}}
+{{- $shortTitle := $p.short_title | default "" -}}
+{{- $lawType := $p.law_type | default $p.type | default "" -}}
+{{- $year := $p.year | default "" -}}
+{{- $agency := $p.agency | default "" -}}
+{{- $status := $p.status | default "" -}}
+{{- $officialSource := $p.official_source | default "" -}}
+{{- $sourceURL := $p.source_url | default "" -}}
+{{- $lastChecked := $p.last_checked | default "" -}}
+{{- $audiences := $p.audiences | default slice -}}
+{{- $tags := $p.tags | default slice -}}
+
+<div class="law-meta-card" aria-label="ข้อมูลกำกับกฎหมาย">
+  <div class="law-meta-card__head">
+    <h2 class="law-meta-card__title">ข้อมูลกฎหมาย</h2>
+    <p class="law-meta-card__lead">สรุปข้อมูลอ้างอิงเพื่อการศึกษา — โปรดตรวจสอบฉบับทางการก่อนนำไปใช้งาน</p>
+  </div>
+
+  <dl class="law-meta-card__dl">
+    <div class="law-meta-card__row">
+      <dt>ชื่อกฎหมาย</dt>
+      <dd>{{ if $title }}{{ $title }}{{ else }}{{ $placeholder }}{{ end }}</dd>
+    </div>
+
+    <div class="law-meta-card__row">
+      <dt>ชื่อย่อ</dt>
+      <dd>
+        {{- if and $shortTitle (ne $shortTitle $title) -}}
+          {{ $shortTitle }}
+        {{- else if $shortTitle -}}
+          {{ $shortTitle }}
+        {{- else -}}
+          {{ $placeholder }}
+        {{- end -}}
+      </dd>
+    </div>
+
+    <div class="law-meta-card__row">
+      <dt>ประเภทกฎหมาย</dt>
+      <dd>{{ if $lawType }}{{ $lawType }}{{ else }}{{ $placeholder }}{{ end }}</dd>
+    </div>
+
+    <div class="law-meta-card__row">
+      <dt>ปีที่ประกาศ/ปีที่เกี่ยวข้อง</dt>
+      <dd>{{ if $year }}{{ $year }}{{ else }}{{ $placeholder }}{{ end }}</dd>
+    </div>
+
+    <div class="law-meta-card__row">
+      <dt>หมวดหมู่</dt>
+      <dd>{{ if $categoryLabel }}{{ $categoryLabel }}{{ else if $p.category }}{{ $p.category }}{{ else }}{{ $placeholder }}{{ end }}</dd>
+    </div>
+
+    <div class="law-meta-card__row">
+      <dt>หน่วยงานที่เกี่ยวข้อง</dt>
+      <dd>{{ if $agency }}{{ $agency }}{{ else }}{{ $placeholder }}{{ end }}</dd>
+    </div>
+
+    <div class="law-meta-card__row">
+      <dt>สถานะข้อมูล</dt>
+      <dd>
+        {{- if $status -}}
+          <span class="law-meta-card__status{{ if ne $status "บังคับใช้" }} law-meta-card__status--draft{{ end }}">{{ $status }}</span>
+        {{- else -}}
+          {{ $placeholder }}
+        {{- end -}}
+      </dd>
+    </div>
+
+    <div class="law-meta-card__row">
+      <dt>แหล่งข้อมูลทางการ</dt>
+      <dd>{{ if $officialSource }}{{ $officialSource }}{{ else }}{{ $placeholder }}{{ end }}</dd>
+    </div>
+
+    <div class="law-meta-card__row">
+      <dt>วันที่ตรวจสอบข้อมูล</dt>
+      <dd>{{ if $lastChecked }}{{ $lastChecked }}{{ else }}{{ $placeholder }}{{ end }}</dd>
+    </div>
+
+  {{- if $audiences }}
+    <div class="law-meta-card__row law-meta-card__row--full">
+      <dt>เหมาะสำหรับ</dt>
+      <dd>
+        <ul class="law-meta-card__pills">
+          {{- range $audiences }}
+          <li>{{ . }}</li>
+          {{- end }}
+        </ul>
+      </dd>
+    </div>
+  {{- else }}
+    <div class="law-meta-card__row">
+      <dt>เหมาะสำหรับ</dt>
+      <dd>{{ $placeholder }}</dd>
+    </div>
+  {{- end }}
+
+  {{- if $tags }}
+    <div class="law-meta-card__row law-meta-card__row--full">
+      <dt>คำสำคัญ</dt>
+      <dd>
+        <ul class="law-meta-card__pills law-meta-card__pills--tags">
+          {{- range $tags }}
+          <li>{{ . }}</li>
+          {{- end }}
+        </ul>
+      </dd>
+    </div>
+  {{- end }}
+  </dl>
+
+  <div class="law-meta-card__actions">
+    {{- if $sourceURL }}
+    <a class="btn btn-primary law-meta-card__source-btn" href="{{ $sourceURL }}" target="_blank" rel="noopener">เปิดแหล่งข้อมูลทางการ</a>
+    {{- else }}
+    <p class="law-meta-card__source-missing">ลิงก์แหล่งทางการ: {{ $placeholder }}</p>
+    {{- end }}
+  </div>
+</div>

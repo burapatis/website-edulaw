@@ -10,6 +10,8 @@
 
 <section style="padding-top:46px;">
   <div class="container">
+    {{ partial "law-meta-card.html" . }}
+
     <div class="law-detail-grid">
       <article class="law-detail-main content-body">
         <div class="law-detail-badges">
@@ -28,44 +30,13 @@
         </div>
         {{- end }}
 
-        <div class="disclaimer-note" style="margin-top:18px;">
-          เนื้อหาเป็นการสรุปสาระสำคัญเพื่อการเรียนรู้ ไม่ใช่ถ้อยคำตามกฎหมายฉบับเต็ม
-          {{- with .Params.last_checked }} · ตรวจสอบล่าสุด {{ . }}{{ end }}
-        </div>
+        {{ partial "legal-disclaimer.html" . }}
       </article>
 
       <aside class="law-detail-side">
-        <div class="law-side-card">
-          <h4>ข้อมูลกฎหมาย</h4>
-          <dl class="law-meta-dl">
-            <dt>หมวดหมู่</dt>
-            <dd>
-              {{- range $data.categories }}
-                {{- if eq .key $.Params.category }}{{ .label }}{{ end }}
-              {{- end }}
-            </dd>
-            <dt>หน่วยงาน</dt>
-            <dd>{{ .Params.agency }}</dd>
-            <dt>ปี / ช่วงเวลา</dt>
-            <dd>{{ .Params.year }}</dd>
-            <dt>สถานะ</dt>
-            <dd>{{ .Params.status }}</dd>
-            <dt>ประเภท</dt>
-            <dd>{{ .Params.law_type | default .Params.type }}</dd>
-            {{- with .Params.official_source }}
-            <dt>แหล่งอ้างอิงทางการ</dt>
-            <dd>{{ . }}</dd>
-            {{- end }}
-            {{- with .Params.law_id }}
-            <dt>รหัส</dt>
-            <dd><code>{{ . }}</code></dd>
-            {{- end }}
-          </dl>
-        </div>
-
         {{- if .Params.links }}
         <div class="law-side-card">
-          <h4>ลิงก์อ้างอิง</h4>
+          <h4>ลิงก์อ้างอิงเพิ่มเติม</h4>
           <ul class="law-link-list">
             {{- range .Params.links }}
             <li><a href="{{ .url }}" target="_blank" rel="noopener">{{ .label }}</a></li>
@@ -85,13 +56,6 @@
             {{- end }}
             {{- end }}
           </ul>
-        </div>
-        {{- end }}
-
-        {{- with .Params.source_url }}
-        <div class="law-side-card">
-          <h4>แหล่งฉบับเต็ม</h4>
-          <a class="btn btn-primary" href="{{ . }}" target="_blank" rel="noopener" style="width:100%;justify-content:center;">เปิดแหล่งอ้างอิงทางการ</a>
         </div>
         {{- end }}
 

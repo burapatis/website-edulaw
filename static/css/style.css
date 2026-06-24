@@ -844,5 +844,50 @@ section{padding:74px 0;}
 .law-meta-dl dd{margin:0;color:var(--ink);}
 .law-link-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;}
 .law-link-list a{color:var(--navy);font-weight:600;font-size:14px;}
-@media (max-width:880px){.law-detail-grid{grid-template-columns:1fr;}}
+
+/* ---- การ์ดข้อมูลกำกับกฎหมาย (หน้ารายละเอียด) ---- */
+.law-meta-card{
+  background:#fff;border:1px solid var(--paper-line);border-radius:var(--radius-l);
+  padding:24px 26px;margin-bottom:28px;box-shadow:var(--shadow-soft);
+  border-left:4px solid var(--navy);
+}
+.law-meta-card__head{margin-bottom:18px;}
+.law-meta-card__title{margin:0 0 6px;font-size:20px;color:var(--navy);}
+.law-meta-card__lead{margin:0;font-size:13.5px;color:var(--ink-soft);line-height:1.55;}
+.law-meta-card__dl{margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 24px;}
+.law-meta-card__row{display:grid;grid-template-columns:minmax(120px,38%) 1fr;gap:6px 12px;align-items:start;}
+.law-meta-card__row--full{grid-column:1/-1;}
+.law-meta-card__dl dt{font-size:13px;font-weight:700;color:var(--ink-soft);margin:0;}
+.law-meta-card__dl dd{margin:0;font-size:14.5px;color:var(--ink);line-height:1.55;}
+.law-meta-card__status{
+  display:inline-block;padding:3px 10px;border-radius:999px;
+  background:var(--navy-tint);color:var(--navy);font-size:12.5px;font-weight:700;
+}
+.law-meta-card__status--draft{background:var(--maroon-tint);color:var(--maroon);}
+.law-meta-card__pills{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px;}
+.law-meta-card__pills li{
+  font-size:12.5px;padding:4px 10px;border-radius:999px;
+  background:var(--paper-alt);color:var(--ink-soft);border:1px solid var(--paper-line);
+}
+.law-meta-card__pills--tags li{background:var(--navy-tint);color:var(--navy);border-color:transparent;}
+.law-meta-card__actions{
+  margin-top:20px;padding-top:18px;border-top:1px dashed var(--paper-line);
+  display:flex;flex-wrap:wrap;gap:12px;align-items:center;
+}
+.law-meta-card__source-btn{min-width:220px;justify-content:center;}
+.law-meta-card__source-missing{margin:0;font-size:13.5px;color:var(--ink-soft);}
+
+.legal-disclaimer{
+  margin-top:28px;padding:18px 20px;border-radius:var(--radius-m);
+  background:linear-gradient(145deg,#f8f4ec 0%,#fff 100%);
+  border:1px solid #e6d9b8;border-left:4px solid var(--gold);
+}
+.legal-disclaimer__text{margin:0;font-size:14px;line-height:1.7;color:var(--ink);}
+
+@media (max-width:880px){
+  .law-detail-grid{grid-template-columns:1fr;}
+  .law-meta-card__dl{grid-template-columns:1fr;}
+  .law-meta-card__row{grid-template-columns:1fr;}
+  .law-meta-card__source-btn{width:100%;}
+}
 
