@@ -2,7 +2,6 @@ baseURL = 'https://burapatis.github.io/website-edulaw/'
 locale = 'th-th'
 defaultContentLanguage = 'th'
 title = 'กฎหมายการศึกษา'
-theme = ''
 
 [params]
   description = 'คลังรวบรวม จัดระบบ และเผยแพร่กฎหมายการศึกษาไทยทุกฉบับไว้ในที่เดียว พร้อมสรุปความรู้ แบบทดสอบ และลิงก์แหล่งอ้างอิงทางการ'
