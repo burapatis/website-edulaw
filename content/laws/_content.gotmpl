@@ -61,6 +61,10 @@
   {{- $lawType := $law.law_type | default $law.type | default "" -}}
   {{- $catKeys := $law.categories | default (slice $law.category) -}}
   {{- $tags := $law.tags | default slice -}}
+  {{- $agencies := slice -}}
+  {{- if $law.agency }}{{ $agencies = slice $law.agency }}{{ end -}}
+  {{- $lawtypes := slice -}}
+  {{- if $lawType }}{{ $lawtypes = slice $lawType }}{{ end -}}
 
   {{- $lawDesc := printf "สรุปและข้อมูลเบื้องต้นเกี่ยวกับ %s พร้อมหมวดหมู่ หน่วยงานที่เกี่ยวข้อง (%s) สถานะข้อมูล (%s) และลิงก์แหล่งข้อมูลทางการ" $law.title ($law.agency | default "หน่วยงานที่เกี่ยวข้อง") ($law.status | default "ข้อมูลสรุป") -}}
 
@@ -85,14 +89,12 @@
     "summary" $law.summary
     "links" ($law.links | default slice)
     "categories" ($law.categories | default (slice $law.category))
+    "agencies" $agencies
+    "lawtypes" $lawtypes
     "relatedLaws" ($law.relatedLaws | default slice)
   -}}
 
   {{- $content := dict "mediaType" "text/markdown" "value" $body -}}
-  {{- $agencies := slice -}}
-  {{- if $law.agency }}{{ $agencies = slice $law.agency }}{{ end -}}
-  {{- $lawtypes := slice -}}
-  {{- if $lawType }}{{ $lawtypes = slice $lawType }}{{ end -}}
   {{- $page := dict
     "content" $content
     "kind" "page"
