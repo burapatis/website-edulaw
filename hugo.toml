@@ -19,7 +19,7 @@ enableRobotsTXT = true
   tagline = 'EDUCATION LAW HUB'
   ogImage = 'assets/feature-graphic.png'
   feedbackGithubIssuesNew = 'https://github.com/burapatis/website-edulaw/issues/new/choose'
-  feedbackGoogleForm = ''
+  feedbackGoogleForm = 'https://forms.gle/1dYeBTHmC1HcrbRx6'
   version = '1.0.0-beta'
   release_status = 'Public Beta'
 
