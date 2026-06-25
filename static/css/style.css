@@ -398,6 +398,8 @@ section{padding:74px 0;}
 .cat-card--subordinate .cat-icon{background:#e8d9b0;color:#6b5416;}
 .cat-card--draft{background:linear-gradient(145deg,#f0f0f0 0%,#fafafa 100%);border-color:#c8c8c8;}
 .cat-card--draft .cat-icon{background:#e2e2e2;color:#5b554a;}
+.cat-card--international{background:linear-gradient(145deg,#e3f0ee 0%,#f4fbfa 100%);border-color:#a3cdc7;}
+.cat-card--international .cat-icon{background:#c8e4df;color:#1d6f6f;}
 .cat-card--tool-summary{background:linear-gradient(145deg,#e5efe7 0%,#f7fcf8 100%);border-color:#a8c9b2;}
 .cat-card--tool-summary .cat-icon{background:#cfe3d6;color:#3e6b57;}
 .cat-card--tool-quiz{background:linear-gradient(145deg,#f5ecd4 0%,#fffaf0 100%);border-color:#d9c48a;}
@@ -478,6 +480,7 @@ section{padding:74px 0;}
 .law-card--child{border-left:4px solid #7a2331;}
 .law-card--subordinate{border-left:4px solid #6b5416;}
 .law-card--draft{border-left:4px solid #8a8a8a;}
+.law-card--international{border-left:4px solid #1d6f6f;}
 .law-status-pill{
   font-family:var(--f-mono);font-size:11px;padding:3px 9px;border-radius:999px;
   background:var(--sage-tint);color:var(--sage);

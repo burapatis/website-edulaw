@@ -55,6 +55,12 @@
       "label": "ร่างกฎหมาย/ความเคลื่อนไหว",
       "icon": "flag",
       "desc": "กฎหมายที่อยู่ระหว่างการพิจารณา ควรติดตามความคืบหน้า"
+    },
+    {
+      "key": "international",
+      "label": "สนธิสัญญา/กฎหมายระหว่างประเทศด้านการศึกษา",
+      "icon": "globe",
+      "desc": "สนธิสัญญาสิทธิมนุษยชนที่ไทยเป็นภาคีและมีบทบัญญัติด้านสิทธิทางการศึกษา ความเสมอภาค และการไม่เลือกปฏิบัติ"
     }
   ],
   "laws": [
@@ -1198,6 +1204,214 @@
         "punishment-rule-2548"
       ],
       "lastUpdated": "2568-06-23"
+    },
+    {
+      "id": "icescr",
+      "category": "international",
+      "title": "กติการะหว่างประเทศว่าด้วยสิทธิทางเศรษฐกิจ สังคม และวัฒนธรรม (ICESCR) — โดยเฉพาะข้อ 13–14",
+      "short_title": "ICESCR (สิทธิทางการศึกษา ข้อ 13–14)",
+      "year": "ค.ศ. 1966 · ไทยภาคยานุวัติ 5 ก.ย. 1999",
+      "type": "สนธิสัญญาระหว่างประเทศ",
+      "agency": "องค์การสหประชาชาติ (UN)",
+      "status": "ไทยเป็นภาคี",
+      "summary": "กติการะหว่างประเทศที่รับรองสิทธิทางเศรษฐกิจ สังคม และวัฒนธรรม โดยข้อ 13–14 รับรองสิทธิในการศึกษาของทุกคน หลักการศึกษาภาคบังคับฟรี และการพัฒนาการศึกษาทุกระดับอย่างก้าวหน้า ประเทศไทยเข้าเป็นภาคีโดยการภาคยานุวัติเมื่อ 5 กันยายน ค.ศ. 1999",
+      "points": [
+        "ข้อ 13 รับรองสิทธิของทุกคนในการศึกษา และให้การศึกษามุ่งพัฒนาบุคลิกภาพและศักดิ์ศรีความเป็นมนุษย์อย่างเต็มที่",
+        "กำหนดให้การศึกษาระดับประถมเป็นภาคบังคับและไม่เสียค่าใช้จ่ายสำหรับทุกคน",
+        "ให้รัฐภาคีพัฒนาการศึกษาระดับมัธยมและอุดมศึกษาให้เข้าถึงได้อย่างเท่าเทียมและค่อย ๆ จัดให้เรียนฟรี",
+        "ข้อ 14 กำหนดให้รัฐที่ยังจัดการศึกษาภาคบังคับฟรีไม่ได้ ต้องจัดทำแผนดำเนินการให้บรรลุภายในเวลาที่เหมาะสม"
+      ],
+      "citation": "United Nations Treaty Collection, Chapter IV.3 — Thailand: Accession 5 September 1999",
+      "source_url": "https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-3&chapter=4&clang=_en",
+      "official_source": "UN Treaty Collection",
+      "last_checked": "2026-06-26",
+      "links": [
+        {
+          "label": "UN Treaty Collection — ICESCR (สถานะภาคี)",
+          "url": "https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-3&chapter=4&clang=_en"
+        },
+        {
+          "label": "OHCHR — ตัวบท ICESCR",
+          "url": "https://www.ohchr.org/en/instruments-mechanisms/instruments/international-covenant-economic-social-and-cultural-rights"
+        }
+      ],
+      "tags": [
+        "สิทธิมนุษยชน",
+        "สิทธิทางการศึกษา",
+        "สนธิสัญญาระหว่างประเทศ"
+      ],
+      "relatedLaws": [
+        "const-2560",
+        "nea-2542",
+        "compulsory-2545"
+      ],
+      "lastUpdated": "2568-06-26"
+    },
+    {
+      "id": "crc",
+      "category": "international",
+      "title": "อนุสัญญาว่าด้วยสิทธิเด็ก (CRC) — โดยเฉพาะข้อ 28–29",
+      "short_title": "CRC (สิทธิเด็กด้านการศึกษา ข้อ 28–29)",
+      "year": "ค.ศ. 1989 · ไทยภาคยานุวัติ 27 มี.ค. 1992",
+      "type": "สนธิสัญญาระหว่างประเทศ",
+      "agency": "องค์การสหประชาชาติ (UN)",
+      "status": "ไทยเป็นภาคี",
+      "summary": "อนุสัญญาด้านสิทธิมนุษยชนที่มีภาคีมากที่สุด (196 รัฐ) รับรองสิทธิเด็กอย่างรอบด้าน โดยข้อ 28–29 รับรองสิทธิในการศึกษาของเด็กและกำหนดเป้าหมายของการศึกษา ประเทศไทยเข้าเป็นภาคีโดยการภาคยานุวัติเมื่อ 27 มีนาคม ค.ศ. 1992",
+      "points": [
+        "ข้อ 28 รับรองสิทธิของเด็กในการศึกษา ให้การศึกษาประถมเป็นภาคบังคับและไม่เสียค่าใช้จ่าย",
+        "ส่งเสริมการศึกษามัธยมและอุดมศึกษาให้เข้าถึงได้ และดำเนินมาตรการลดการออกกลางคัน",
+        "ข้อ 28 กำหนดให้วินัยในโรงเรียนต้องสอดคล้องกับศักดิ์ศรีความเป็นมนุษย์ของเด็ก",
+        "ข้อ 29 กำหนดให้การศึกษามุ่งพัฒนาบุคลิกภาพ ความสามารถ การเคารพสิทธิมนุษยชน และความรับผิดชอบต่อสังคม"
+      ],
+      "citation": "United Nations Treaty Collection, Chapter IV.11 — Thailand: Accession 27 March 1992 (196 States parties)",
+      "source_url": "https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-11&chapter=4&clang=_en",
+      "official_source": "UN Treaty Collection",
+      "last_checked": "2026-06-26",
+      "links": [
+        {
+          "label": "UN Treaty Collection — CRC (สถานะภาคี)",
+          "url": "https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-11&chapter=4&clang=_en"
+        },
+        {
+          "label": "OHCHR — ตัวบท CRC",
+          "url": "https://www.ohchr.org/en/instruments-mechanisms/instruments/convention-rights-child"
+        }
+      ],
+      "tags": [
+        "สิทธิเด็ก",
+        "สิทธิทางการศึกษา",
+        "สนธิสัญญาระหว่างประเทศ"
+      ],
+      "relatedLaws": [
+        "const-2560",
+        "child-protect-2546",
+        "compulsory-2545"
+      ],
+      "lastUpdated": "2568-06-26"
+    },
+    {
+      "id": "crpd",
+      "category": "international",
+      "title": "อนุสัญญาว่าด้วยสิทธิคนพิการ (CRPD) — โดยเฉพาะข้อ 24 เรื่องการศึกษา",
+      "short_title": "CRPD (การศึกษาสำหรับคนพิการ ข้อ 24)",
+      "year": "ค.ศ. 2006 · มีผลใช้บังคับ 3 พ.ค. 2008 · ไทยให้สัตยาบัน 29 ก.ค. 2008",
+      "type": "สนธิสัญญาระหว่างประเทศ",
+      "agency": "องค์การสหประชาชาติ (UN)",
+      "status": "ไทยเป็นภาคี",
+      "summary": "อนุสัญญาที่รับรองสิทธิและศักดิ์ศรีของคนพิการ โดยข้อ 24 รับรองสิทธิด้านการศึกษาแบบเรียนรวม (inclusive education) ที่ไม่เลือกปฏิบัติ ประเทศไทยลงนามเมื่อ 30 มีนาคม ค.ศ. 2007 และให้สัตยาบันเมื่อ 29 กรกฎาคม ค.ศ. 2008 (อนุสัญญามีผลใช้บังคับทั่วไปตั้งแต่ 3 พฤษภาคม ค.ศ. 2008)",
+      "points": [
+        "ข้อ 24 รับรองสิทธิของคนพิการในการศึกษาโดยไม่เลือกปฏิบัติและบนพื้นฐานของโอกาสที่เท่าเทียม",
+        "กำหนดให้รัฐจัดระบบการศึกษาแบบเรียนรวมทุกระดับและการเรียนรู้ตลอดชีวิต",
+        "ต้องจัดที่พักอาศัยและการช่วยเหลือที่เหมาะสม (reasonable accommodation) ตามความต้องการของแต่ละบุคคล",
+        "สอดคล้องกับ พ.ร.บ.การจัดการศึกษาสำหรับคนพิการ พ.ศ. 2551 ของไทยในการจัดการเรียนรู้แบบเรียนรวม"
+      ],
+      "citation": "United Nations Treaty Collection, Chapter IV.15 — Thailand: Signature 30 March 2007, Ratification 29 July 2008; entry into force 3 May 2008",
+      "source_url": "https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-15&chapter=4&clang=_en",
+      "official_source": "UN Treaty Collection",
+      "last_checked": "2026-06-26",
+      "links": [
+        {
+          "label": "UN Treaty Collection — CRPD (สถานะภาคี)",
+          "url": "https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-15&chapter=4&clang=_en"
+        },
+        {
+          "label": "OHCHR — ตัวบท CRPD",
+          "url": "https://www.ohchr.org/en/instruments-mechanisms/instruments/convention-rights-persons-disabilities"
+        }
+      ],
+      "tags": [
+        "คนพิการ",
+        "การศึกษาแบบเรียนรวม",
+        "สนธิสัญญาระหว่างประเทศ"
+      ],
+      "relatedLaws": [
+        "const-2560",
+        "disability-edu-2551",
+        "disabled-welfare-2550"
+      ],
+      "lastUpdated": "2568-06-26"
+    },
+    {
+      "id": "cedaw",
+      "category": "international",
+      "title": "อนุสัญญาว่าด้วยการขจัดการเลือกปฏิบัติต่อสตรีในทุกรูปแบบ (CEDAW) — โดยเฉพาะข้อ 10 ความเสมอภาคทางการศึกษา",
+      "short_title": "CEDAW (ความเสมอภาคทางการศึกษา ข้อ 10)",
+      "year": "ค.ศ. 1979 · ไทยภาคยานุวัติ 9 ส.ค. 1985",
+      "type": "สนธิสัญญาระหว่างประเทศ",
+      "agency": "องค์การสหประชาชาติ (UN)",
+      "status": "ไทยเป็นภาคี",
+      "summary": "อนุสัญญาที่มุ่งขจัดการเลือกปฏิบัติต่อสตรีในทุกด้าน โดยข้อ 10 รับรองสิทธิที่เท่าเทียมของสตรีในการศึกษา ประเทศไทยเข้าเป็นภาคีโดยการภาคยานุวัติเมื่อ 9 สิงหาคม ค.ศ. 1985",
+      "points": [
+        "ข้อ 10 กำหนดให้รัฐขจัดการเลือกปฏิบัติต่อสตรีเพื่อให้มีสิทธิเท่าเทียมกับบุรุษในด้านการศึกษา",
+        "ให้โอกาสเข้าถึงการศึกษา หลักสูตร การสอบ และทุนการศึกษาอย่างเท่าเทียมทุกระดับ",
+        "ส่งเสริมการลดอัตราการออกจากโรงเรียนของนักเรียนหญิงและจัดโครงการสำหรับผู้ที่ออกกลางคัน",
+        "ขจัดแนวคิดเหมารวมทางเพศในการศึกษาผ่านการปรับปรุงตำราเรียนและวิธีการสอน"
+      ],
+      "citation": "United Nations Treaty Collection, Chapter IV.8 — Thailand: Accession 9 August 1985",
+      "source_url": "https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-8&chapter=4&clang=_en",
+      "official_source": "UN Treaty Collection",
+      "last_checked": "2026-06-26",
+      "links": [
+        {
+          "label": "UN Treaty Collection — CEDAW (สถานะภาคี)",
+          "url": "https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-8&chapter=4&clang=_en"
+        },
+        {
+          "label": "OHCHR — ตัวบท CEDAW",
+          "url": "https://www.ohchr.org/en/instruments-mechanisms/instruments/convention-elimination-all-forms-discrimination-against-women"
+        }
+      ],
+      "tags": [
+        "ความเสมอภาคทางเพศ",
+        "สิทธิทางการศึกษา",
+        "สนธิสัญญาระหว่างประเทศ"
+      ],
+      "relatedLaws": [
+        "const-2560",
+        "nea-2542"
+      ],
+      "lastUpdated": "2568-06-26"
+    },
+    {
+      "id": "icerd",
+      "category": "international",
+      "title": "อนุสัญญาว่าด้วยการขจัดการเลือกปฏิบัติทางเชื้อชาติในทุกรูปแบบ (ICERD) — โดยเฉพาะข้อ 5(e)(v) และข้อ 7",
+      "short_title": "ICERD (สิทธิการศึกษาและการต่อต้านอคติ ข้อ 5, 7)",
+      "year": "ค.ศ. 1965 · ไทยภาคยานุวัติ 28 ม.ค. 2003",
+      "type": "สนธิสัญญาระหว่างประเทศ",
+      "agency": "องค์การสหประชาชาติ (UN)",
+      "status": "ไทยเป็นภาคี",
+      "summary": "อนุสัญญาที่มุ่งขจัดการเลือกปฏิบัติทางเชื้อชาติในทุกรูปแบบ โดยข้อ 5(e)(v) รับรองสิทธิด้านการศึกษาและการฝึกอบรมโดยไม่เลือกปฏิบัติ และข้อ 7 ส่งเสริมการศึกษาเพื่อต่อต้านอคติและส่งเสริมความเข้าใจระหว่างกลุ่มชน ประเทศไทยเข้าเป็นภาคีโดยการภาคยานุวัติเมื่อ 28 มกราคม ค.ศ. 2003",
+      "points": [
+        "ข้อ 5(e)(v) รับรองสิทธิในการศึกษาและการฝึกอบรมของทุกคนโดยไม่เลือกปฏิบัติทางเชื้อชาติ สีผิว หรือชาติกำเนิด",
+        "ให้รัฐประกันความเสมอภาคต่อหน้ากฎหมายในการเข้าถึงบริการการศึกษาของรัฐ",
+        "ข้อ 7 กำหนดให้รัฐใช้มาตรการด้านการศึกษาเพื่อต่อต้านอคติที่นำไปสู่การเลือกปฏิบัติทางเชื้อชาติ",
+        "ส่งเสริมความเข้าใจ ความอดกลั้น และมิตรภาพระหว่างกลุ่มชาติพันธุ์ผ่านระบบการเรียนการสอน"
+      ],
+      "citation": "United Nations Treaty Collection, Chapter IV.2 — Thailand: Accession 28 January 2003",
+      "source_url": "https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-2&chapter=4&clang=_en",
+      "official_source": "UN Treaty Collection",
+      "last_checked": "2026-06-26",
+      "links": [
+        {
+          "label": "UN Treaty Collection — ICERD (สถานะภาคี)",
+          "url": "https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-2&chapter=4&clang=_en"
+        },
+        {
+          "label": "OHCHR — ตัวบท ICERD",
+          "url": "https://www.ohchr.org/en/instruments-mechanisms/instruments/international-convention-elimination-all-forms-racial"
+        }
+      ],
+      "tags": [
+        "การไม่เลือกปฏิบัติ",
+        "สิทธิทางการศึกษา",
+        "สนธิสัญญาระหว่างประเทศ"
+      ],
+      "relatedLaws": [
+        "const-2560",
+        "nea-2542"
+      ],
+      "lastUpdated": "2568-06-26"
     }
   ]
 }

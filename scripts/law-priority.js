@@ -43,6 +43,11 @@ const LAW_PRIORITY = {
   'univ-civil-2547': 'P2',
   'innovation-area-2562': 'P2',
   'nea-draft': 'P2',
+  'icescr': 'P2',
+  'crc': 'P2',
+  'crpd': 'P2',
+  'cedaw': 'P2',
+  'icerd': 'P2',
 
   // ---- P3: กฎหมายเฉพาะทาง/ใช้งานเฉพาะกลุ่ม ----
   'age-counting-2545': 'P3',

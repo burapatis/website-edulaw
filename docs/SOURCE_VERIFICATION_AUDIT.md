@@ -5,14 +5,14 @@
 
 - วันที่สร้างรายงาน: 2026-06-25
 - แหล่งข้อมูล: `data/laws.json` (หน้ากฎหมายสร้างจากคลังนี้ + `content/laws/_content.gotmpl`)
-- จำนวนหน้ากฎหมายทั้งหมด: **30**
+- จำนวนหน้ากฎหมายทั้งหมด: **35**
 - ค่าวันที่ตรวจเชิงโครงสร้าง (default จาก gotmpl): 2026-06-24
 
 ## สรุปสถานะการตรวจสอบ
 
 | verification_status | ความหมาย | จำนวน |
 |---------------------|----------|------:|
-| `verified_official_source` | ตรวจสอบแหล่งข้อมูลทางการแล้ว (ฟิลด์ครบเชิงโครงสร้าง) | 30 |
+| `verified_official_source` | ตรวจสอบแหล่งข้อมูลทางการแล้ว (ฟิลด์ครบเชิงโครงสร้าง) | 35 |
 | `needs_source_url` | อยู่ระหว่างตรวจสอบแหล่งข้อมูล (ต้องการลิงก์ทางการเฉพาะฉบับ) | 0 |
 | `needs_official_source_review` | อยู่ระหว่างตรวจสอบแหล่งข้อมูล (ต้องทบทวน official_source) | 0 |
 | `needs_status_review` | อยู่ระหว่างตรวจสอบแหล่งข้อมูล (ต้องทบทวนสถานะ) | 0 |
@@ -21,7 +21,7 @@
 
 ### สรุปแหล่งข้อมูล
 
-- มี `source_url` ระบุชัดเจนใน data: **30**
+- มี `source_url` ระบุชัดเจนใน data: **35**
 - มีเฉพาะลิงก์ราชกิจจานุเบกษาแบบหน้าหลัก (ยังไม่ใช่ลิงก์เฉพาะฉบับ): **0**
 - ไม่มีลิงก์แหล่งข้อมูลเลย: **0**
 - `official_source` เป็น placeholder: **0**
@@ -66,6 +66,11 @@
 | `data/laws.json#labor-protection-2541` | พระราชบัญญัติคุ้มครองแรงงาน พ.ศ. 2541 (ลูกจ้างสถานศึกษาเอกชน) | พระราชบัญญัติ | พ.ศ. 2541 · แก้ไขเพิ่มเติมหลายฉบับ | กระทรวงแรงงาน / โรงเรียนเอกชนและสถานศึกษาที่จ้างลูกจ้าง | `https://www.ratchakitcha.soc.go.th/DATA/PDF/2541/A/008/1.PDF` | ราชกิจจานุเบกษา | 2026-06-25 | บังคับใช้ | `verified_official_source` | P3 |
 | `data/laws.json#local-edu-2542` | บทบัญญัติเกี่ยวกับการจัดการศึกษาท้องถิ่น (ตาม พ.ร.บ.การศึกษาแห่งชาติ) | บทบัญญัติใน พ.ร.บ. | พ.ศ. 2542 · ปรับปรุงตามฉบับแก้ไข | องค์กรปกครองส่วนท้องถิ่น / สพฐ. | `https://www.moe.go.th/backend/wp-content/uploads/2020/10/1.-%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9A%E0%B8%B1%E0%B8%8D%E0%B8%8D%E0%B8%B1%E0%B8%95%E0%B8%B4%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%A8%E0%B8%B6%E0%B8%81%E0%B8%A9%E0%B8%B2%E0%B9%81%E0%B8%AB%E0%B9%88%E0%B8%87%E0%B8%8A%E0%B8%B2%E0%B8%95%E0%B8%B4-%E0%B8%9E.%E0%B8%A8.2542-%E0%B8%89.%E0%B8%AD%E0%B8%B1%E0%B8%9E%E0%B9%80%E0%B8%94%E0%B8%97.pdf` | กระทรวงศึกษาธิการ | 2026-06-26 | บังคับใช้ | `verified_official_source` | P3 |
 | `data/laws.json#youth-protection-2551` | พระราชบัญญัติส่งเสริมและพัฒนาคุณภาพชีวิตเด็กและเยาวชน พ.ศ. 2551 | พระราชบัญญัติ | พ.ศ. 2551 | กรมกิจการเด็กและเยาวชน | `https://siythailand.org/wp-content/uploads/2020/10/law_th_20172507204615_1.pdf` | เอกสารเผยแพร่ (ควรยืนยันกับราชกิจจานุเบกษา) | 2026-06-25 | บังคับใช้ | `verified_official_source` | P2 |
+| `data/laws.json#icescr` | กติการะหว่างประเทศว่าด้วยสิทธิทางเศรษฐกิจ สังคม และวัฒนธรรม (ICESCR) — โดยเฉพาะข้อ 13–14 | สนธิสัญญาระหว่างประเทศ | ค.ศ. 1966 · ไทยภาคยานุวัติ 5 ก.ย. 1999 | องค์การสหประชาชาติ (UN) | `https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-3&chapter=4&clang=_en` | UN Treaty Collection | 2026-06-26 | ไทยเป็นภาคี | `verified_official_source` | P2 |
+| `data/laws.json#crc` | อนุสัญญาว่าด้วยสิทธิเด็ก (CRC) — โดยเฉพาะข้อ 28–29 | สนธิสัญญาระหว่างประเทศ | ค.ศ. 1989 · ไทยภาคยานุวัติ 27 มี.ค. 1992 | องค์การสหประชาชาติ (UN) | `https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-11&chapter=4&clang=_en` | UN Treaty Collection | 2026-06-26 | ไทยเป็นภาคี | `verified_official_source` | P2 |
+| `data/laws.json#crpd` | อนุสัญญาว่าด้วยสิทธิคนพิการ (CRPD) — โดยเฉพาะข้อ 24 เรื่องการศึกษา | สนธิสัญญาระหว่างประเทศ | ค.ศ. 2006 · มีผลใช้บังคับ 3 พ.ค. 2008 · ไทยให้สัตยาบัน 29 ก.ค. 2008 | องค์การสหประชาชาติ (UN) | `https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-15&chapter=4&clang=_en` | UN Treaty Collection | 2026-06-26 | ไทยเป็นภาคี | `verified_official_source` | P2 |
+| `data/laws.json#cedaw` | อนุสัญญาว่าด้วยการขจัดการเลือกปฏิบัติต่อสตรีในทุกรูปแบบ (CEDAW) — โดยเฉพาะข้อ 10 ความเสมอภาคทางการศึกษา | สนธิสัญญาระหว่างประเทศ | ค.ศ. 1979 · ไทยภาคยานุวัติ 9 ส.ค. 1985 | องค์การสหประชาชาติ (UN) | `https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-8&chapter=4&clang=_en` | UN Treaty Collection | 2026-06-26 | ไทยเป็นภาคี | `verified_official_source` | P2 |
+| `data/laws.json#icerd` | อนุสัญญาว่าด้วยการขจัดการเลือกปฏิบัติทางเชื้อชาติในทุกรูปแบบ (ICERD) — โดยเฉพาะข้อ 5(e)(v) และข้อ 7 | สนธิสัญญาระหว่างประเทศ | ค.ศ. 1965 · ไทยภาคยานุวัติ 28 ม.ค. 2003 | องค์การสหประชาชาติ (UN) | `https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-2&chapter=4&clang=_en` | UN Treaty Collection | 2026-06-26 | ไทยเป็นภาคี | `verified_official_source` | P2 |
 
 ## แหล่งข้อมูลที่ระบุชัดเจนใน data (source_url แบบเจาะจง)
 
@@ -189,6 +194,26 @@
   - source_url: https://siythailand.org/wp-content/uploads/2020/10/law_th_20172507204615_1.pdf
   - official_source: เอกสารเผยแพร่ (ควรยืนยันกับราชกิจจานุเบกษา)
   - last_checked: 2026-06-25
+- `icescr` — กติการะหว่างประเทศว่าด้วยสิทธิทางเศรษฐกิจ สังคม และวัฒนธรรม (ICESCR) — โดยเฉพาะข้อ 13–14
+  - source_url: https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-3&chapter=4&clang=_en
+  - official_source: UN Treaty Collection
+  - last_checked: 2026-06-26
+- `crc` — อนุสัญญาว่าด้วยสิทธิเด็ก (CRC) — โดยเฉพาะข้อ 28–29
+  - source_url: https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-11&chapter=4&clang=_en
+  - official_source: UN Treaty Collection
+  - last_checked: 2026-06-26
+- `crpd` — อนุสัญญาว่าด้วยสิทธิคนพิการ (CRPD) — โดยเฉพาะข้อ 24 เรื่องการศึกษา
+  - source_url: https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-15&chapter=4&clang=_en
+  - official_source: UN Treaty Collection
+  - last_checked: 2026-06-26
+- `cedaw` — อนุสัญญาว่าด้วยการขจัดการเลือกปฏิบัติต่อสตรีในทุกรูปแบบ (CEDAW) — โดยเฉพาะข้อ 10 ความเสมอภาคทางการศึกษา
+  - source_url: https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-8&chapter=4&clang=_en
+  - official_source: UN Treaty Collection
+  - last_checked: 2026-06-26
+- `icerd` — อนุสัญญาว่าด้วยการขจัดการเลือกปฏิบัติทางเชื้อชาติในทุกรูปแบบ (ICERD) — โดยเฉพาะข้อ 5(e)(v) และข้อ 7
+  - source_url: https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-2&chapter=4&clang=_en
+  - official_source: UN Treaty Collection
+  - last_checked: 2026-06-26
 
 ---
 
