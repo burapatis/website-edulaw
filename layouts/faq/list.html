@@ -13,9 +13,13 @@
     {{ partial "legal-disclaimer.html" . }}
 
     <div class="faq-list content-body" data-pagefind-body>
+      {{- $lastGroup := "" }}
       {{- range site.Data.faq.items }}
+      {{- with .group }}{{ if ne . $lastGroup }}
+      <h2 class="faq-group">{{ . }}</h2>
+      {{ $lastGroup = . }}{{ end }}{{ end }}
       <article class="faq-item">
-        <h2 class="faq-item__q">{{ .question }}</h2>
+        <h3 class="faq-item__q">{{ .question }}</h3>
         <p class="faq-item__a">{{ .answer }}</p>
         {{- with .links }}
         <p class="faq-item__links">
