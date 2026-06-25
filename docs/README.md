@@ -25,6 +25,9 @@
 | [../CONTRIBUTING.md](../CONTRIBUTING.md) | แนวทางร่วมพัฒนา |
 | [../SOURCE_REVIEW_LOG.md](../SOURCE_REVIEW_LOG.md) | บันทึกตรวจแหล่งด้วยมือ |
 | [../LEGAL_REVIEW_CHECKLIST.md](../LEGAL_REVIEW_CHECKLIST.md) | checklist ตรวจกฎหมายก่อน deploy |
+| [SOURCE_VERIFICATION_WORKSHEET.md](SOURCE_VERIFICATION_WORKSHEET.md) | วิธีตรวจและกรอกแหล่งข้อมูลทางการ (Step 16) |
+| [SOURCE_VERIFICATION_AUDIT.md](SOURCE_VERIFICATION_AUDIT.md) | ตารางสถานะแหล่งข้อมูลทุกหน้า (สร้างด้วย `npm run audit:sources`) |
+| [PRIORITY_LAW_SOURCE_CHECKLIST.md](PRIORITY_LAW_SOURCE_CHECKLIST.md) | เช็กลิสต์ตรวจแหล่งตามลำดับความสำคัญ (สร้างอัตโนมัติ) |
 
 ## คุณภาพและ CI
 
@@ -56,4 +59,5 @@ npm run check:content:full
 npm run build:search
 npm run release:check
 npm run report:stats
+npm run audit:sources
 ```

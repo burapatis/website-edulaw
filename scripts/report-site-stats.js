@@ -8,6 +8,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { getPriority } = require('./law-priority');
 
 const ROOT = path.resolve(__dirname, '..');
 const LAWS_JSON = path.join(ROOT, 'data', 'laws.json');
@@ -79,6 +80,21 @@ function countQuizQuestions(yamlText) {
   return matches ? matches.length : 0;
 }
 
+function isGenericGazetteUrl(url) {
+  return /^https?:\/\/ratchakitcha\.soc\.go\.th\/?$/.test((url || '').trim());
+}
+
+/** ประเภทของ source_url: explicit | generic-gazette | deep-gazette | none */
+function sourceUrlType(law) {
+  if ((law.source_url || '').trim()) return 'explicit';
+  for (const link of law.links || []) {
+    if (link.label === 'ราชกิจจานุเบกษา' && link.url) {
+      return isGenericGazetteUrl(link.url) ? 'generic-gazette' : 'deep-gazette';
+    }
+  }
+  return 'none';
+}
+
 function deriveSourceUrl(law) {
   let sourceURL = (law.source_url || '').trim();
   if (sourceURL) return sourceURL;
@@ -131,6 +147,13 @@ function main() {
   let reviewGood = 0;
   let reviewNeeds = 0;
 
+  // สรุปการตรวจแหล่งข้อมูล (Step 16)
+  let explicitSource = 0;
+  let genericGazetteOnly = 0;
+  let noSourceLink = 0;
+  let verifiedSource = 0; // มี source_url เฉพาะฉบับ + official ไม่ใช่ placeholder + last_checked
+  let p12NeedsReview = 0;
+
   const lawtypeCounts = {};
   const agencyCounts = {};
 
@@ -143,6 +166,7 @@ function main() {
     const src = deriveSourceUrl(law);
     const official = deriveOfficialSource(law);
     const rawLastChecked = (law.last_checked || '').trim();
+    const srcType = sourceUrlType(law);
 
     if (!src) missingSource += 1;
     if (official === OFFICIAL_PLACEHOLDER) placeholderOfficial += 1;
@@ -155,6 +179,19 @@ function main() {
 
     if (src && official !== OFFICIAL_PLACEHOLDER) reviewGood += 1;
     else reviewNeeds += 1;
+
+    if (srcType === 'explicit') explicitSource += 1;
+    else if (srcType === 'generic-gazette') genericGazetteOnly += 1;
+    else if (srcType === 'none') noSourceLink += 1;
+
+    const isVerified =
+      srcType === 'explicit' &&
+      official !== OFFICIAL_PLACEHOLDER &&
+      Boolean(rawLastChecked);
+    if (isVerified) verifiedSource += 1;
+
+    const priority = getPriority(law.id);
+    if ((priority === 'P1' || priority === 'P2') && !isVerified) p12NeedsReview += 1;
   }
 
   let backlogPending = 0;
@@ -189,6 +226,16 @@ function main() {
   console.log(`  last_checked เก่า >${STALE_CHECK_DAYS}d: ${staleLastChecked}`);
   console.log(`  คิว pending_review:       ${backlogPending}`);
   console.log(`  คิว in_review:            ${backlogInReview}`);
+  console.log('');
+  console.log('สรุปการตรวจแหล่งข้อมูล (Step 16)');
+  console.log('--------------------------------');
+  console.log(`  หน้ากฎหมายทั้งหมด:        ${laws.length}`);
+  console.log(`  มี source_url เฉพาะฉบับ:  ${explicitSource}`);
+  console.log(`  เฉพาะลิงก์หน้าหลัก รก.:    ${genericGazetteOnly}`);
+  console.log(`  ไม่มีลิงก์แหล่งข้อมูล:     ${noSourceLink}`);
+  console.log(`  ยืนยันแหล่งแล้ว (โครงสร้าง): ${verifiedSource}`);
+  console.log(`  P1/P2 ที่ยังต้องตรวจด้วยมือ: ${p12NeedsReview}`);
+  console.log('  (รายละเอียด: docs/SOURCE_VERIFICATION_AUDIT.md — สร้างด้วย npm run audit:sources)');
   console.log('');
   console.log('กฎหมายแยกตามประเภท (สูงสุด 8 รายการ)');
   Object.entries(lawtypeCounts)

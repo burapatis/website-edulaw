@@ -11,6 +11,7 @@
     "check:content:full": "node scripts/check-content-quality.js --full",
     "check:build": "hugo --gc --minify",
     "report:stats": "node scripts/report-site-stats.js",
+    "audit:sources": "node scripts/source-audit.js",
     "release:check": "node scripts/release-check.js",
     "dev": "hugo server -D"
   },
