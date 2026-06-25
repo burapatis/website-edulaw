@@ -45,6 +45,7 @@
 | [FEEDBACK_WORKFLOW.md](FEEDBACK_WORKFLOW.md) | รับและจัดการข้อเสนอแนะจากผู้ใช้ |
 | [DASHBOARD.md](DASHBOARD.md) | ภาพรวมเว็บไซต์และสถานะเนื้อหา |
 | [GUIDES.md](GUIDES.md) | คู่มือและบทความอธิบายกฎหมาย |
+| [GAMES.md](GAMES.md) | เกมเรียนรู้และเกมจับคู่คำศัพท์ |
 
 ## คำสั่งที่ใช้บ่อย
 

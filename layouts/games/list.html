@@ -1,0 +1,70 @@
+{{ define "main" }}
+<div class="page-hero" data-pagefind-body>
+  <div class="container">
+    <div class="breadcrumb"><a href="{{ partial "iu.html" "" }}">หน้าแรก</a> / {{ .Title }}</div>
+    <h1>{{ .Title }}</h1>
+    <p>{{ .Description }}</p>
+    <div class="game-intro">{{ .Content }}</div>
+  </div>
+</div>
+
+<section class="game-section">
+  <div class="container">
+    {{ partial "game-disclaimer.html" . }}
+
+    <div class="section-head" style="margin-top:28px;">
+      <div>
+        <div class="eyebrow">เลือกเกม</div>
+        <h2 class="mt-0">เกมที่พร้อมเล่น</h2>
+        <p class="game-lead">เริ่มจากเกมจับคู่คำศัพท์ แล้วต่อยอดด้วยการอ่านสรุปกฎหมาย คู่มือ หรือทำแบบทดสอบ</p>
+      </div>
+    </div>
+
+    <div class="game-card-grid">
+      <a class="game-pick-card" href="{{ partial "iu.html" "games/matching/" }}">
+        <span class="game-pick-card__icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24"><path d="M10.5 4.5h-6v6h6v-6Zm9 9h-6v6h6v-6Zm-9 0h-6v6h6v-6Zm9-9h-6v6h6v-6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </span>
+        <h3>เกมจับคู่คำศัพท์กฎหมายการศึกษา</h3>
+        <p>จับคู่คำสำคัญกับความหมายเบื้องต้น พร้อมคำอธิบายและลิงก์อ่านต่อ</p>
+        <span class="game-pick-card__cta">เริ่มเล่น →</span>
+      </a>
+    </div>
+
+    <div class="section-head" style="margin-top:42px;">
+      <div>
+        <div class="eyebrow">เรียนรู้ต่อ</div>
+        <h2 class="mt-0">เครื่องมือที่เกี่ยวข้อง</h2>
+      </div>
+    </div>
+
+    <div class="game-tools cat-grid">
+      <a class="cat-card cat-card--tool-quiz" href="{{ partial "iu.html" "quiz/" }}">
+        <h3>แบบทดสอบ</h3>
+        <p>ทบทวนความเข้าใจเบื้องต้น พร้อมคำอธิบายทุกข้อ</p>
+        <span class="cat-count">ทำแบบทดสอบ →</span>
+      </a>
+      <a class="cat-card cat-card--tool-summary" href="{{ partial "iu.html" "guides/" }}">
+        <h3>คู่มือและบทความ</h3>
+        <p>วางกรอบความเข้าใจก่อนอ่านคลังกฎหมาย</p>
+        <span class="cat-count">อ่านคู่มือ →</span>
+      </a>
+      <a class="cat-card cat-card--tool-paths" href="{{ partial "iu.html" "learning-paths/" }}">
+        <h3>เส้นทางการเรียนรู้</h3>
+        <p>ลำดับการอ่านตามบทบาทของผู้เรียน</p>
+        <span class="cat-count">เลือกเส้นทาง →</span>
+      </a>
+      <a class="cat-card cat-card--tool-faq" href="{{ partial "iu.html" "laws/" }}">
+        <h3>คลังกฎหมาย</h3>
+        <p>อ่านสรุปกฎหมายพร้อมลิงก์แหล่งทางการ</p>
+        <span class="cat-count">ไปที่คลัง →</span>
+      </a>
+      <a class="cat-card cat-card--tool-guides" href="{{ partial "iu.html" "search/" }}">
+        <h3>ค้นหา</h3>
+        <p>ค้นหาชื่อกฎหมายหรือประเด็นในคลัง</p>
+        <span class="cat-count">ไปที่หน้าค้นหา →</span>
+      </a>
+    </div>
+  </div>
+</section>
+{{ end }}

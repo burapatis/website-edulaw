@@ -1478,3 +1478,125 @@ body.nav-open{overflow:hidden;}
   font-size:14px;line-height:1.65;padding:14px 18px;
   background:var(--navy-tint);border-radius:var(--radius-sm);color:var(--ink);
 }
+
+/* =========================================================
+   เกมเรียนรู้ (Learning games)
+   ========================================================= */
+.game-section{padding:40px 0 64px;}
+.game-intro{margin-top:14px;}
+.game-lead{color:var(--ink-soft);max-width:640px;margin:6px 0 0;}
+
+.game-disclaimer{
+  background:var(--maroon-tint);border:1px solid #e3b9b0;
+  border-radius:var(--radius-m);padding:14px 18px;
+}
+.game-disclaimer__text{margin:0;font-size:14px;line-height:1.7;color:#5a2630;}
+
+/* การ์ดเลือกเกมในหน้า landing */
+.game-card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:8px;}
+.game-pick-card{
+  display:flex;flex-direction:column;gap:8px;
+  background:#fff;border:1px solid var(--paper-line);border-radius:var(--radius-m);
+  padding:24px 22px;text-decoration:none;color:inherit;
+  transition:transform .18s, box-shadow .18s, border-color .18s;
+}
+.game-pick-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-soft);border-color:var(--gold);}
+.game-pick-card__icon{
+  width:46px;height:46px;border-radius:12px;background:var(--navy-tint);
+  display:flex;align-items:center;justify-content:center;color:var(--navy);
+}
+.game-pick-card h3{font-size:17px;margin:6px 0 2px;}
+.game-pick-card p{font-size:13.6px;color:var(--ink-soft);margin:0;}
+.game-pick-card__cta{font-family:var(--f-mono);font-size:12px;color:var(--maroon);margin-top:auto;}
+.game-tools{margin-top:18px;}
+
+/* วิธีเล่น */
+.game-howto{
+  margin-top:24px;background:var(--paper-alt);border:1px solid var(--paper-line);
+  border-radius:var(--radius-m);padding:18px 22px;
+}
+.game-howto__list{margin:8px 0 0;padding-left:22px;line-height:1.8;font-size:14.5px;color:var(--ink);}
+
+/* กระดานเกม */
+.game-matching{margin-top:24px;}
+.game-status-bar{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  flex-wrap:wrap;margin-bottom:16px;
+}
+.game-progress{margin:0;font-family:var(--f-mono);font-size:14px;color:var(--navy);font-weight:600;}
+
+.game-board{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+}
+.game-card{
+  position:relative;min-height:96px;padding:12px;
+  border:1.5px solid var(--paper-line);border-radius:var(--radius-m);
+  background:var(--navy);color:var(--paper);cursor:pointer;
+  font-family:var(--f-body);font-size:14px;line-height:1.45;text-align:center;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .18s, border-color .18s, transform .12s;
+}
+.game-card:hover:not(:disabled){transform:translateY(-2px);}
+.game-card:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+.game-card__face{display:block;width:100%;word-break:break-word;}
+.game-card.is-flipped{
+  background:#fff;color:var(--ink);border-color:var(--navy);
+}
+.game-card.game-card--term.is-flipped{background:#fff;border-color:var(--gold);}
+.game-card.game-card--match.is-flipped{background:var(--navy-tint);border-color:var(--navy-2);}
+.game-card.is-matched{
+  background:var(--sage-tint);color:#234a3a;border-color:var(--sage);cursor:default;
+}
+.game-card.is-matched .game-card__face::after{
+  content:"\2713";display:block;margin-top:6px;font-weight:700;color:var(--sage);
+}
+
+/* ผลตอบกลับ */
+.game-feedback{margin-top:18px;min-height:24px;font-size:14.5px;color:var(--ink-soft);}
+.game-feedback__ok{
+  background:var(--sage-tint);border:1px solid var(--sage);
+  border-radius:var(--radius-m);padding:14px 18px;
+}
+.game-feedback__title{margin:0 0 6px;font-weight:700;color:#234a3a;}
+.game-feedback__body{margin:0 0 8px;color:var(--ink);line-height:1.6;}
+.game-feedback__link{font-weight:600;color:var(--maroon);}
+
+/* จบเกม */
+.game-complete{
+  margin-top:20px;background:var(--navy);color:var(--paper);
+  border-radius:var(--radius-m);padding:22px 24px;
+}
+.game-complete__text{margin:0 0 14px;font-size:16px;line-height:1.6;}
+.game-complete__actions{display:flex;gap:12px;flex-wrap:wrap;}
+
+.game-noscript{margin-top:16px;font-size:14px;color:var(--ink-soft);}
+
+/* อภิธานศัพท์ (fallback + SEO/Pagefind) */
+.game-glossary{margin-top:40px;}
+.game-glossary__lead{color:var(--ink-soft);font-size:14.5px;margin:6px 0 16px;}
+.game-glossary__list{margin:0;display:grid;gap:12px;}
+.game-glossary__item{
+  background:#fff;border:1px solid var(--paper-line);border-radius:var(--radius-m);
+  padding:14px 18px;
+}
+.game-glossary__item dt{font-weight:700;color:var(--navy);margin-bottom:4px;}
+.game-glossary__item dd{margin:0;font-size:14.5px;line-height:1.65;color:var(--ink);}
+.game-glossary__cat{font-weight:400;font-size:13px;color:var(--ink-soft);}
+.game-glossary__explain{color:var(--ink-soft);}
+.game-glossary__link{display:block;margin-top:6px;font-weight:600;}
+.game-glossary__link a{color:var(--maroon);}
+
+.game-related{margin-top:36px;}
+.game-related__links{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+
+@media (max-width:780px){
+  .game-board{grid-template-columns:repeat(3,1fr);gap:10px;}
+}
+@media (max-width:520px){
+  .game-board{grid-template-columns:repeat(2,1fr);}
+  .game-card{min-height:88px;font-size:13.5px;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .game-card,.game-pick-card{transition:none;}
+}

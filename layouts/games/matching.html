@@ -1,0 +1,109 @@
+{{ define "main" }}
+{{- $items := slice -}}
+{{- range $it := site.Data.games.matching.items -}}
+  {{- $url := "" -}}
+  {{- with $it.related_url }}{{ $url = partial "iu.html" . }}{{ end -}}
+  {{- $items = $items | append (dict
+      "id" $it.id
+      "term" $it.term
+      "match" $it.match
+      "explanation" ($it.explanation | default "")
+      "category" ($it.category | default "")
+      "relatedUrl" $url
+      "relatedLabel" ($it.related_label | default "")
+  ) -}}
+{{- end -}}
+
+<div class="page-hero" data-pagefind-body>
+  <div class="container">
+    <div class="breadcrumb"><a href="{{ partial "iu.html" "" }}">หน้าแรก</a> / <a href="{{ partial "iu.html" "games/" }}">เกมเรียนรู้</a> / {{ .Title }}</div>
+    <h1>{{ .Title }}</h1>
+    <p>{{ .Description }}</p>
+    <div class="game-intro">{{ .Content }}</div>
+  </div>
+</div>
+
+<section class="game-section">
+  <div class="container">
+    {{ partial "game-disclaimer.html" . }}
+
+    <div class="game-howto" data-pagefind-body>
+      <h2 class="mt-0">วิธีเล่น</h2>
+      <ol class="game-howto__list">
+        <li>การ์ดทั้งหมดจะถูกสับและคว่ำไว้ — มีทั้งการ์ด <strong>คำสำคัญ</strong> และการ์ด <strong>ความหมาย</strong></li>
+        <li>แตะหรือคลิกการ์ดเพื่อเปิดทีละสองใบ</li>
+        <li>ถ้าคำสำคัญตรงกับความหมาย การ์ดจะเปิดค้างไว้พร้อมคำอธิบายสั้น ๆ</li>
+        <li>ถ้าไม่ตรงกัน การ์ดจะคว่ำกลับ ให้ลองใหม่</li>
+        <li>จับคู่ให้ครบทุกคู่เพื่อจบเกม แล้วกด “เล่นใหม่” เพื่อเริ่มรอบใหม่ได้เสมอ</li>
+      </ol>
+    </div>
+
+    <div
+      class="game-matching"
+      id="matchingGame"
+      data-pagefind-ignore
+      data-flip-delay="1000"
+    >
+      <div class="game-status-bar">
+        <p class="game-progress" id="gameProgress" aria-live="polite">จับคู่แล้ว 0 จาก {{ len $items }} คู่</p>
+        <button type="button" class="btn btn-outline btn-sm" id="gameRestart">เล่นใหม่</button>
+      </div>
+
+      <div class="game-board" id="gameBoard" role="group" aria-label="กระดานเกมจับคู่คำศัพท์"></div>
+
+      <div class="game-feedback" id="gameFeedback" role="status" aria-live="polite"></div>
+
+      <div class="game-complete" id="gameComplete" hidden>
+        <p class="game-complete__text">ยอดเยี่ยม! คุณจับคู่ครบแล้ว ลองอ่านต่อหรือทำแบบทดสอบเพื่อทบทวนเพิ่มเติม</p>
+        <div class="game-complete__actions">
+          <a class="btn btn-gold" href="{{ partial "iu.html" "quiz/" }}">ทำแบบทดสอบ</a>
+          <a class="btn btn-outline" href="{{ partial "iu.html" "guides/" }}">อ่านคู่มือ</a>
+          <button type="button" class="btn btn-outline" id="gameRestart2">เล่นใหม่</button>
+        </div>
+      </div>
+
+      <p class="game-noscript" id="gameNoscript">
+        เกมนี้ต้องเปิดใช้งาน JavaScript — หากการ์ดไม่ปรากฏ คุณยังอ่านคำศัพท์และความหมายทั้งหมดได้จาก “อภิธานศัพท์ในเกม” ด้านล่าง
+      </p>
+    </div>
+
+    <div class="game-glossary" data-pagefind-body>
+      <h2>อภิธานศัพท์ในเกม</h2>
+      <p class="game-glossary__lead">รายการคำสำคัญและความหมายเบื้องต้นทั้งหมดที่ใช้ในเกมนี้ (สำหรับอ่านทบทวนและการค้นหา)</p>
+      <dl class="game-glossary__list">
+        {{- range $items }}
+        <div class="game-glossary__item">
+          <dt>{{ .term }}{{ with .category }} <span class="game-glossary__cat">({{ . }})</span>{{ end }}</dt>
+          <dd>
+            {{ .match }}
+            {{- with .explanation }}<span class="game-glossary__explain"> — {{ . }}</span>{{ end }}
+            {{- if and .relatedUrl .relatedLabel }}
+            <span class="game-glossary__link"><a href="{{ .relatedUrl }}">{{ .relatedLabel }}</a></span>
+            {{- end }}
+          </dd>
+        </div>
+        {{- end }}
+      </dl>
+    </div>
+
+    {{ partial "feedback-callout.html" . }}
+
+    <div class="game-related">
+      <h2>เรียนรู้ต่อ</h2>
+      <div class="game-related__links">
+        <a class="btn btn-outline btn-sm" href="{{ partial "iu.html" "laws/" }}">คลังกฎหมาย</a>
+        <a class="btn btn-outline btn-sm" href="{{ partial "iu.html" "search/" }}">ค้นหา</a>
+        <a class="btn btn-outline btn-sm" href="{{ partial "iu.html" "quiz/" }}">แบบทดสอบ</a>
+        <a class="btn btn-outline btn-sm" href="{{ partial "iu.html" "guides/" }}">คู่มือ</a>
+        <a class="btn btn-outline btn-sm" href="{{ partial "iu.html" "learning-paths/" }}">เส้นทางการเรียนรู้</a>
+      </div>
+    </div>
+
+    <script type="application/json" id="matchingData">{{ $items | jsonify | safeJS }}</script>
+  </div>
+</section>
+{{ end }}
+
+{{ define "scripts" }}
+<script src="{{ printf "%s?v=1" (partial "iu.html" "js/games-matching.js") }}"></script>
+{{ end }}
