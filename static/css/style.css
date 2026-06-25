@@ -1485,6 +1485,8 @@ body.nav-open{overflow:hidden;}
 .faq-section{padding:40px 0 64px;}
 .faq-intro{margin-top:12px;}
 .faq-list{margin-top:24px;}
+.faq-group{font-size:20px;color:var(--maroon);margin:34px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--paper-line);}
+.faq-group:first-child{margin-top:0;}
 .faq-item{
   background:#fff;border:1px solid var(--paper-line);border-radius:var(--radius-m);
   padding:18px 22px;margin-bottom:14px;
