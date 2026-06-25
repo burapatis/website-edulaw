@@ -19,7 +19,6 @@ tags:
 related_laws:
   - teacher-civil-2547
   - teacher-council-2546
-  - teacher-license-kr-2550
   - teacher-salary-2547
 related_learning_paths:
   - teachers

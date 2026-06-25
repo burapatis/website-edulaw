@@ -11,7 +11,6 @@ related_laws:
   - teacher-civil-2547
   - teacher-council-2546
   - teacher-salary-2547
-  - qa-edu-2546
 taxonomy_links:
   - label: "กลุ่มผู้ใช้: ครูและบุคลากรทางการศึกษา"
     url: "audiences/ครูและบุคลากรทางการศึกษา/"

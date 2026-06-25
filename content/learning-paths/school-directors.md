@@ -7,10 +7,8 @@ card_theme: admin
 card_summary: "การบริหารสถานศึกษา กฎหมายแม่บท วินัย และความปลอดภัยผู้เรียน"
 related_laws:
   - nea-2542
-  - qa-edu-2546
   - child-protect-2546
   - punishment-rule-2548
-  - anti-bullying-moe-2566
   - moe-admin-2546
 taxonomy_links:
   - label: "หมวดบริหารราชการ / อุดมศึกษา"
