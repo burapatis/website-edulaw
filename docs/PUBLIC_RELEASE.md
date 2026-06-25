@@ -73,6 +73,7 @@
 ## เอกสารที่เกี่ยวข้อง
 
 - [หน้าสถานะ Public Beta](/about/public-beta/) — สำหรับผู้ใช้
+- [SITE_VERIFICATION_REPORT.md](SITE_VERIFICATION_REPORT.md) — รายงานตรวจสอบก่อนเผยแพร่ v1.0.0-beta
 - [CHANGELOG.md](../CHANGELOG.md)
 - [RELEASE_CHECKLIST.md](../RELEASE_CHECKLIST.md)
 - [QA_CHECKLIST.md](QA_CHECKLIST.md)

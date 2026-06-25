@@ -7,6 +7,7 @@
 | เอกสาร | คำอธิบาย |
 |--------|----------|
 | [PUBLIC_RELEASE.md](PUBLIC_RELEASE.md) | การเปิดใช้งาน Public Beta และถ้อยคำสาธารณะ |
+| [SITE_VERIFICATION_REPORT.md](SITE_VERIFICATION_REPORT.md) | รายงานสรุปผลตรวจสอบก่อน/หลังเผยแพร่ v1.0.0-beta |
 | [QA_CHECKLIST.md](QA_CHECKLIST.md) | ทดสอบด้วยเบราว์เซอร์ (desktop/mobile) |
 | [ROADMAP.md](ROADMAP.md) | แผนพัฒนาเวอร์ชันถัดไป |
 | [../RELEASE_CHECKLIST.md](../RELEASE_CHECKLIST.md) | Checklist ก่อน deploy |

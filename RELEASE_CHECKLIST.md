@@ -2,7 +2,7 @@
 
 รายการตรวจก่อนเผยแพร่หรือประกาศเวอร์ชันใหม่ (เช่น Public Beta v1.0.0-beta)
 
-ใช้คู่กับ [docs/QA_CHECKLIST.md](docs/QA_CHECKLIST.md) และ [LEGAL_REVIEW_CHECKLIST.md](LEGAL_REVIEW_CHECKLIST.md)
+ใช้คู่กับ [docs/QA_CHECKLIST.md](docs/QA_CHECKLIST.md), [docs/SITE_VERIFICATION_REPORT.md](docs/SITE_VERIFICATION_REPORT.md) และ [LEGAL_REVIEW_CHECKLIST.md](LEGAL_REVIEW_CHECKLIST.md)
 
 ## คำสั่งอัตโนมัติ
 

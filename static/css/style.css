@@ -39,7 +39,7 @@
 }
 
 *{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
+html{scroll-behavior:smooth;overflow-x:clip;}
 body{
   margin:0;
   background:var(--paper);
@@ -242,19 +242,31 @@ body{
 .nav-toggle span{display:block;width:20px;height:2px;background:var(--navy);margin:4px 0;}
 
 @media (max-width: 920px){
+  /* ปิด backdrop-filter บนมือถือ เพื่อไม่ให้ header กลายเป็น containing block
+     ของเมนูที่ position:fixed (มิฉะนั้นเมนูจะสูงเกือบ 0 และไปอยู่หลังเนื้อหา) */
+  .site-header{
+    backdrop-filter:none;-webkit-backdrop-filter:none;
+    background:var(--paper);
+  }
+  .header-inner{flex-wrap:nowrap;}
+  /* ให้โลโก้และปุ่มเมนูอยู่เหนือ overlay ของเมนูเสมอ เพื่อให้กดปิดได้ */
+  .brand{position:relative;z-index:70;}
   .main-nav{
-    position:fixed;inset:64px 0 0 0;background:var(--paper);
-    flex-direction:column;align-items:stretch;padding:18px;gap:4px;
+    position:fixed;top:64px;left:12px;right:12px;
+    max-height:calc(100dvh - 80px);
+    background:var(--paper);z-index:50;
+    flex-direction:column;align-items:stretch;
+    padding:10px;gap:2px;margin:0;
+    border:1px solid var(--paper-line);border-radius:14px;
+    box-shadow:0 18px 36px rgba(0,0,0,.16);
     transform:translateY(-12px);opacity:0;visibility:hidden;
     transition:opacity .2s, transform .2s, visibility .2s;
-    border-top:1px solid var(--paper-line);
     overflow-y:auto;
   }
   .main-nav.open{transform:translateY(0);opacity:1;visibility:visible;}
   .main-nav a{padding:13px 16px;font-size:16px;}
-  .nav-toggle{display:block;}
+  .nav-toggle{display:block;position:relative;z-index:70;}
   .search-mini{display:none;}
-  .header-inner{flex-wrap:wrap;}
 }
 
 /* =========================================================
@@ -300,10 +312,10 @@ body{
 .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:38px;}
 .hero-search{
   display:flex;background:#fff;border-radius:16px;padding:8px;gap:8px;
-  box-shadow:var(--shadow-lift);max-width:560px;
+  box-shadow:var(--shadow-lift);max-width:560px;width:100%;
 }
 .hero-search input{
-  flex:1;border:none;outline:none;padding:12px 14px;font-family:var(--f-body);
+  flex:1;min-width:0;border:none;outline:none;padding:12px 14px;font-family:var(--f-body);
   font-size:15.5px;border-radius:10px;color:var(--ink);
 }
 .hero-search button{
@@ -323,8 +335,13 @@ body{
 }
 @media (max-width:880px){
   .hero-grid{grid-template-columns:1fr;}
+  .hero-grid > div{min-width:0;}
   .hero-emblem{order:-1;}
   .hero-feature{max-width:min(100%, 280px);}
+}
+@media (max-width:560px){
+  .hero-search{flex-direction:column;}
+  .hero-search button{width:100%;justify-content:center;}
 }
 
 /* =========================================================
@@ -1301,6 +1318,10 @@ body.nav-open{overflow:hidden;}
 .content-status-summary__meta{margin:0 0 12px;font-size:13.5px;color:rgba(250,246,236,.78);}
 .content-status-summary .btn-outline.on-dark{border-color:rgba(255,255,255,.35);color:#fff;}
 .content-status-summary .btn-outline.on-dark:hover{background:rgba(255,255,255,.1);}
+.content-status-summary .btn{
+  white-space:normal;text-align:center;line-height:1.5;
+  max-width:100%;height:auto;border-radius:14px;
+}
 
 /* Guides */
 .guide-section{padding:40px 0 64px;}
