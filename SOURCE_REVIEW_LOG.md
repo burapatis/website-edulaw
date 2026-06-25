@@ -39,3 +39,37 @@ _ยังไม่มีบันทึกการตรวจสอบใน 
 |---------------|-----------|-------------------|--------------------------|------------|---------------|----------|
 | 2026-06-25 | `data/laws.json#nea-2542` | พระราชบัญญัติการศึกษาแห่งชาติ พ.ศ. 2542 และที่แก้ไขเพิ่มเติม | ราชกิจจานุเบกษา / กระทรวงศึกษาธิการ | https://ratchakitcha.soc.go.th/documents/1708862.pdf | ตรวจสอบแหล่งข้อมูลทางการแล้ว (เปิดได้ HTTP 200) เพิ่มลิงก์ฉบับที่ 2–4 ในรายการ links | ฉบับ พ.ศ. 2542 เป็น source_url หลัก; ควรตรวจสอบฉบับแก้ไขเพิ่มเติมจากแหล่งทางการก่อนใช้อ้างอิง |
 | 2026-06-25 | `data/laws.json#moe-admin-2546` | พระราชบัญญัติระเบียบบริหารราชการกระทรวงศึกษาธิการ พ.ศ. 2546 และที่แก้ไขเพิ่มเติม | กระทรวงศึกษาธิการ | https://www.moe.go.th/พรบ-ระเบียบบริหารราชการ/ | ตรวจสอบแหล่งข้อมูลทางการแล้ว (เปิดได้ HTTP 200) | ใช้หน้าเฉพาะฉบับของกระทรวงศึกษาธิการ; ควรตรวจสอบฉบับแก้ไขเพิ่มเติมจากแหล่งทางการก่อนใช้อ้างอิง |
+
+### รอบเพิ่มเติม 2026-06-25 — ยืนยันแหล่งจากรายการที่ผู้ใช้ส่งมา
+
+ตรวจ HTTP ของทุก URL ที่ได้รับ (browser UA). ผลโดยสรุป:
+
+- ลิงก์จากโดเมนราชการ/หน่วยงาน (moe.go.th, ops.moe.go.th, ops.go.th, otepc.go.th, dep.go.th, studentloan.or.th, mhesi.nrct.go.th, tosh.or.th, omhc.dmh.go.th, onec.go.th, ksp.or.th, ratchakitcha.soc.go.th/documents/…) — **HTTP 200**
+- ลิงก์ `www.ratchakitcha.soc.go.th/DATA/PDF/…` (const-2560, higher-ed-2562, ecd-2562, eef-2561, pdpa-2562, labor-2541) — **HTTP 403 จาก Cloudflare challenge** (เป็นลิงก์ราชกิจจานุเบกษาที่ถูกต้อง แต่บล็อกการเช็คอัตโนมัติ ตรวจซ้ำด้วยเบราว์เซอร์จริงได้)
+
+| วันที่ตรวจสอบ | ฉบับที่อัปเดต source_url | โดเมนแหล่ง | สถานะ HTTP |
+|---------------|--------------------------|------------|------------|
+| 2026-06-25 | const-2560, higher-ed-2562, ecd-2562, eef-2561, pdpa-2562, labor-protection-2541 | ratchakitcha.soc.go.th/DATA/PDF | 403 (Cloudflare; ลิงก์ถูกต้อง) |
+| 2026-06-25 | innovation-area-2562, youth-protection-2551 (ฉบับ 2) | ratchakitcha.soc.go.th/documents | 200 |
+| 2026-06-25 | vocational-2551, teacher-salary-2547 (+ฉ.2,3), punishment-rule-2548 | moe.go.th/backend | 200 |
+| 2026-06-25 | private-school-2550, learning-promote-2566, disability-edu-2551 | ops.moe.go.th | 200 |
+| 2026-06-25 | ohes-2562 | ops.go.th | 200 |
+| 2026-06-25 | teacher-civil-2547 (+ฉ.2,3,4) | otepc.go.th | 200 |
+| 2026-06-25 | child-protect-2546 | dep.go.th | 200 |
+| 2026-06-25 | sla-2560 | studentloan.or.th | 200 |
+| 2026-06-25 | univ-civil-2547 | mhesi.nrct.go.th | 200 |
+| 2026-06-25 | osh-2554 | tosh.or.th | 200 |
+| 2026-06-25 | disabled-welfare-2550 | omhc.dmh.go.th | 200 |
+| 2026-06-25 | age-counting-2545 | backoffice.onec.go.th | 200 |
+| 2026-06-25 | nea-draft | parliament.go.th | 200 |
+
+**รายการที่ต้องระวัง (ยังไม่อัปเดตตามที่ส่งมา):**
+
+- `teacher-council-2546` (พ.ร.บ.สภาครูฯ 2546): URL ที่ส่งมา (`act-teacher-4-2562.pdf`) คือ **พ.ร.บ.ระเบียบข้าราชการครูฯ ฉบับที่ 4 พ.ศ. 2562** → นำไปใส่เป็นลิงก์ฉบับที่ 4 ของ `teacher-civil-2547` แทน; `teacher-council-2546` ยังคงเป็น needs_source_url
+- `teacher-license-kr-2550` (กฎกระทรวงออกใบอนุญาตฯ 2550): URL ที่ส่งมาเป็น **กฎกระทรวงการประกอบวิชาชีพควบคุม พ.ศ. 2549** (คนละฉบับ) → บันทึกแยกไว้ใน `data/law_backlog.yaml#backlog-ksp-control-profession-2549`; ฉบับ 2550 ยังคงเป็น needs_source_url
+- `youth-protection-2551`: source_url หลักเป็นเอกสารเผยแพร่ของ NGO (siythailand.org) — ควรยืนยันกับราชกิจจานุเบกษา (เพิ่มลิงก์ฉบับที่ 2 จากราชกิจจานุเบกษาไว้แล้ว)
+
+**กฎหมายที่ตัดออกจากคลัง (ตามคำสั่งผู้ใช้ — ไม่มี URL และไม่มีหน้าอื่นอ้างถึง):**
+
+- `ocs-rank-rule-2553`, `teacher-welfare-2547`, `autonomous-univ`, `excellence-fund-2550`, `rmut-2550` (รวม 5 ฉบับ)
+- ยังเก็บไว้ในคลัง (รอ URL): `qa-edu-2546`, `procurement-2560`, `budget-procedure-2561` (มีหน้าเส้นทางการเรียนรู้/คู่มืออ้างถึง)

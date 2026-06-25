@@ -266,3 +266,20 @@ items:
     source_url: ""
     review_status: pending_review
     notes: "อยู่ในดัชนี ศธ. — ตรวจสอบความสัมพันธ์กับ learning-promote-2566 (อาจถูกแทนที่บางส่วน) ก่อนเพิ่ม"
+
+  # ---- รายการที่มีลิงก์ทางการแล้ว แต่ยังไม่ได้สร้างหน้าเว็บ (รอจัดทำเนื้อหา) ----
+  - id: backlog-ksp-control-profession-2549
+    title: "กฎกระทรวงการประกอบวิชาชีพควบคุม พ.ศ. 2549"
+    short_title: "วิชาชีพควบคุม (คุรุสภา)"
+    law_type: "กฎกระทรวง"
+    priority: medium
+    target_audiences:
+      - ครูและบุคลากรทางการศึกษา
+      - ผู้บริหารสถานศึกษา
+    possible_agencies:
+      - คุรุสภา
+      - กระทรวงศึกษาธิการ
+    source_status: "พบลิงก์ทางการ (คุรุสภา) ตรวจ HTTP 200 เมื่อ 2026-06-25"
+    source_url: "https://www.ksp.or.th/wp-content/uploads/2025/06/%E0%B8%81%E0%B8%8E%E0%B8%81%E0%B8%A3%E0%B8%B0%E0%B8%97%E0%B8%A3%E0%B8%A7%E0%B8%87%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%81%E0%B8%AD%E0%B8%9A%E0%B8%A7%E0%B8%B4%E0%B8%8A%E0%B8%B2%E0%B8%8A%E0%B8%B5%E0%B8%9E%E0%B8%84%E0%B8%A7%E0%B8%9A%E0%B8%84%E0%B8%B8%E0%B8%A1-%E0%B8%9E.%E0%B8%A8.-2549.pdf"
+    review_status: in_review
+    notes: "เป็นคนละฉบับกับ teacher-license-kr-2550 (ออกใบอนุญาตฯ 2550) — แยกเป็นหน้าใหม่เมื่อจัดทำสรุปเนื้อหาจากตัวบทจริง"
