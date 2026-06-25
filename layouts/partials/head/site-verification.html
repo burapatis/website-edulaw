@@ -1,0 +1,7 @@
+{{- /* meta verification สำหรับเครื่องมือผู้ดูแลเว็บ — แสดงเฉพาะเมื่อมีรหัสใน hugo.toml */ -}}
+{{- with site.Params.googleSiteVerification }}
+<meta name="google-site-verification" content="{{ . }}">
+{{- end }}
+{{- with site.Params.bingSiteVerification }}
+<meta name="msvalidate.01" content="{{ . }}">
+{{- end }}

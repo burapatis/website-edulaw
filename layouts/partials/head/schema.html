@@ -58,6 +58,17 @@
 {{- end -}}
 
 {{- $graph := slice (dict "@type" "BreadcrumbList" "itemListElement" $crumbs) -}}
+{{- if and (eq .Section "faq") site.Data.faq.items -}}
+  {{- $faqEntities := slice -}}
+  {{- range site.Data.faq.items -}}
+    {{- $faqEntities = $faqEntities | append (dict
+      "@type" "Question"
+      "name" .question
+      "acceptedAnswer" (dict "@type" "Answer" "text" .answer)
+    ) -}}
+  {{- end -}}
+  {{- $graph = $graph | append (dict "@type" "FAQPage" "mainEntity" $faqEntities) -}}
+{{- end -}}
 {{- if and (eq .Section "laws") .IsPage -}}
   {{- $graph = $graph | append (dict
     "@type" "TechArticle"

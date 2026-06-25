@@ -22,6 +22,11 @@ enableRobotsTXT = true
   feedbackGoogleForm = 'https://forms.gle/1dYeBTHmC1HcrbRx6'
   version = '1.0.0-beta'
   release_status = 'Public Beta'
+  # การยืนยันความเป็นเจ้าของกับเครื่องมือผู้ดูแลเว็บ (ใส่เฉพาะรหัสใน content ของ meta tag)
+  googleSiteVerification = 'wMILLqrIT3tacGNLNlP30_oUf39tjLi_gkUcO0aAGTY'
+  bingSiteVerification = ''
+  # คำสำคัญเริ่มต้นของเว็บไซต์ (ใช้เมื่อหน้านั้นไม่มี keywords/tags ของตัวเอง)
+  keywords = ['กฎหมายการศึกษา', 'พ.ร.บ.การศึกษาแห่งชาติ', 'กฎหมายครู', 'ใบประกอบวิชาชีพครู', 'วิทยฐานะ', 'เรียนฟรี', 'การศึกษาภาคบังคับ', 'คุ้มครองเด็ก', 'ราชกิจจานุเบกษา', 'คลังกฎหมายการศึกษา']
 
 [sitemap]
   changefreq = 'weekly'

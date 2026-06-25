@@ -1480,6 +1480,21 @@ body.nav-open{overflow:hidden;}
 }
 
 /* =========================================================
+   คำถามที่พบบ่อย (FAQ)
+   ========================================================= */
+.faq-section{padding:40px 0 64px;}
+.faq-intro{margin-top:12px;}
+.faq-list{margin-top:24px;}
+.faq-item{
+  background:#fff;border:1px solid var(--paper-line);border-radius:var(--radius-m);
+  padding:18px 22px;margin-bottom:14px;
+}
+.faq-item__q{font-size:18px;margin:0 0 8px;color:var(--navy);}
+.faq-item__a{margin:0;font-size:15px;line-height:1.75;color:var(--ink);}
+.faq-item__links{margin:10px 0 0;display:flex;gap:16px;flex-wrap:wrap;}
+.faq-item__links a{font-weight:600;color:var(--maroon);font-size:14.5px;}
+
+/* =========================================================
    เกมเรียนรู้ (Learning games)
    ========================================================= */
 .game-section{padding:40px 0 64px;}

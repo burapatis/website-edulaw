@@ -3,4 +3,16 @@
 <meta name="description" content="{{ $seo.description }}">
 <meta name="robots" content="{{ $seo.robots }}">
 <meta name="author" content="{{ site.Params.author }}">
+{{- /* keywords: ใช้ของหน้าก่อน (keywords/tags) แล้วค่อย fallback เป็นค่าเริ่มต้นของเว็บไซต์ */ -}}
+{{- $kw := slice -}}
+{{- with .Params.keywords -}}
+  {{- if reflect.IsSlice . }}{{ $kw = . }}{{ else }}{{ $kw = split . "," }}{{ end -}}
+{{- else with .Params.tags -}}
+  {{- $kw = . -}}
+{{- else with site.Params.keywords -}}
+  {{- $kw = . -}}
+{{- end -}}
+{{- with $kw }}
+<meta name="keywords" content="{{ delimit . ", " }}">
+{{- end }}
 <link rel="canonical" href="{{ .Permalink }}">

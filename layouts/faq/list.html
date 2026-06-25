@@ -1,0 +1,36 @@
+{{ define "main" }}
+<div class="page-hero" data-pagefind-body>
+  <div class="container">
+    <div class="breadcrumb"><a href="{{ partial "iu.html" "" }}">หน้าแรก</a> / {{ .Title }}</div>
+    <h1>{{ .Title }}</h1>
+    <p>{{ .Description }}</p>
+    <div class="faq-intro">{{ .Content }}</div>
+  </div>
+</div>
+
+<section class="faq-section">
+  <div class="container">
+    {{ partial "legal-disclaimer.html" . }}
+
+    <div class="faq-list content-body" data-pagefind-body>
+      {{- range site.Data.faq.items }}
+      <article class="faq-item">
+        <h2 class="faq-item__q">{{ .question }}</h2>
+        <p class="faq-item__a">{{ .answer }}</p>
+        {{- with .links }}
+        <p class="faq-item__links">
+          {{- range . }}
+          {{- $url := .url -}}
+          {{- if not (hasPrefix $url "http") }}{{ $url = partial "iu.html" $url }}{{ end -}}
+          <a href="{{ $url }}"{{ if hasPrefix .url "http" }} target="_blank" rel="noopener"{{ end }}>{{ .label }} →</a>
+          {{- end }}
+        </p>
+        {{- end }}
+      </article>
+      {{- end }}
+    </div>
+
+    {{ partial "feedback-callout.html" . }}
+  </div>
+</section>
+{{ end }}
