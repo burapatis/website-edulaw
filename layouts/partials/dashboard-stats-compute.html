@@ -3,6 +3,8 @@
 {{- $laws := site.Data.laws.laws -}}
 {{- $catalog := site.Data.laws -}}
 {{- $quizData := site.Data.quizzes -}}
+{{- /* ต้องตรงกับ $defaultAudiences ใน content/laws/_content.gotmpl เพื่อให้ตัวเลขสอดคล้องกับหน้ากฎหมายที่ Hugo สร้าง */ -}}
+{{- $defaultAudiences := slice "ครูและบุคลากรทางการศึกษา" "นักศึกษา" "ผู้สนใจทั่วไป" -}}
 
 {{- /* derive helpers */ -}}
 {{- $lawtypeMap := dict -}}
@@ -32,7 +34,7 @@
     {{- if . }}{{ $categoryMap = merge $categoryMap (dict . (add (index $categoryMap . | default 0) 1)) }}{{ end -}}
   {{- end -}}
 
-  {{- $auds := $law.audiences | default slice -}}
+  {{- $auds := $law.audiences | default $defaultAudiences -}}
   {{- range $auds }}
     {{- if . }}{{ $audienceMap = merge $audienceMap (dict . (add (index $audienceMap . | default 0) 1)) }}{{ end -}}
   {{- end -}}
@@ -128,10 +130,10 @@
   "quizQuestions" (len ($quizData.questions | default slice))
   "quizCategories" (len ($quizData.categories | default slice))
   "learningPaths" $pathCount
-  "categoryTermCount" (len site.Taxonomies.categories)
-  "agencyTermCount" (len site.Taxonomies.agencies)
-  "audienceTermCount" (len site.Taxonomies.audiences)
-  "lawtypeTermCount" (len site.Taxonomies.lawtypes)
+  "categoryTermCount" (len $categoryRows)
+  "agencyTermCount" (len $agencyRows)
+  "audienceTermCount" (len $audienceRows)
+  "lawtypeTermCount" (len $lawtypeRows)
   "tagCount" (len $tagSet)
   "catalogUpdatedAt" ($catalog.updatedAt | default "")
   "buildDate" (now.Format "2006-01-02")

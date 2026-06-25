@@ -39,9 +39,9 @@
 
 ค่าคงที่ **6** — ตรงกับจำนวนการ์ดใน `layouts/summaries/list.html` (ไม่ใช่หน้า markdown แยก)
 
-### Taxonomy counts
+### จำนวนหมวดหมู่ / หน่วยงาน / กลุ่มผู้ใช้ / ประเภทกฎหมาย
 
-`len site.Taxonomies.categories` (และ agencies, audiences, lawtypes) — จากหน้ากฎหมายที่ Hugo สร้างตอน build
+นับจากจำนวนแถวของตารางการกระจายตัว (`categoryRows`, `agencyRows`, `audienceRows`, `lawtypeRows`) ซึ่ง derive ตรงจาก `data/laws.json` — ตัวเลขในการ์ดภาพรวมจึงตรงกับตารางด้านล่างเสมอ (ไม่พึ่ง `site.Taxonomies` ที่อาจคลาดเคลื่อนเมื่อมีกฎหมายที่ไม่ระบุหน่วยงาน/ประเภท)
 
 ### สถานะการตรวจสอบแหล่งข้อมูล
 
