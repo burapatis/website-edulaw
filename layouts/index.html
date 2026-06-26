@@ -143,7 +143,7 @@
         <span class="cat-icon" data-icon="info"></span>
         <h3>คู่มือและบทความอธิบาย</h3>
         <p>บทความแนะนำเชิงการศึกษา วางกรอบก่อนอ่านคลังกฎหมาย</p>
-        <span class="cat-count">6 บทความ</span>
+        <span class="cat-count">{{ len (where site.RegularPages "Section" "guides") }} บทความ</span>
       </a>
       <a class="cat-card cat-card--tool-quiz" href="{{ partial "iu.html" "quiz/" }}">
         <span class="cat-icon" data-icon="check"></span>
