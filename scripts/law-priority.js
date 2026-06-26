@@ -54,8 +54,12 @@ const LAW_PRIORITY = {
   'rajabhat-2547': 'P2',
   'rmut-2548': 'P2',
   'community-college-2558': 'P2',
+  'onesqa-2543': 'P2',
+  'ipst-2541': 'P2',
 
   // ---- P3: กฎหมายเฉพาะทาง/ใช้งานเฉพาะกลุ่ม ----
+  'school-lunch-fund-2535': 'P3',
+  'ops-moe-structure-2567': 'P3',
   'age-counting-2545': 'P3',
   'autonomous-univ': 'P3',
   'excellence-fund-2550': 'P3',
