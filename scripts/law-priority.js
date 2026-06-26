@@ -48,16 +48,23 @@ const LAW_PRIORITY = {
   'crpd': 'P2',
   'cedaw': 'P2',
   'icerd': 'P2',
+  'private-univ-2546': 'P2',
+  'vocational-institute-2555': 'P2',
+  'hesi-policy-council-2562': 'P2',
+  'rajabhat-2547': 'P2',
+  'rmut-2548': 'P2',
+  'community-college-2558': 'P2',
 
   // ---- P3: กฎหมายเฉพาะทาง/ใช้งานเฉพาะกลุ่ม ----
   'age-counting-2545': 'P3',
   'autonomous-univ': 'P3',
-  'rmut-2550': 'P3',
   'excellence-fund-2550': 'P3',
   'budget-procedure-2561': 'P3',
   'procurement-2560': 'P3',
   'labor-protection-2541': 'P3',
   'local-edu-2542': 'P3',
+  'student-uniform-2551': 'P3',
+  'scout-2551': 'P3',
 };
 
 function getPriority(lawId) {

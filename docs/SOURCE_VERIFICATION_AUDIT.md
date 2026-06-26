@@ -3,16 +3,16 @@
 > เอกสารนี้ **สร้างอัตโนมัติ** ด้วย `npm run audit:sources` — อย่าแก้ด้วยมือ
 > ใช้เป็นฐานข้อมูลสำหรับการตรวจแหล่งทางการด้วยมือ ไม่ใช่การยืนยันความถูกต้องทางกฎหมาย
 
-- วันที่สร้างรายงาน: 2026-06-25
+- วันที่สร้างรายงาน: 2026-06-26
 - แหล่งข้อมูล: `data/laws.json` (หน้ากฎหมายสร้างจากคลังนี้ + `content/laws/_content.gotmpl`)
-- จำนวนหน้ากฎหมายทั้งหมด: **35**
+- จำนวนหน้ากฎหมายทั้งหมด: **43**
 - ค่าวันที่ตรวจเชิงโครงสร้าง (default จาก gotmpl): 2026-06-24
 
 ## สรุปสถานะการตรวจสอบ
 
 | verification_status | ความหมาย | จำนวน |
 |---------------------|----------|------:|
-| `verified_official_source` | ตรวจสอบแหล่งข้อมูลทางการแล้ว (ฟิลด์ครบเชิงโครงสร้าง) | 35 |
+| `verified_official_source` | ตรวจสอบแหล่งข้อมูลทางการแล้ว (ฟิลด์ครบเชิงโครงสร้าง) | 43 |
 | `needs_source_url` | อยู่ระหว่างตรวจสอบแหล่งข้อมูล (ต้องการลิงก์ทางการเฉพาะฉบับ) | 0 |
 | `needs_official_source_review` | อยู่ระหว่างตรวจสอบแหล่งข้อมูล (ต้องทบทวน official_source) | 0 |
 | `needs_status_review` | อยู่ระหว่างตรวจสอบแหล่งข้อมูล (ต้องทบทวนสถานะ) | 0 |
@@ -21,7 +21,7 @@
 
 ### สรุปแหล่งข้อมูล
 
-- มี `source_url` ระบุชัดเจนใน data: **35**
+- มี `source_url` ระบุชัดเจนใน data: **43**
 - มีเฉพาะลิงก์ราชกิจจานุเบกษาแบบหน้าหลัก (ยังไม่ใช่ลิงก์เฉพาะฉบับ): **0**
 - ไม่มีลิงก์แหล่งข้อมูลเลย: **0**
 - `official_source` เป็น placeholder: **0**
@@ -66,6 +66,14 @@
 | `data/laws.json#labor-protection-2541` | พระราชบัญญัติคุ้มครองแรงงาน พ.ศ. 2541 (ลูกจ้างสถานศึกษาเอกชน) | พระราชบัญญัติ | พ.ศ. 2541 · แก้ไขเพิ่มเติมหลายฉบับ | กระทรวงแรงงาน / โรงเรียนเอกชนและสถานศึกษาที่จ้างลูกจ้าง | `https://www.ratchakitcha.soc.go.th/DATA/PDF/2541/A/008/1.PDF` | ราชกิจจานุเบกษา | 2026-06-25 | บังคับใช้ | `verified_official_source` | P3 |
 | `data/laws.json#local-edu-2542` | บทบัญญัติเกี่ยวกับการจัดการศึกษาท้องถิ่น (ตาม พ.ร.บ.การศึกษาแห่งชาติ) | บทบัญญัติใน พ.ร.บ. | พ.ศ. 2542 · ปรับปรุงตามฉบับแก้ไข | องค์กรปกครองส่วนท้องถิ่น / สพฐ. | `https://www.moe.go.th/backend/wp-content/uploads/2020/10/1.-%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9A%E0%B8%B1%E0%B8%8D%E0%B8%8D%E0%B8%B1%E0%B8%95%E0%B8%B4%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%A8%E0%B8%B6%E0%B8%81%E0%B8%A9%E0%B8%B2%E0%B9%81%E0%B8%AB%E0%B9%88%E0%B8%87%E0%B8%8A%E0%B8%B2%E0%B8%95%E0%B8%B4-%E0%B8%9E.%E0%B8%A8.2542-%E0%B8%89.%E0%B8%AD%E0%B8%B1%E0%B8%9E%E0%B9%80%E0%B8%94%E0%B8%97.pdf` | กระทรวงศึกษาธิการ | 2026-06-26 | บังคับใช้ | `verified_official_source` | P3 |
 | `data/laws.json#youth-protection-2551` | พระราชบัญญัติส่งเสริมและพัฒนาคุณภาพชีวิตเด็กและเยาวชน พ.ศ. 2551 | พระราชบัญญัติ | พ.ศ. 2551 | กรมกิจการเด็กและเยาวชน | `https://siythailand.org/wp-content/uploads/2020/10/law_th_20172507204615_1.pdf` | เอกสารเผยแพร่ (ควรยืนยันกับราชกิจจานุเบกษา) | 2026-06-25 | บังคับใช้ | `verified_official_source` | P2 |
+| `data/laws.json#private-univ-2546` | พระราชบัญญัติสถาบันอุดมศึกษาเอกชน พ.ศ. 2546 และที่แก้ไขเพิ่มเติม | พระราชบัญญัติ | พ.ศ. 2546 · แก้ไขเพิ่มเติม (ฉบับที่ 2) พ.ศ. 2550 และ (ฉบับที่ 3) พ.ศ. 2562 | กระทรวงการอุดมศึกษา วิทยาศาสตร์ วิจัยและนวัตกรรม (อว.) | `https://mhesi.nrct.go.th/archives/s/mhesi_archives/item/397` | คลังจดหมายเหตุดิจิทัล กระทรวง อว. | 2026-06-26 | บังคับใช้ | `verified_official_source` | P2 |
+| `data/laws.json#student-uniform-2551` | พระราชบัญญัติเครื่องแบบนักเรียน พ.ศ. 2551 | พระราชบัญญัติ | พ.ศ. 2551 | กระทรวงศึกษาธิการ | `https://ops.moe.go.th/wp-content/uploads/2023/03/1.-%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9A%E0%B8%B1%E0%B8%8D%E0%B8%8D%E0%B8%B1%E0%B8%95%E0%B8%B4%E0%B9%80%E0%B8%84%E0%B8%A3%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%87%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B9%80%E0%B8%A3%E0%B8%B5%E0%B8%A2%E0%B8%99-%E0%B8%9E.%E0%B8%A8.-%E0%B9%92%E0%B9%95%E0%B9%95%E0%B9%91.pdf` | สำนักงานปลัดกระทรวงศึกษาธิการ | 2026-06-26 | บังคับใช้ | `verified_official_source` | P3 |
+| `data/laws.json#scout-2551` | พระราชบัญญัติลูกเสือ พ.ศ. 2551 | พระราชบัญญัติ | พ.ศ. 2551 | กระทรวงศึกษาธิการ / สำนักงานลูกเสือแห่งชาติ | `https://backoffice.onec.go.th/uploaded/Category/Laws/Act/acteng/01/0101-j-510331.pdf` | สำนักงานเลขาธิการสภาการศึกษา (สกศ.) | 2026-06-26 | บังคับใช้ | `verified_official_source` | P3 |
+| `data/laws.json#vocational-institute-2555` | พระราชบัญญัติสถาบันการอาชีวศึกษา พ.ศ. 2555 | พระราชบัญญัติ | พ.ศ. 2555 | สำนักงานคณะกรรมการการอาชีวศึกษา (สอศ.) | `https://old.parliament.go.th/ewtcommittee/ewt/25join_nationaleducation/ewt_dl_link.php?nid=271&filename=index` | รัฐสภา (เอกสารเผยแพร่ — ควรยืนยันกับราชกิจจานุเบกษา) | 2026-06-26 | บังคับใช้ | `verified_official_source` | P2 |
+| `data/laws.json#hesi-policy-council-2562` | พระราชบัญญัติสภานโยบายการอุดมศึกษา วิทยาศาสตร์ วิจัยและนวัตกรรมแห่งชาติ พ.ศ. 2562 | พระราชบัญญัติ | พ.ศ. 2562 | สภานโยบายการอุดมศึกษาฯ / กระทรวง อว. | `https://db.legal.tu.ac.th/wp-content/uploads/2022/08/%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9A%E0%B8%B1%E0%B8%8D%E0%B8%8D%E0%B8%B1%E0%B8%95%E0%B8%B4%E0%B8%AA%E0%B8%A0%E0%B8%B2%E0%B8%99%E0%B9%82%E0%B8%A2%E0%B8%9A%E0%B8%B2%E0%B8%A2%E0%B8%AD%E0%B8%B8%E0%B8%94%E0%B8%A1%E0%B8%A8%E0%B8%B6%E0%B8%81%E0%B8%A9%E0%B8%B2-%E0%B8%A7%E0%B8%B4%E0%B8%97%E0%B8%A2%E0%B8%B2%E0%B8%A8%E0%B8%B2%E0%B8%AA%E0%B8%95%E0%B8%A3%E0%B9%8C-%E0%B8%A7%E0%B8%B4%E0%B8%88%E0%B8%B1%E0%B8%A2-%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%99%E0%B8%A7%E0%B8%B1%E0%B8%95%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%81%E0%B8%AB%E0%B9%88%E0%B8%87%E0%B8%8A%E0%B8%B2%E0%B8%95%E0%B8%B4-%E0%B8%9E.%E0%B8%A8.-2562.pdf` | ฐานข้อมูลกฎหมาย ม.ธรรมศาสตร์ (เผยแพร่ — ควรยืนยันกับราชกิจจานุเบกษา) | 2026-06-26 | บังคับใช้ | `verified_official_source` | P2 |
+| `data/laws.json#rajabhat-2547` | พระราชบัญญัติมหาวิทยาลัยราชภัฏ พ.ศ. 2547 | พระราชบัญญัติ | พ.ศ. 2547 | กระทรวง อว. / มหาวิทยาลัยราชภัฏ | `https://prt.parliament.go.th/items/8bd4ab86-c135-40ff-a746-2ca96a95982e` | คลังสารสนเทศ สำนักงานเลขาธิการสภาผู้แทนราษฎร | 2026-06-26 | บังคับใช้ | `verified_official_source` | P2 |
+| `data/laws.json#rmut-2548` | พระราชบัญญัติมหาวิทยาลัยเทคโนโลยีราชมงคล พ.ศ. 2548 | พระราชบัญญัติ | พ.ศ. 2548 | กระทรวง อว. / มหาวิทยาลัยเทคโนโลยีราชมงคล | `https://mhesi.nrct.go.th/archives/s/mhesi_archives/item/393` | คลังจดหมายเหตุดิจิทัล กระทรวง อว. | 2026-06-26 | บังคับใช้ | `verified_official_source` | P2 |
+| `data/laws.json#community-college-2558` | พระราชบัญญัติสถาบันวิทยาลัยชุมชน พ.ศ. 2558 | พระราชบัญญัติ | พ.ศ. 2558 | กระทรวง อว. / สถาบันวิทยาลัยชุมชน | `https://www.ratchakitcha.soc.go.th/DATA/PDF/2558/A/030/1.PDF` | ราชกิจจานุเบกษา | 2026-06-26 | บังคับใช้ | `verified_official_source` | P2 |
 | `data/laws.json#icescr` | กติการะหว่างประเทศว่าด้วยสิทธิทางเศรษฐกิจ สังคม และวัฒนธรรม (ICESCR) — โดยเฉพาะข้อ 13–14 | สนธิสัญญาระหว่างประเทศ | ค.ศ. 1966 · ไทยภาคยานุวัติ 5 ก.ย. 1999 | องค์การสหประชาชาติ (UN) | `https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-3&chapter=4&clang=_en` | UN Treaty Collection | 2026-06-26 | ไทยเป็นภาคี | `verified_official_source` | P2 |
 | `data/laws.json#crc` | อนุสัญญาว่าด้วยสิทธิเด็ก (CRC) — โดยเฉพาะข้อ 28–29 | สนธิสัญญาระหว่างประเทศ | ค.ศ. 1989 · ไทยภาคยานุวัติ 27 มี.ค. 1992 | องค์การสหประชาชาติ (UN) | `https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-11&chapter=4&clang=_en` | UN Treaty Collection | 2026-06-26 | ไทยเป็นภาคี | `verified_official_source` | P2 |
 | `data/laws.json#crpd` | อนุสัญญาว่าด้วยสิทธิคนพิการ (CRPD) — โดยเฉพาะข้อ 24 เรื่องการศึกษา | สนธิสัญญาระหว่างประเทศ | ค.ศ. 2006 · มีผลใช้บังคับ 3 พ.ค. 2008 · ไทยให้สัตยาบัน 29 ก.ค. 2008 | องค์การสหประชาชาติ (UN) | `https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-15&chapter=4&clang=_en` | UN Treaty Collection | 2026-06-26 | ไทยเป็นภาคี | `verified_official_source` | P2 |
@@ -194,6 +202,38 @@
   - source_url: https://siythailand.org/wp-content/uploads/2020/10/law_th_20172507204615_1.pdf
   - official_source: เอกสารเผยแพร่ (ควรยืนยันกับราชกิจจานุเบกษา)
   - last_checked: 2026-06-25
+- `private-univ-2546` — พระราชบัญญัติสถาบันอุดมศึกษาเอกชน พ.ศ. 2546 และที่แก้ไขเพิ่มเติม
+  - source_url: https://mhesi.nrct.go.th/archives/s/mhesi_archives/item/397
+  - official_source: คลังจดหมายเหตุดิจิทัล กระทรวง อว.
+  - last_checked: 2026-06-26
+- `student-uniform-2551` — พระราชบัญญัติเครื่องแบบนักเรียน พ.ศ. 2551
+  - source_url: https://ops.moe.go.th/wp-content/uploads/2023/03/1.-%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9A%E0%B8%B1%E0%B8%8D%E0%B8%8D%E0%B8%B1%E0%B8%95%E0%B8%B4%E0%B9%80%E0%B8%84%E0%B8%A3%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%87%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B9%80%E0%B8%A3%E0%B8%B5%E0%B8%A2%E0%B8%99-%E0%B8%9E.%E0%B8%A8.-%E0%B9%92%E0%B9%95%E0%B9%95%E0%B9%91.pdf
+  - official_source: สำนักงานปลัดกระทรวงศึกษาธิการ
+  - last_checked: 2026-06-26
+- `scout-2551` — พระราชบัญญัติลูกเสือ พ.ศ. 2551
+  - source_url: https://backoffice.onec.go.th/uploaded/Category/Laws/Act/acteng/01/0101-j-510331.pdf
+  - official_source: สำนักงานเลขาธิการสภาการศึกษา (สกศ.)
+  - last_checked: 2026-06-26
+- `vocational-institute-2555` — พระราชบัญญัติสถาบันการอาชีวศึกษา พ.ศ. 2555
+  - source_url: https://old.parliament.go.th/ewtcommittee/ewt/25join_nationaleducation/ewt_dl_link.php?nid=271&filename=index
+  - official_source: รัฐสภา (เอกสารเผยแพร่ — ควรยืนยันกับราชกิจจานุเบกษา)
+  - last_checked: 2026-06-26
+- `hesi-policy-council-2562` — พระราชบัญญัติสภานโยบายการอุดมศึกษา วิทยาศาสตร์ วิจัยและนวัตกรรมแห่งชาติ พ.ศ. 2562
+  - source_url: https://db.legal.tu.ac.th/wp-content/uploads/2022/08/%E0%B8%9E%E0%B8%A3%E0%B8%B0%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%9A%E0%B8%B1%E0%B8%8D%E0%B8%8D%E0%B8%B1%E0%B8%95%E0%B8%B4%E0%B8%AA%E0%B8%A0%E0%B8%B2%E0%B8%99%E0%B9%82%E0%B8%A2%E0%B8%9A%E0%B8%B2%E0%B8%A2%E0%B8%AD%E0%B8%B8%E0%B8%94%E0%B8%A1%E0%B8%A8%E0%B8%B6%E0%B8%81%E0%B8%A9%E0%B8%B2-%E0%B8%A7%E0%B8%B4%E0%B8%97%E0%B8%A2%E0%B8%B2%E0%B8%A8%E0%B8%B2%E0%B8%AA%E0%B8%95%E0%B8%A3%E0%B9%8C-%E0%B8%A7%E0%B8%B4%E0%B8%88%E0%B8%B1%E0%B8%A2-%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%99%E0%B8%A7%E0%B8%B1%E0%B8%95%E0%B8%81%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%81%E0%B8%AB%E0%B9%88%E0%B8%87%E0%B8%8A%E0%B8%B2%E0%B8%95%E0%B8%B4-%E0%B8%9E.%E0%B8%A8.-2562.pdf
+  - official_source: ฐานข้อมูลกฎหมาย ม.ธรรมศาสตร์ (เผยแพร่ — ควรยืนยันกับราชกิจจานุเบกษา)
+  - last_checked: 2026-06-26
+- `rajabhat-2547` — พระราชบัญญัติมหาวิทยาลัยราชภัฏ พ.ศ. 2547
+  - source_url: https://prt.parliament.go.th/items/8bd4ab86-c135-40ff-a746-2ca96a95982e
+  - official_source: คลังสารสนเทศ สำนักงานเลขาธิการสภาผู้แทนราษฎร
+  - last_checked: 2026-06-26
+- `rmut-2548` — พระราชบัญญัติมหาวิทยาลัยเทคโนโลยีราชมงคล พ.ศ. 2548
+  - source_url: https://mhesi.nrct.go.th/archives/s/mhesi_archives/item/393
+  - official_source: คลังจดหมายเหตุดิจิทัล กระทรวง อว.
+  - last_checked: 2026-06-26
+- `community-college-2558` — พระราชบัญญัติสถาบันวิทยาลัยชุมชน พ.ศ. 2558
+  - source_url: https://www.ratchakitcha.soc.go.th/DATA/PDF/2558/A/030/1.PDF
+  - official_source: ราชกิจจานุเบกษา
+  - last_checked: 2026-06-26
 - `icescr` — กติการะหว่างประเทศว่าด้วยสิทธิทางเศรษฐกิจ สังคม และวัฒนธรรม (ICESCR) — โดยเฉพาะข้อ 13–14
   - source_url: https://treaties.un.org/Pages/ViewDetails.aspx?src=TREATY&mtdsg_no=IV-3&chapter=4&clang=_en
   - official_source: UN Treaty Collection
