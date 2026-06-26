@@ -33,7 +33,11 @@
     noMatch: 'ไม่พบข้อสอบที่ตรงกับตัวกรอง',
     mixedTitle: 'แบบทดสอบรวมทุกหมวด',
     mixedDesc: 'สุ่มคำถามจากทุกหมวดมารวมกัน เหมาะสำหรับประเมินความเข้าใจโดยรวม',
+    bloomPrefix: 'ระดับการวัดตาม Bloom',
   };
+
+  // ลำดับตามทฤษฎี Bloom (จากจำ → สร้างสรรค์) เพื่อจัดเรียงตัวกรองให้สื่อความหมาย
+  const BLOOM_ORDER = ['จำ', 'เข้าใจ', 'นำไปใช้', 'วิเคราะห์', 'ประเมิน', 'สร้างสรรค์'];
 
   const colorClass = {
     constitution: 'quiz-cat-card--constitution',
@@ -47,7 +51,7 @@
   let selectedKey = '';
   let currentSetKey = 'mixed';
 
-  const filters = { category: '', audience: '', difficulty: '' };
+  const filters = { category: '', audience: '', difficulty: '', bloom: '' };
 
   let quiz = { questions: [], idx: 0, score: 0, answered: [], setTitle: '' };
 
@@ -55,6 +59,7 @@
     filterCategory: document.getElementById('filterCategory'),
     filterAudience: document.getElementById('filterAudience'),
     filterDifficulty: document.getElementById('filterDifficulty'),
+    filterBloom: document.getElementById('filterBloom'),
     filterSummary: document.getElementById('filterSummary'),
     filterEmpty: document.getElementById('filterEmpty'),
     catGrid: document.getElementById('quizCatGrid'),
@@ -67,6 +72,7 @@
     qOptions: document.getElementById('qOptions'),
     qFeedback: document.getElementById('qFeedback'),
     qExplain: document.getElementById('qExplain'),
+    qBloom: document.getElementById('qBloom'),
     qExplainBody: document.getElementById('qExplainBody'),
     qRelated: document.getElementById('qRelated'),
     qRelatedLinks: document.getElementById('qRelatedLinks'),
@@ -117,7 +123,8 @@
         q.category === filters.category;
       const audOk = !filters.audience || q.audience === filters.audience;
       const diffOk = !filters.difficulty || q.difficulty === filters.difficulty;
-      return catOk && audOk && diffOk;
+      const bloomOk = !filters.bloom || q.bloom_level === filters.bloom;
+      return catOk && audOk && diffOk && bloomOk;
     });
   }
 
@@ -177,6 +184,20 @@
         opt.value = v;
         opt.textContent = v;
         els.filterDifficulty.appendChild(opt);
+      });
+    }
+
+    if (els.filterBloom) {
+      const present = new Set(allQuestions.map((q) => q.bloom_level).filter(Boolean));
+      // เรียงตามลำดับทฤษฎี Bloom และต่อท้ายด้วยค่าอื่นที่ไม่อยู่ในลำดับ (ถ้ามี)
+      const ordered = BLOOM_ORDER.filter((b) => present.has(b)).concat(
+        [...present].filter((b) => !BLOOM_ORDER.includes(b))
+      );
+      ordered.forEach((v) => {
+        const opt = document.createElement('option');
+        opt.value = v;
+        opt.textContent = v;
+        els.filterBloom.appendChild(opt);
       });
     }
   }
@@ -317,6 +338,10 @@
     els.qFeedback.textContent = '';
     els.qFeedback.className = 'q-feedback';
     els.qExplain.classList.remove('show');
+    if (els.qBloom) {
+      els.qBloom.textContent = '';
+      els.qBloom.hidden = true;
+    }
     els.qExplainBody.textContent = '';
     els.qRelated.hidden = true;
     els.qRelatedLinks.innerHTML = '';
@@ -354,6 +379,15 @@
 
     quiz.answered[quiz.idx] = chosen;
     els.qExplainBody.textContent = q.explanation || 'ควรตรวจสอบรายละเอียดเพิ่มเติมจากกฎหมายหรือแหล่งข้อมูลทางการที่เกี่ยวข้อง';
+    if (els.qBloom) {
+      if (q.bloom_level) {
+        els.qBloom.textContent = `${LABELS.bloomPrefix}: ${q.bloom_level}`;
+        els.qBloom.hidden = false;
+      } else {
+        els.qBloom.textContent = '';
+        els.qBloom.hidden = true;
+      }
+    }
     els.qExplain.classList.add('show');
 
     const links = [];
@@ -414,6 +448,7 @@
     filters.category = els.filterCategory?.value || '';
     filters.audience = els.filterAudience?.value || '';
     filters.difficulty = els.filterDifficulty?.value || '';
+    filters.bloom = els.filterBloom?.value || '';
     selectedKey = filters.category === 'mixed' ? 'mixed' : filters.category || selectedKey;
     buildCatGrid();
     updateFilterSummary();
@@ -428,6 +463,7 @@
     els.filterCategory?.addEventListener('change', onFilterChange);
     els.filterAudience?.addEventListener('change', onFilterChange);
     els.filterDifficulty?.addEventListener('change', onFilterChange);
+    els.filterBloom?.addEventListener('change', onFilterChange);
     els.startBtn?.addEventListener('click', () => startQuiz(resolveSelectedKey()));
     els.nextBtn?.addEventListener('click', nextQuestion);
     els.quitQuizBtn?.addEventListener('click', () => showStage('stageSelect'));

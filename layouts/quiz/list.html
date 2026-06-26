@@ -24,7 +24,7 @@
         <div>
           <div class="eyebrow">เลือกชุดแบบทดสอบ</div>
           <h2 class="mt-0">แบบทดสอบความรู้กฎหมายการศึกษา</h2>
-          <p class="quiz-select-lead">รวม <b>{{ len $quiz.questions }}</b> ข้อ แบ่งเป็น {{ len $quiz.categories }} หมวด หมวดละ 8 ข้อ หรือเลือกทำแบบทดสอบรวมสุ่ม 20 ข้อ</p>
+          <p class="quiz-select-lead">รวม <b>{{ len $quiz.questions }}</b> ข้อ แบ่งเป็น {{ len $quiz.categories }} หมวด หมวดละ {{ div (len $quiz.questions) (len $quiz.categories) }} ข้อ หรือเลือกทำแบบทดสอบรวมสุ่ม 20 ข้อจากทุกหมวด</p>
         </div>
       </div>
 
@@ -48,6 +48,12 @@
         <label class="quiz-filter-field">
           <span>ระดับความยาก</span>
           <select id="filterDifficulty">
+            <option value="">ทุกระดับ</option>
+          </select>
+        </label>
+        <label class="quiz-filter-field">
+          <span>ระดับการวัดของ Bloom</span>
+          <select id="filterBloom">
             <option value="">ทุกระดับ</option>
           </select>
         </label>
@@ -76,7 +82,10 @@
         <div class="q-options" id="qOptions" role="group" aria-label="ตัวเลือกคำตอบ"></div>
         <div class="q-feedback" id="qFeedback" aria-live="polite"></div>
         <div class="q-explain" id="qExplain">
-          <h3 class="q-explain__title">คำอธิบาย</h3>
+          <div class="q-explain__head">
+            <h3 class="q-explain__title">คำอธิบาย</h3>
+            <span class="q-bloom-badge" id="qBloom" hidden></span>
+          </div>
           <p class="q-explain__body" id="qExplainBody"></p>
           <div class="q-related" id="qRelated" hidden>
             <h4 class="q-related__title">อ่านต่อ</h4>
@@ -111,5 +120,5 @@
 {{ end }}
 
 {{ define "scripts" }}
-<script src="{{ printf "%s?v=4" (partial "iu.html" "js/quiz.js") }}"></script>
+<script src="{{ printf "%s?v=5" (partial "iu.html" "js/quiz.js") }}"></script>
 {{ end }}

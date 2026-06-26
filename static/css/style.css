@@ -712,7 +712,14 @@ section{padding:74px 0;}
 }
 .q-feedback.is-correct{border-color:#8eb89a;background:#edf6f0;color:#1f5c36;}
 .q-feedback.is-incorrect{border-color:#d9a8a8;background:#fdf3f3;color:#8b2e2e;}
-.q-explain__title{margin:0 0 8px;font-size:15px;color:var(--navy);}
+.q-explain__head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:0 0 8px;}
+.q-explain__title{margin:0;font-size:15px;color:var(--navy);}
+.q-bloom-badge{
+  display:inline-block;font-size:12px;font-weight:600;line-height:1.4;
+  padding:3px 10px;border-radius:999px;white-space:nowrap;
+  color:var(--navy-2);background:rgba(255,255,255,.65);
+  border:1px solid var(--paper-line);
+}
 .q-explain__body{margin:0;line-height:1.65;}
 .q-related{margin-top:14px;padding-top:12px;border-top:1px dashed var(--paper-line);}
 .q-related__title{margin:0 0 6px;font-size:14px;color:var(--navy);}

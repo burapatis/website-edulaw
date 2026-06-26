@@ -26,6 +26,9 @@ jobs:
       - name: Content quality check
         run: npm run check:content
 
+      - name: Quiz data check
+        run: npm run check:quiz
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:

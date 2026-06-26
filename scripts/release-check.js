@@ -14,6 +14,7 @@ const ROOT = path.resolve(__dirname, '..');
 
 const STEPS = [
   { cmd: 'npm run check:content', label: 'Content quality (check:content)' },
+  { cmd: 'npm run check:quiz', label: 'Quiz data (check:quiz)' },
   { cmd: 'npm run build:search', label: 'Hugo minify + Pagefind (build:search)' },
 ];
 
